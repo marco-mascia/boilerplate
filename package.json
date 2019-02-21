@@ -1,0 +1,14 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "yet another web project boilerplate",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marco Mascia",
+  "license": "ISC"
+}
