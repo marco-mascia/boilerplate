@@ -2,14 +2,28 @@
   "name": "boilerplate",
   "version": "1.0.0",
   "description": "yet another web project boilerplate",
-  "main": "main.js",
+  "main": "index.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Marco Mascia",
-  "license": "ISC"
-} 
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marco-mascia/boilerplate.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/marco-mascia/boilerplate/issues"
+  },
+  "homepage": "https://github.com/marco-mascia/boilerplate#readme",
+  "devDependencies": {
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}
