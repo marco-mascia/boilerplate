@@ -1,0 +1,68 @@
+/*
+.grid__container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "item__header item__header item__header item__header"
+      "item__main item__main . item__sidebar"
+      "item__footer item__footer item__footer item__footer";
+  }
+
+.item{
+    @include linear-gradient($second-color, $second-shade);
+}
+
+.item__header{
+    grid-area: item__header;  
+}
+
+.item__main{
+    grid-area: item__main;    
+}
+
+.item__sidebar{
+    grid-area: item__sidebar;    
+}
+
+.item__header{
+    grid-area: item__header;
+}
+
+.item__footer{
+    grid-area: item__footer;
+}
+*/
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "item item--pink item--blue item--acqua"
+      "item--violet item--violet item--violet item--violet";
+  }
+
+
+  .item{
+    grid-area: item;  
+    background-color:#FAF4E9;
+  }
+  
+  .item--pink{
+    grid-area: item--pink;  
+    background-color: #CB4D7B;
+  }
+  .item--blue{
+    grid-area: item--blue;  
+    background-color: #5989A4;
+  }
+  .item--acqua{
+    grid-area: item--acqua;  
+    background-color: #7FC9CE;
+  }
+  .item--violet{
+    grid-area: item--violet;  
+    background-color: #76456E;
+  }
