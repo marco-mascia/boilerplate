@@ -1,68 +1,134 @@
-/*
+
 .grid__container {
+    padding: 5px;
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
+    grid-gap: 5px;
     grid-template-areas: 
-      "item__header item__header item__header item__header"
-      "item__main item__main . item__sidebar"
-      "item__footer item__footer item__footer item__footer";
+    "header header header header"
+    "main main main sidebar"
+    "footer footer footer footer";
+    
   }
 
 .item{
     @include linear-gradient($second-color, $second-shade);
+    border-radius: 5px;
+    padding: 5px;
+    @include box-shadow(3px, 3px, 5px, rgba(0, 0, 0, 0.315), false);
 }
 
-.item__header{
-    grid-area: item__header;  
+.header{
+    grid-area: header;  
 }
 
 .item__main{
-    grid-area: item__main;    
+    grid-area: main;    
 }
 
 .item__sidebar{
-    grid-area: item__sidebar;    
+    grid-area: sidebar;    
 }
 
 .item__header{
-    grid-area: item__header;
+    grid-area: header;
 }
 
 .item__footer{
-    grid-area: item__footer;
+    grid-area: footer;
 }
-*/
 
-.grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+/* Styles */
+.grid__container {
+  grid-template-areas: 
+  "header header header header"
+  "sidebar sidebar sidebar sidebar"
+  "main main main main"
+  "footer footer footer footer";
+}
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* Styles */
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+/* Styles */
+  .grid__container {
     grid-template-areas: 
-      "item item--pink item--blue item--acqua"
-      "item--violet item--violet item--violet item--violet";
+    "header header header header"
+    "sidebar sidebar sidebar sidebar"
+    "main main main main"
+    "footer footer footer footer";
   }
+}
 
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px) {
+/* Styles */
+.grid__container {
+  grid-template-areas: 
+  "header header sidebar sidebar"
+  "main main sidebar sidebar"
+  "footer footer footer footer";
+  }
+}
 
-  .item{
-    grid-area: item;  
-    background-color:#FAF4E9;
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px)
+and (orientation : landscape) {
+/* Styles */
+
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px)
+and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+
+.grid__container {
+  grid-template-areas: 
+  "header header header sidebar"
+  "main main main sidebar"
+  "footer footer footer sidebar";
   }
-  
-  .item--pink{
-    grid-area: item--pink;  
-    background-color: #CB4D7B;
-  }
-  .item--blue{
-    grid-area: item--blue;  
-    background-color: #5989A4;
-  }
-  .item--acqua{
-    grid-area: item--acqua;  
-    background-color: #7FC9CE;
-  }
-  .item--violet{
-    grid-area: item--violet;  
-    background-color: #76456E;
-  }
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
