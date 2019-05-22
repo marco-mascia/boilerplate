@@ -1,15 +1,12 @@
 # humanstxt.org/
-# The humans responsible & technology colophon
+# The humans responsible & technology stack
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Marco Mascia
 
-# THANKS
 
-    <name>
-
-# TECHNOLOGY COLOPHON
+# TECHNOLOGY STACK
 
     CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    Webpack, SASS
