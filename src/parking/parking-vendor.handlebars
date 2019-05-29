@@ -1,0 +1,27 @@
+<!-- This is the template for the vendor section and the slots container -->
+<section class="vendor toggle-box" selected-slots="">
+    <p class="header">
+        {{ book }} {{ departure }}
+    </p>
+    <p class="toggle">
+        {{ toggleMessage }}
+    </p>
+
+    <section class="content">
+        <div class="grid--vendor">
+            <article>
+                <h2> {{ featuresTitle }} </h2>
+                <picture>
+                    <source srcset={{ map }}>
+                    <img src={{ map }} />
+                </picture>
+            </article>
+            <ul>
+                {{#each features}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>  
+    </section>
+</section>
+<section class="parking_slots flex__container"></section>
