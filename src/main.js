@@ -14,20 +14,6 @@ let messages = {
 }
 
 export function init() {
-
-    /*
-    let template = require("./index.handlebars");
-
-    let $temporary = template({
-        header: messages.header,
-        main: messages.main,
-        aside: messages.aside,
-        footer: messages.footer
-    });
-
-    $(document.body).append($temporary);
-    */
-
     /*
    var src = document.getElementById('#print-script'); //$("#print-script").html();
    var source = src.innerHTML();
@@ -41,10 +27,7 @@ export function init() {
            return 'category';
        } 
    };
-
    */
-   //$("#print-template").html(template(data));
-
 
    /*
    let template = require("./index.handlebars");
@@ -52,7 +35,5 @@ export function init() {
    $(document.body).append($compiled)
    */
 
-
 }
-
 init();
