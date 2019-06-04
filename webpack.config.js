@@ -25,20 +25,14 @@ module.exports = {
                     loader: "babel-loader"
                 }
             },
-            /*
-            {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: "html-loader",
-                        options: { minimize: false }
-                    }
-                ]
+            {   
+                test: /\.css$/i, 
+                use: ['style-loader', 'css-loader']
             },
-            */
-          
-            { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
-            { test: /\.handlebars$/, loader: "handlebars-loader" },
+            {   
+                test: /\.handlebars$/, 
+                loader: "handlebars-loader" 
+            },
             {
                 test: /\.scss$/,
                 use: ['style-loader','css-loader', 'postcss-loader', 'sass-loader']
