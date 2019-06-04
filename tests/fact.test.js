@@ -28,3 +28,28 @@ describe("Module should return", function () {
   });
 });
 */
+
+describe('A nested suite', function() {
+  var dependency;
+
+  beforeEach(function() {
+      // This works!
+      dependency = this.sharedDependency;                
+  });
+
+  it('Dependency should be defined', function() {
+      expect(dependency).toBeDefined();
+  });
+});
+
+describe("Module should return", function () {
+  it("some number", function () {
+    //arrange
+    //expect(myModule()).toEqual(10);
+
+    //act
+
+    //assert
+    
+  });
+});
