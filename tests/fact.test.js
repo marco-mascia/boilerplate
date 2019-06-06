@@ -20,36 +20,3 @@ it('fact(5) == 15', () => {
   expect(fact(5)).toBe(15);
 });
 
-/*
-const myModule = require('./../src/main.js');
-describe("Module should return", function () {
-  it("some number", function () {
-    expect(myModule()).toEqual(10);
-  });
-});
-*/
-
-describe('A nested suite', function() {
-  var dependency;
-
-  beforeEach(function() {
-      // This works!
-      dependency = this.sharedDependency;                
-  });
-
-  it('Dependency should be defined', function() {
-      expect(dependency).toBeDefined();
-  });
-});
-
-describe("Module should return", function () {
-  it("some number", function () {
-    //arrange
-    //expect(myModule()).toEqual(10);
-
-    //act
-
-    //assert
-    
-  });
-});
