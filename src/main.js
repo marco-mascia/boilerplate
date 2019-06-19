@@ -6,7 +6,7 @@ const iAmJavascriptES6 = () => console.log(...arr);
 window.iAmJavascriptES6 = iAmJavascriptES6;
 */
 
-let messages = {
+const messages = {
     header: 'intestazione',
     main: 'corpo',
     aside: 'lato',
