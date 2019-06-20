@@ -37,3 +37,11 @@ export function init() {
 
 }
 init();
+
+import angular from 'angular'
+import components from './components/components.module'
+angular.module('app', [components]).controller('MainCtrl', function MainCtrl() {
+    this.hero = {
+      name: 'Spawn'
+    };
+  });

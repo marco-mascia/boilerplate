@@ -25,18 +25,22 @@ module.exports = {
                     loader: "babel-loader"
                 }
             },
-            {   
-                test: /\.css$/i, 
+            {
+                test: /\.css$/i,
                 use: ['style-loader', 'css-loader']
             },
-            {   
-                test: /\.handlebars$/, 
-                loader: "handlebars-loader" 
+            {
+                test: /\.handlebars$/,
+                loader: "handlebars-loader"
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader','css-loader', 'postcss-loader', 'sass-loader']
-            }
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+            },
+            {
+                test: /\.html$/,
+                loader: "html-loader"
+            },
         ]
     },
     plugins: [
@@ -56,9 +60,9 @@ module.exports = {
                 removeComments: true,
                 removeEmptyElements: true
             },
-          }),
-        
+        }),
+
         new WebpackMd5Hash()
-    
+
     ]
 };
