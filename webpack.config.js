@@ -29,10 +29,7 @@ module.exports = {
                 test: /\.css$/i, 
                 use: ['style-loader', 'css-loader']
             },
-            {   
-                test: /\.handlebars$/, 
-                loader: "handlebars-loader" 
-            },
+          
             {
                 test: /\.scss$/,
                 use: ['style-loader','css-loader', 'postcss-loader', 'sass-loader']
@@ -48,7 +45,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'My Boilerplate',
-            template: './src/index.handlebars',
+            template: './src/index.html',
             minify: !isDevMode && {
                 html5: true,
                 collapseWhitespace: true,
