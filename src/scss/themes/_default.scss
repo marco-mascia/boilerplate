@@ -45,6 +45,7 @@
   .link--target {
     stroke: #2ca02c;
   }
+
   div.tooltip {	
       position: absolute;			
       text-align: center;			
@@ -75,13 +76,10 @@
     fill: red;
   }
 
-
-
 .container-circle { 
-  background-color: cadetblue;
+  background-color: steelblue;
   width: 600px; }
-
-  
+ 
 
 .circleBox {
   display: block;
@@ -89,8 +87,12 @@
   height: 120px;
 }
   
-
-
 circle { fill: tomato; }
 
+.container-chart{
+  background-color:white;
+  border: 1px dashed navy;
+  height: 1000px;
+  width: 1000px;
+}
 

@@ -5,7 +5,8 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>{{htmlWebpackPlugin.options.title}}</title>
+      <title>{{ htmlWebpackPlugin.options.title }}</title>
+
     <!--
       <link rel="manifest" href="site.webmanifest">
       <link rel="apple-touch-icon" href="icon.png">
@@ -17,26 +18,30 @@
   </head>
 
   <body>
-      <div class="wrapper">
-          <!--
-          <div class="content"></div>
-          <div class="visual"></div>
-          -->
-          <div class="home"></div>
-          
+
+    <div layout="row">
+      <div class="menu" flex="20">
+        menu
+      </div>
+      <div class="content" flex="80">
+        content
+      </div>
+    </div>
+
+      <div class="wrapper">          
+          <div class="home"></div>          
       </div>
 
       <div class="container-chart">
-          
-        
       </div>
-      
-      <div class="container-circle">
-     
+
+      <!--
+      <div class="container-circle">     
           <button id="addCircle" class="btn btn-primary">Add circle</button>
           <button id="removeCircle" class="btn btn-primary">Remove circle</button>
       </div>
-      
+      -->
+
   </body>
  
 </html>
