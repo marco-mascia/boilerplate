@@ -2,7 +2,6 @@ import './scss/main.scss';
 import flare from '../assets/flare.json';
 import * as d3 from "d3";
 
-
 export function init() {
     console.log('init')
 }
@@ -159,7 +158,7 @@ import(
     drawChart(jsonData);  
 });
 
-import drawCircle from './circle.ts'
+//import drawCircle from './circle.ts'
 //drawCircle();
 
 /* --------------------------------------------------------- */

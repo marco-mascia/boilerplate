@@ -2,6 +2,7 @@
 /* DRAW CHART                                                */
 /* --------------------------------------------------------- */
 import * as d3 from "d3";
+import responsivefy from './responsivefy.ts'
 
 export default function drawChart(jsonData) {
 
@@ -18,6 +19,7 @@ export default function drawChart(jsonData) {
 
     const rx = width / 2;
     const ry = height / 2;
+    const duration = 750;
 
     const cluster = d3.cluster()
         .size([360, innerRadius]);
@@ -35,12 +37,12 @@ export default function drawChart(jsonData) {
         .append('g')
         .attr('transform', `translate(${width/2}, ${height/2})`);
 
-    const root = packageHierarchy(jsonData)
+    let root = packageHierarchy(jsonData)
         .sum(function (d) { return d.size; });
+    console.log('root ', root.children);
 
-    //var link = svg.selectAll(".link");  
-    let link = svg.append("g").selectAll(".link");         
-    let node = svg.append("g").selectAll(".node");
+          
+    
 
   /*
     svg.append("svg:path")
@@ -82,21 +84,20 @@ export default function drawChart(jsonData) {
             arr2.push(x[i][x[i].length - 1].data.key);
         }
  
-
-        link = link
+        const link = svg.append("g").selectAll(".link")
             .data(packageImports(root.leaves()))
             .enter()
             .append("path")
             .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
             .attr("class", "link")
             .attr("d", line)
-            
+            /*
             .style("stroke", function(d) { 
                 var splitName = d.source.data.name.split(".");             
                 var group = splitName[0] + '.' + splitName[1];            
                 return color(group); 
             });
-            
+            */
             
         link
             .exit()
@@ -104,8 +105,17 @@ export default function drawChart(jsonData) {
             .attr('r', 0)
             .remove();     
 
-        node = node
-            .data(root.leaves())
+
+
+        // Update the nodes...
+        let node = svg.append("g").selectAll(".node")
+            .data(root.leaves(), function(d) {
+                return d.id || (d.id = ++i);
+            });
+
+   
+
+        var nodeEnter = node
             .enter()            
             .append("a")
             .attr("class", "node")
@@ -129,22 +139,50 @@ export default function drawChart(jsonData) {
             })   
             .on("mouseover", mouseovered)
             .on("mouseout", mouseouted);
-            
-        node
+          
+        let nodeExit = node
             .exit()
             .transition()
+            .duration(duration)
             .attr('r', 0)
             .remove(); 
+        
+        nodeExit.select('node').attr('r', 0);
+  
 
-        function mouseovered(d) {                           
-            console.log(d);            
+        // Update
+        let nodeUpdate = nodeEnter.merge(node);
 
+        // Transition to the proper position for the node
+        
+        nodeUpdate.transition().
+            duration(duration);
+
+            
+
+        // Update the node attributes and style
+        /*
+        nodeUpdate.select('circle.node').
+            attr('r', 25).
+            style("fill", function(d) {
+                return "#0e4677";
+            }).
+            attr('cursor', 'pointer');
+            */
+
+       
+        function mouseovered(d) {
             node
                 .each(function (n) { n.target = n.source = false; });    
             link                
                 .classed("link--target", function (l) { if (l.target === d) return l.source.source = true; })
                 .classed("link--source", function (l) { if (l.source === d) return l.target.target = true; })
                 .filter(function (l) { return l.target === d || l.source === d; })
+                .style("stroke", function(d) { 
+                    var splitName = d.source.data.name.split(".");             
+                    var group = splitName[0] + '.' + splitName[1];            
+                    return color(group); 
+                })
                 .raise();    
             node
                 .classed("node--target", function (n) { return n.target; })
@@ -154,7 +192,10 @@ export default function drawChart(jsonData) {
         function mouseouted(d) {
             link
                 .classed("link--target", false)
-                .classed("link--source", false);
+                .classed("link--source", false)
+                .style("stroke", function(d) {        
+                    return 'steelblue'; 
+                });
     
             node
                 .classed("node--target", false)
@@ -164,6 +205,44 @@ export default function drawChart(jsonData) {
     }
 
     plot(root, svg);
+
+
+    //LOOK
+    //https://jsfiddle.net/a6pLqpxw/8/
+
+    setTimeout(function () {
+        /*
+        let newData = { "name": "flare.lab.Jester", "size": 3534, "imports": ["flare.display.DirtySprite"] }
+        jsonData.push(newData);
+        root = packageHierarchy(jsonData)
+        .sum(function (d) { return d.size; });
+        //console.log(jsonData);
+        //console.log(jsonData.length);
+        plot(root, svg);
+        */
+        //creates New OBJECT
+        var newNodeObj = {
+            type: 'resource-delete',
+        name: "flare.lab.Jester",
+        attributes: [],
+        children: []
+        };
+
+        //Creates new Node 
+        var newNode = d3.hierarchy(newNodeObj);
+        newNode.depth = root.depth; 
+        newNode.height = root.height - 1;
+        newNode.parent = root; 
+
+
+       //root.children.push(newNode);
+       //root.data.children.push(newNode.data);
+       
+       /plot(root, svg);
+       
+   
+    }, 5000);
+    
 
 /*
 function findStartAngle(children) {
@@ -239,48 +318,6 @@ function findEndAngle(children) {
         // return as an integer
         return Math.round(Number(width))
     }
-
-    function responsivefy(svg) {
-        // container will be the DOM element
-        // that the svg is appended to
-        // we then measure the container
-        // and find its aspect ratio
-        const container = d3.select(svg.node().parentNode),
-            width = parseInt(svg.style('width'), 10),
-            height = parseInt(svg.style('height'), 10),
-            aspect = width / height;
-       
-        // set viewBox attribute to the initial size
-        // control scaling with preserveAspectRatio
-        // resize svg on inital page load
-        svg.attr('viewBox', `0 0 ${width} ${height}`)
-            .attr('preserveAspectRatio', 'xMinYMid')
-            .call(resize);
-       
-        // add a listener so the chart will be resized
-        // when the window resizes
-        // multiple listeners for the same event type
-        // requires a namespace, i.e., 'click.foo'
-        // api docs: https://goo.gl/F3ZCFr
-        d3.select(window).on(
-            'resize.' + container.attr('id'), 
-            resize
-        );
-       
-        // this is the code that resizes the chart
-        // it will be called on load
-        // and in response to window resizes
-        // gets the width of the container
-        // and resizes the svg to fill it
-        // while maintaining a consistent aspect ratio
-        function resize() {
-            const w = parseInt(container.style('width'));
-            svg.attr('width', w);
-            svg.attr('height', Math.round(w / aspect));
-        }
-      }
-    
- 
 }
 
 /* --------------------------------------------------------- */
