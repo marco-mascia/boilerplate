@@ -13,7 +13,7 @@
   
   .link {
     stroke: steelblue;
-    stroke-opacity: 0.4;
+    stroke-opacity: 0.2;
     fill: none;
     pointer-events: none;
   }
@@ -91,8 +91,17 @@ circle { fill: tomato; }
 
 .container-chart{
   background-color:white;
-  border: 1px dashed navy;
+  border: 1px solid #DFDFDF;
   height: 1000px;
   width: 1000px;
 }
+
+md-card-title{
+  padding: 10px !important;
+}
+.md-title{
+  font-size: 14px !important;
+}
+
+
 

@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
+    "@types/d3": "^5.7.2",
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.1",
@@ -46,8 +47,11 @@
   },
   "dependencies": {
     "angular": "^1.7.9",
+    "angular-animate": "^1.4.14",
+    "angular-aria": "^1.4.14",
     "angular-material": "^1.1.20",
+    "angular-messages": "^1.4.14",
     "csv-parser": "^2.3.0",
-    "d3": "^5.14.2"
+    "d3": "^5.15.0"
   }
 }

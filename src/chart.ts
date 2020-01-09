@@ -2,13 +2,17 @@
 /* DRAW CHART                                                */
 /* --------------------------------------------------------- */
 import * as d3 from "d3";
-import responsivefy from './responsivefy.ts'
+import responsivefy from './responsivefy.ts';
+import packageHierarchy from './packageHierarchy.ts';
+import packageImports from './packageImports.ts';
+import getDivWidth from './getDivWidth.ts';
 
 export default function drawChart(jsonData) {
 
     console.log('drawChart data: ', jsonData);
 
-    const divWidth = getDivWidth('.container-chart');
+    const divWidth = getDivWidth('.container-chart');    
+
     const diameter = divWidth,
         radius = diameter / 2,
         innerRadius = radius - divWidth/7;
@@ -19,13 +23,16 @@ export default function drawChart(jsonData) {
 
     const rx = width / 2;
     const ry = height / 2;
+   
     const duration = 750;
+    const tension_default = 0.85;
+    let tension = tension_default;
 
-    const cluster = d3.cluster()
+    let cluster = d3.cluster()
         .size([360, innerRadius]);
 
-    const line = d3.radialLine()
-        .curve(d3.curveBundle.beta(0.85))
+    let line = d3.radialLine()
+        .curve(d3.curveBundle.beta(tension))        
         .radius(function (d) { return d.y; })
         .angle(function (d) { return d.x / 180 * Math.PI; });
 
@@ -37,138 +44,67 @@ export default function drawChart(jsonData) {
         .append('g')
         .attr('transform', `translate(${width/2}, ${height/2})`);
 
-    let root = packageHierarchy(jsonData)
-        .sum(function (d) { return d.size; });
-    console.log('root ', root.children);
+    let root = packageHierarchy(jsonData[0]).sum(function (d) { return d.size; });        
+    var links, nodes;   
 
-          
-    
+    //var link = svg.append("g").selectAll(".link");
+    //var node = svg.append("g").selectAll(".node");
 
-  /*
-    svg.append("svg:path")
-    .attr("class", "arc")
-    .attr("d", d3.arc().outerRadius(ry - 180).innerRadius(0).startAngle(0).endAngle(2 * Math.PI))  
-
-    var nodes = cluster(root);
-    var groupData = svg.selectAll("g.group")
-    .data(nodes.filter(function(d) { return (d.key=='data' || d.key == 'animate' || d.key == 'display') && d.children; }))
-    .enter().append("group")
-    .attr("class", "group");
-
-    var groupArc = d3.arc()
-    .innerRadius(ry - 177)
-    .outerRadius(ry - 157)
-    .startAngle(function(d) { return (findStartAngle(d.__data__.children)-2) * Math.PI / 180;})
-    .endAngle(function(d) { return (findEndAngle(d.__data__.children)+2) * Math.PI / 180});
-    
-    svg.selectAll("g.arc")
-    .data(groupData[0])
-    .enter()
-    .append("svg:path")
-    .attr("d", groupArc)
-    .attr("class", "groupArc")
-    .style("fill", "#1f77b4")
-    .style("fill-opacity", 0.5);
-    */
+    var link = svg.selectAll(".link");       
+    var node = svg.selectAll(".node");
+    var path = svg.selectAll("path.link");
 
     var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 7));
 
-    const plot = (root, svg) => {
+    function update(root){
+           
+        links = packageImports(root.descendants());
+        cluster(root);  
+        nodes = root.descendants();           
+        
+       link = link        
+           .data(links)
+           .enter()
+           .append("path")
+           .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
+           .attr("class", "link")
+           .attr("d", line)           
+           .style("stroke", function(d) { 
+               var splitName = d.source.data.name.split(".");             
+               var group = splitName[0] + '.' + splitName[1];            
+               return color(group); 
+           });      
+           link
+                .exit()
+                .transition()
+                .attr('r', 0)
+                .remove()        
+           
+        /** ---------------------------------------------------- */                                       
 
-        cluster(root);    
-        var x = packageImports(root.leaves());
-    
-        var arr = [], arr2 = [];
-        for (var i = 0; i < x.length; i++) {
-            arr.push(x[i][0].data.key);
-            arr2.push(x[i][x[i].length - 1].data.key);
-        }
- 
-        const link = svg.append("g").selectAll(".link")
-            .data(packageImports(root.leaves()))
-            .enter()
-            .append("path")
-            .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
-            .attr("class", "link")
-            .attr("d", line)
-            /*
-            .style("stroke", function(d) { 
-                var splitName = d.source.data.name.split(".");             
-                var group = splitName[0] + '.' + splitName[1];            
-                return color(group); 
-            });
-            */
-            
-        link
-            .exit()
-            .transition()
-            .attr('r', 0)
-            .remove();     
-
-
-
-        // Update the nodes...
-        let node = svg.append("g").selectAll(".node")
-            .data(root.leaves(), function(d) {
-                return d.id || (d.id = ++i);
-            });
-
-   
-
-        var nodeEnter = node
-            .enter()            
-            .append("a")
+        node = node
+            .data(nodes.filter(function(n) { return !n.children; }))
+            .enter().append("text")
             .attr("class", "node")
-            .attr("dy", "0.31em")
-            .attr("xlink:href", function (d) {
-                if (d.data.url === undefined) {
-                } else {
-                    return d.data.url;
-                }
-            })
-            .append("text")
-            .attr("class", "node")
-            .attr("dy", "0.31em")
-            .attr("transform", function (d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
-            .attr("text-anchor", function (d) { return d.x < 180 ? "start" : "end"; })
-            .text(function (d) { return d.data.key; })           
+            .attr("dy", ".31em")
+            .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+            .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+            .text(function(d) { return d.data.key; })
+            .on("mouseover", mouseovered)
+            .on("mouseout", mouseouted)
             .style("fill", function(d) { 
                 var splitName = d.data.name.split(".");             
                 var group = splitName[0] + '.' + splitName[1];            
                 return color(group); 
-            })   
-            .on("mouseover", mouseovered)
-            .on("mouseout", mouseouted);
-          
-        let nodeExit = node
+            });  
+
+            /*         
             .exit()
             .transition()
-            .duration(duration)
             .attr('r', 0)
-            .remove(); 
-        
-        nodeExit.select('node').attr('r', 0);
-  
-
-        // Update
-        let nodeUpdate = nodeEnter.merge(node);
-
-        // Transition to the proper position for the node
-        
-        nodeUpdate.transition().
-            duration(duration);
-
-            
-
-        // Update the node attributes and style
-        /*
-        nodeUpdate.select('circle.node').
-            attr('r', 25).
-            style("fill", function(d) {
-                return "#0e4677";
-            }).
-            attr('cursor', 'pointer');
+            .remove();
             */
+                       
 
        
         function mouseovered(d) {
@@ -178,11 +114,7 @@ export default function drawChart(jsonData) {
                 .classed("link--target", function (l) { if (l.target === d) return l.source.source = true; })
                 .classed("link--source", function (l) { if (l.source === d) return l.target.target = true; })
                 .filter(function (l) { return l.target === d || l.source === d; })
-                .style("stroke", function(d) { 
-                    var splitName = d.source.data.name.split(".");             
-                    var group = splitName[0] + '.' + splitName[1];            
-                    return color(group); 
-                })
+                .style("stroke", strokeLine)
                 .raise();    
             node
                 .classed("node--target", function (n) { return n.target; })
@@ -193,131 +125,98 @@ export default function drawChart(jsonData) {
             link
                 .classed("link--target", false)
                 .classed("link--source", false)
-                .style("stroke", function(d) {        
-                    return 'steelblue'; 
-                });
-    
+                .style("stroke", strokeLine);
             node
                 .classed("node--target", false)
                 .classed("node--source", false);            
         }
-
+    
     }
 
-    plot(root, svg);
-
+    update(root);
 
     //LOOK
-    //https://jsfiddle.net/a6pLqpxw/8/
+    //https://jsfiddle.net/a6pLqpxw/8/  
+  
 
-    setTimeout(function () {
-        /*
-        let newData = { "name": "flare.lab.Jester", "size": 3534, "imports": ["flare.display.DirtySprite"] }
-        jsonData.push(newData);
-        root = packageHierarchy(jsonData)
-        .sum(function (d) { return d.size; });
-        //console.log(jsonData);
-        //console.log(jsonData.length);
-        plot(root, svg);
-        */
-        //creates New OBJECT
-        var newNodeObj = {
-            type: 'resource-delete',
-        name: "flare.lab.Jester",
-        attributes: [],
-        children: []
-        };
+    function strokeLine(d){        
+        let splitName = d.source.data.name.split(".");                     
+        let group = splitName[0] + '.' + splitName[1];            
+        return color(group); 
+    }
 
-        //Creates new Node 
-        var newNode = d3.hierarchy(newNodeObj);
-        newNode.depth = root.depth; 
-        newNode.height = root.height - 1;
-        newNode.parent = root; 
-
-
-       //root.children.push(newNode);
-       //root.data.children.push(newNode.data);
-       
-       /plot(root, svg);
-       
-   
+    d3.timeout(function() {
+       console.log('Timeout triggered');      
+       root = packageHierarchy(jsonData[0]);            
+       //update(root); 
     }, 5000);
-    
 
-/*
-function findStartAngle(children) {
-    var min = children[0].x;
-    children.forEach(function(d) {
-       if (d.x < min)
-           min = d.x;
+
+    document.getElementById('tension').onclick = function() {
+        console.log('tension clicked');
+        line = d3.radialLine().curve(d3.curveBundle.beta(0));
+    };
+
+
+    function findStartAngle(children) {
+        var min = children[0].x;
+        children.forEach(function(d) {
+           if (d.x < min)
+               min = d.x;
+        });
+        return min;
+    }
+    
+    function findEndAngle(children) {
+        var max = children[0].x;
+        children.forEach(function(d) {
+           if (d.x > max)
+               max = d.x;
+        });
+        return max;
+    }   
+
+
+    /*
+    var path = svg.selectAll("path.link")
+    .data(links)
+  .enter().append("svg:path")
+    .attr("class", function(d) { return "link source-" + d.source.key + " target-" + d.target.key; })
+    .attr("d", function(d, i) { return line(splines[i]); });
+
+    d3.select("input[type=range]").on("change", function() {
+        line.curve(d3.curveBundle.beta(this.value / 100));
+        path.attr("d", function(d, i) { return line(XPathEvaluator[i]); });
+      });
+      */
+
+      /*
+  // https://github.com/d3/d3-force
+  let layout = d3.forceSimulation()
+    // settle at a layout faster
+    .alphaDecay(0.1)
+    // nearby nodes attract each other
+    .force("charge", d3.forceManyBody()
+      .strength(10)
+      .distanceMax(scales.airports.range()[1] * 2)
+    )
+    // edges want to be as short as possible
+    // prevents too much stretching
+    .force("link", d3.forceLink()
+      .strength(0.7)
+      .distance(0)
+    )
+    .on("tick", function(d) {
+      links.attr("d", line);
+    })
+    .on("end", function(d) {
+      console.log("layout complete");
     });
-    return min;
-}
 
-function findEndAngle(children) {
-    var max = children[0].x;
-    children.forEach(function(d) {
-       if (d.x > max)
-           max = d.x;
-    });
-    return max;
-}
-*/
+  layout.nodes(bundle.nodes).force("link").links(bundle.links);
+      */
+      
 
-    // Lazily construct the package hierarchy from class names.
-    function packageHierarchy(classes) {
-        var map = {};
-    
-        function find(name, data) {
-            var node = map[name], i;
-            if (!node) {
-                node = map[name] = data || { name: name, children: [] };
-                if (name.length) {
-                    node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
-                    node.parent.children.push(node);
-                    node.key = name.substring(i + 1);                
-                }               
-            }
-            return node;
-        }
-    
-        classes.forEach(function (d) {
-            find(d.name, d);
-        });
-    
-        return d3.hierarchy(map[""]);
-    }
-
-    // Return a list of imports for the given array of nodes.
-    function packageImports(nodes) {
-        var map = {},
-            imports = [];
-    
-        // Compute a map from name to node.
-        nodes.forEach(function (d) {
-            map[d.data.name] = d;
-        });
-    
-        // For each import, construct a link from the source to target node.
-        nodes.forEach(function (d) {            
-            if (d.data.imports) d.data.imports.forEach(function (i) {
-                imports.push(map[d.data.name].path(map[i]));
-            });
-        });
-    
-        return imports;
-    }
-
-    // get the dom element width
-    function getDivWidth (div) {
-        var width = d3.select(div)
-        // get the width of div element
-        .style('width')
-        // take of 'px'
-        .slice(0, -2)
-        // return as an integer
-        return Math.round(Number(width))
-    }
 }
 
 /* --------------------------------------------------------- */

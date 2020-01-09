@@ -5,43 +5,139 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>{{ htmlWebpackPlugin.options.title }}</title>
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">      
 
-    <!--
-      <link rel="manifest" href="site.webmanifest">
-      <link rel="apple-touch-icon" href="icon.png">
-    -->
-      <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
+       <!-- Angular Material requires Angular.js Libraries -->
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>      
+      
+  
+       <!-- Angular Material Library -->
+       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>     
+       
+      <title>Impact Analisys</title>
      
   </head>
 
-  <body>
-
-    <div layout="row">
-      <div class="menu" flex="20">
-        menu
-      </div>
-      <div class="content" flex="80">
-        content
-      </div>
+  <body ng-app="ImpactAnalisysDemo" ng-cloak>
+    <div style="position:absolute;bottom:0;font-size:18px; z-index: 1000000;">
+      tension: <input style="position:relative;top:3px;" type="range" min="0" max="100" value="4">
     </div>
 
-      <div class="wrapper">          
-          <div class="home"></div>          
+    <div layout="row" style="padding: 20px 0;">
+
+      <div class="menu" flex="20">              
+          <div class="container" ng-controller="AccordionCtrl">
+      
+            <div class="expandcollapse-item cubes">  
+              <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
+                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">Cubes</span>                      
+                    </md-card-title-text>              
+                  </md-card-title>    
+                </md-card>
+              </div>      
+
+              <div class="slideDown" ng-show="isCubes" ng-hide="!isCubes" ng-style="cubesStyle">              
+                <div class="expand-collapse-content">
+                  <md-content>
+                    <md-list class="md-dense" flex="">
+                      <md-list-item class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="null">              
+                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                          {{ data.cb1 }}
+                        </md-checkbox>                                                              
+                          <p>{{ item.name }}</p>                        
+                      </md-list-item> 
+                    </md-list>        
+                  </md-content>
+                </div>
+              </div>
+            </div>
+
+            <div class="expandcollapse-item entities">      
+              <div ng-click="isEntities = !isEntities" ng-class="{'expandcollapse-heading-collapsed': isEntities, 'expandcollapse-heading-expanded': !isEntities}">                
+                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">Entities</span>                      
+                    </md-card-title-text>              
+                  </md-card-title>    
+                </md-card>
+              </div>      
+
+              <div class="slideDown" ng-show="isEntities" ng-hide="!isEntities" ng-style="cubesStyle">              
+                <div class="expand-collapse-content">
+                  <md-content>
+                    <md-list class="md-dense" flex="">
+                      <md-list-item ng-repeat="item in entitiesSourceList" ng-click="null">   
+                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                          {{ data.cb1 }}
+                        </md-checkbox>                                                                         
+                          <p>{{ item.name }}</p>                        
+                      </md-list-item> 
+                    </md-list>        
+                  </md-content>
+                </div>
+              </div>
+            </div>
+
+            <div class="expandcollapse-item capsules">      
+              <div ng-click="isCapsules = !isCapsules" ng-class="{'expandcollapse-heading-collapsed': isCapsules, 'expandcollapse-heading-expanded': !isCapsules}">                
+                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">Capsules</span>                      
+                    </md-card-title-text>              
+                  </md-card-title>    
+                </md-card>
+              </div>      
+
+              <div class="slideDown" ng-show="isCapsules" ng-hide="!isCapsules" ng-style="cubesStyle">              
+                <div class="expand-collapse-content">
+                  <md-content>
+                    <md-list class="md-dense" flex="">
+                      <md-list-item ng-repeat="item in capsulesSourceList" ng-click="null">        
+                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                          {{ data.cb1 }}
+                        </md-checkbox>                                                               
+                          <p>{{ item.name }}</p>                        
+                      </md-list-item> 
+                    </md-list>        
+                  </md-content>
+                </div>
+              </div>
+            </div>
+
+          
+            
+            <div class="inset" ng-cloak>               
+              <span class="md-body-1">Tension</span>
+              <md-switch id="tension" ng-model="data.cb1" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
+            </div>
+            <div class="inset" ng-cloak>
+              <span class="md-body-1">Weight</span>
+              <input id="weight" type="range" min="-100" max="100" value="-100"></input>
+            </div>
+            
+          </div>
+      </div>    
+    
+      <div class="content" flex="80">
+        <div class="container-chart"></div>  
       </div>
 
-      <div class="container-chart">
-      </div>
-
+    </div>    
       <!--
       <div class="container-circle">     
           <button id="addCircle" class="btn btn-primary">Add circle</button>
           <button id="removeCircle" class="btn btn-primary">Remove circle</button>
       </div>
       -->
-
+     
   </body>
- 
+
 </html>
