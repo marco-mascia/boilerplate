@@ -7,6 +7,8 @@ import packageHierarchy from './packageHierarchy.ts';
 import packageImports from './packageImports.ts';
 import getDivWidth from './getDivWidth.ts';
 
+let link, node, path;
+
 export default function drawChart(jsonData) {
 
     console.log('drawChart data: ', jsonData);
@@ -50,9 +52,9 @@ export default function drawChart(jsonData) {
     //var link = svg.append("g").selectAll(".link");
     //var node = svg.append("g").selectAll(".node");
 
-    var link = svg.selectAll(".link");       
-    var node = svg.selectAll(".node");
-    var path = svg.selectAll("path.link");
+    link = svg.selectAll(".link");       
+    node = svg.selectAll(".node");
+    path = svg.selectAll("path.link");
 
     var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 7));
 
@@ -92,6 +94,7 @@ export default function drawChart(jsonData) {
             .text(function(d) { return d.data.key; })
             .on("mouseover", mouseovered)
             .on("mouseout", mouseouted)
+            .on("click", clicked)
             .style("fill", function(d) { 
                 var splitName = d.data.name.split(".");             
                 var group = splitName[0] + '.' + splitName[1];            
@@ -104,8 +107,8 @@ export default function drawChart(jsonData) {
             .attr('r', 0)
             .remove();
             */
-                       
 
+     
        
         function mouseovered(d) {
             node
@@ -138,7 +141,6 @@ export default function drawChart(jsonData) {
     //LOOK
     //https://jsfiddle.net/a6pLqpxw/8/  
   
-
     function strokeLine(d){        
         let splitName = d.source.data.name.split(".");                     
         let group = splitName[0] + '.' + splitName[1];            
@@ -151,12 +153,11 @@ export default function drawChart(jsonData) {
        //update(root); 
     }, 5000);
 
-
+    
     document.getElementById('tension').onclick = function() {
         console.log('tension clicked');
         line = d3.radialLine().curve(d3.curveBundle.beta(0));
     };
-
 
     function findStartAngle(children) {
         var min = children[0].x;
@@ -176,47 +177,18 @@ export default function drawChart(jsonData) {
         return max;
     }   
 
+}
 
-    /*
-    var path = svg.selectAll("path.link")
-    .data(links)
-  .enter().append("svg:path")
-    .attr("class", function(d) { return "link source-" + d.source.key + " target-" + d.target.key; })
-    .attr("d", function(d, i) { return line(splines[i]); });
-
-    d3.select("input[type=range]").on("change", function() {
-        line.curve(d3.curveBundle.beta(this.value / 100));
-        path.attr("d", function(d, i) { return line(XPathEvaluator[i]); });
-      });
-      */
-
-      /*
-  // https://github.com/d3/d3-force
-  let layout = d3.forceSimulation()
-    // settle at a layout faster
-    .alphaDecay(0.1)
-    // nearby nodes attract each other
-    .force("charge", d3.forceManyBody()
-      .strength(10)
-      .distanceMax(scales.airports.range()[1] * 2)
-    )
-    // edges want to be as short as possible
-    // prevents too much stretching
-    .force("link", d3.forceLink()
-      .strength(0.7)
-      .distance(0)
-    )
-    .on("tick", function(d) {
-      links.attr("d", line);
-    })
-    .on("end", function(d) {
-      console.log("layout complete");
-    });
-
-  layout.nodes(bundle.nodes).force("link").links(bundle.links);
-      */
-      
-
+export function clicked(d, i) {
+    debugger;
+    console.log('i ', i);            
+    console.log('d ', d);
+    debugger;
+    node                           
+        .attr("stroke", (n) => {
+            if(d.data.name === n.data.name)
+            return 'black';
+        });                                 
 }
 
 /* --------------------------------------------------------- */

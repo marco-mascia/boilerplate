@@ -12,6 +12,8 @@ export function init() {
 }
 //init();
 
+
+import clicked from './chart.ts'
 import drawChart from './chart.ts'
 import flare from '../assets/flare.json';
 import crop from '../assets/crop.json';
@@ -46,6 +48,10 @@ import(
    drawChart(jsonData);  
 });
 */
+function test(){
+    console.log('test');
+}
+
 
 angular.module('ImpactAnalisysDemo', ['ngMaterial', 'ngMessages']);
 angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scope) {
@@ -58,13 +64,37 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.entitiesSourceList = [];   
     $scope.capsulesSourceList = [];   
 
+    $scope.cubeSourceList = flare.filter((item) => {
+        let arr = item.name.split(".");                     
+        return arr[0] + '.' + arr[1] === 'flare.animate';        
+    });
+
+    $scope.entitiesSourceList = flare.filter((item) => {
+        let arr = item.name.split(".");                     
+        return arr[0] + '.' + arr[1] === 'flare.query';        
+    });
+
+    $scope.capsulesSourceList = flare.filter((item) => {
+        let arr = item.name.split(".");                     
+        return arr[0] + '.' + arr[1] === 'flare.analytics';        
+    });
+
+    
+    $scope.select = function(item){
+        console.log('item ', item);        
+        clicked();
+    }
+    
+
+    /*
+    
     const cubeNr = 20;
     const entitiesNr = 20;
     const capsulesNr = 20;
 
     for (let index = 0; index < cubeNr; index++) {        
         $scope.cubeSourceList.push({ name: 'Cube name '+ index });        
-    }
+    }    
        
     for (let index = 0; index < entitiesNr; index++) {        
         $scope.entitiesSourceList.push({ name: 'Entity name '+ index });        
@@ -73,6 +103,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     for (let index = 0; index < capsulesNr; index++) {        
         $scope.capsulesSourceList.push({ name: 'Capsule name '+ index });        
     }
+    */
 
     //$scope.cubesStyle = {'height': cubeNr * 32 + 'px'};
 
