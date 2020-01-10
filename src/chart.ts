@@ -17,6 +17,8 @@ export default function drawChart(jsonData) {
   const width = divWidth - margin.left - margin.right;
   const height = divWidth - margin.top - margin.bottom;
 
+  var color = d3.scale.category10();
+
   var w = width,
     h = height,
     rx = w / 2,
@@ -58,30 +60,25 @@ export default function drawChart(jsonData) {
     .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
-  /*
-const svg = d3
-    .select(".container-chart")
-    .append("svg:g")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .call(responsivefy)    
-    .attr("transform", `translate(${width / 2}, ${height / 2})`);
-    */
-
   svg
     .append("svg:path")
     .attr("class", "arc")
     .attr("d",
-      d3.svg
-        .arc()
+      d3.svg.arc()
         .outerRadius(ry - 180)
         .innerRadius(0)
         .startAngle(0)
         .endAngle(2 * Math.PI)
     )
-    .on("mousedown", mousedown);
+    .on("mousedown", mousedown)
+    .style("fill", function(d) {         
+        //var splitName = d.name.split(".");             
+        //var group = splitName[0] + '.' + splitName[1];            
+        console.log(d);
+        return null; 
+    })
 
-  var nodes = cluster.nodes(packageHierarchy(jsonData[1]));
+  var nodes = cluster.nodes(packageHierarchy(jsonData[2]));
   var links = packageImports(nodes);
   var splines = bundle(links);
 
@@ -95,24 +92,25 @@ const svg = d3
     })
     .attr("d", function(d, i) {
       return line(splines[i]);
-    });
+    }) 
 
   var groupData = svg
     .selectAll("g.group")
     .data(
       nodes.filter(function(d) {
         return (
-          (d.key == "crop" || d.key == "month") &&
-          d.children
+          //(d.key == "crop" || d.key == "month") 
+          //(d.key == "analytics" || d.key == "animate" || d.key == "data" || d.key == "physics" || d.key == "query" || d.key == "scale" || d.key == "util" || d.key == "vis")
+          (d.key == "interest" || d.key == "international" || d.key == "national" || d.key == "AllScales" || d.key == "local")
+          && d.children
         );
       })
     )
     .enter()
     .append("group")
-    .attr("class", "group");
+    .attr("class", "group");    
 
-  var groupArc = d3.svg
-    .arc()
+  var groupArc = d3.svg.arc()
     .innerRadius(ry - 177)
     .outerRadius(ry - 157)
     .startAngle(function(d) {      
@@ -131,7 +129,8 @@ const svg = d3
     .attr("d", groupArc)
     .attr("class", "groupArc")
     .style("fill", "#1f77b4")
-    .style("fill-opacity", 0.5);
+    .style("fill-opacity", 0.5) 
+    
 
   svg
     .selectAll("g.node")
@@ -162,6 +161,11 @@ const svg = d3
     })
     .text(function(d) {
       return d.key.replace(/_/g, " ");
+    })
+    .style("fill", function(d) { 
+        var splitName = d.name.split(".");             
+        var group = splitName[0] + '.' + splitName[1];            
+        return color(group); 
     })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout);
