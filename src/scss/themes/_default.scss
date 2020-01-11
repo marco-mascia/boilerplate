@@ -120,18 +120,13 @@ h3 {
 }
 
 .class, .special {
-  color: #1181B8;
+  //color: #1181B8;
 }
 
-body > svg {
-  position: absolute;
-  top: -80px;
-  left: -160px;
-}
 
 path.arc {
   cursor: move;
-  fill: #fff;
+  fill: transparent;
 }
 
 .node {
@@ -139,7 +134,7 @@ path.arc {
 }
 
 .node:hover {
-  fill: #1f77b4;
+  //fill: #1f77b4;
 }
 
 .link {

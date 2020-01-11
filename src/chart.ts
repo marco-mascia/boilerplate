@@ -60,6 +60,8 @@ export default function drawChart(jsonData) {
     .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
+
+    /*
   svg
     .append("svg:path")
     .attr("class", "arc")
@@ -74,9 +76,10 @@ export default function drawChart(jsonData) {
     .style("fill", function(d) {         
         //var splitName = d.name.split(".");             
         //var group = splitName[0] + '.' + splitName[1];            
-        console.log(d);
+        //console.log(d);
         return null; 
     })
+    */
 
   var nodes = cluster.nodes(packageHierarchy(jsonData[2]));
   var links = packageImports(nodes);
@@ -108,7 +111,9 @@ export default function drawChart(jsonData) {
     )
     .enter()
     .append("group")
-    .attr("class", "group");    
+    .attr("class", function(d){
+        return d.key
+    })
 
   var groupArc = d3.svg.arc()
     .innerRadius(ry - 177)
@@ -118,18 +123,62 @@ export default function drawChart(jsonData) {
     })
     .endAngle(function(d) {      
       return ((findEndAngle(d.__data__.children) + 2) * Math.PI) / 180;
-    });
-    
+    })
 
-  svg
+    /*
+    var arcs = svg
     .selectAll("g.arc")
     .data(groupData[0])
     .enter()
-    .append("svg:path")
-    .attr("d", groupArc)
-    .attr("class", "groupArc")
-    .style("fill", "#1f77b4")
-    .style("fill-opacity", 0.5) 
+        .append("svg:path")
+        .attr("d", groupArc)
+        .attr("class", "groupArc")
+        .style("fill", "#1f77b4")
+        .style("fill-opacity", 0.5)
+        */
+    
+    var arcs = svg.selectAll("g.arc")
+        .data(groupData[0])
+        .enter().append('g')
+            .attr("class", "arc")
+            //.attr("transform", "translate("+outerRadius+","+outerRadius+")");
+        arcs.append('path')
+            .attr('fill', function(d,i){
+                return color($(d).attr("class")); 
+            })
+            .attr('d', groupArc);
+        arcs.append("text")
+            .attr("transform", function(d){ 
+                return "translate("+groupArc.centroid(d)+")"; 
+            })
+            .attr("text-anchor", "middle")
+            .text(function(d){ 
+                return d.value; 
+            });
+
+        arcs.on("mouseup", function(d){
+            console.log("logging ", d)
+        });
+  
+
+        
+    /*
+    var arcs = svg.selectAll("g.arc")
+            .data(groupData[0])
+			.enter().append('g')
+                .attr("class", "arc")
+                .style("fill", "#1f77b4")
+                .style("fill-opacity", 0.5)
+                //.attr("transform", "translate("+outerRadius+","+outerRadius+")");
+                
+	arcs.append('path')
+		.attr('fill', function(d,i){ return color(i); })
+		.attr('d', arc);
+	arcs.append("text")
+		.attr("transform", function(d){ return "translate("+arc.centroid(d)+")"; })
+		.attr("text-anchor", "middle")
+        .text(function(d){ return d.value; });
+    */
     
 
   svg
