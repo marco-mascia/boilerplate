@@ -18,9 +18,12 @@ export default function drawChart(jsonData) {
   const height = divWidth - margin.top - margin.bottom;
 
   var color = d3.scale.category10();
+
+
   const tension_smooth = 0.85;
-  const tension_tense = 0.1;
+  const tension_tense = 0;
   let currentTension = tension_smooth;
+  const line_color = '#1f77b4';
 
   
 
@@ -49,7 +52,9 @@ export default function drawChart(jsonData) {
     })
     .angle(function(d) {
       return (d.x / 180) * Math.PI;
-    });
+    })
+    
+
 
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
   var div = d3
@@ -76,12 +81,12 @@ export default function drawChart(jsonData) {
     .enter()
     .append("svg:path")
     .attr("class", function(d) {
-      return "link source-" + d.source.key + " target-" + d.target.key;
+      return "link source-" + d.source.key + " target-" + d.target.key + " group-" + d.source.parent.key;
     })
     .attr("d", function(d, i) {
       return line(splines[i]);
     }) 
- 
+   
     
 
   var groupData = svg
@@ -101,6 +106,8 @@ export default function drawChart(jsonData) {
     .attr("class", function(d){
         return d.key
     })
+
+    
 
   var groupArc = d3.svg.arc()
     .innerRadius(ry - 177)
@@ -136,7 +143,6 @@ export default function drawChart(jsonData) {
             .attr('d', groupArc);
         arcs.append("text")
             .attr("transform", function(d){ 
-            
                 return "translate("+groupArc.centroid(d) +")"; 
             })
             .attr("text-anchor", "middle")
@@ -144,10 +150,42 @@ export default function drawChart(jsonData) {
                 return $(d).attr("class"); 
             })
             
-
+        arcs.on("mouseup", groupClick);
+        /*
         arcs.on("mouseup", function(d){
             console.log("logging ", d)
         });
+        */
+
+
+  
+    function groupClick(d){
+     
+      svg
+      .selectAll("path.link")
+      .style('stroke', function(){         
+        return color(line_color);  
+      })
+
+      svg
+      .selectAll("path.link.group-" + $(d).attr("class"))
+      //.each(updateNodes("group", true))
+      .style('stroke', function(){           
+        return color($(d).attr("class"));  
+      })
+     
+
+/*
+      svg
+      .selectAll("path.link.target-" + d.key)
+      .classed("target", true)
+      .each(updateNodes("source", true))
+      .style('stroke', function(){         
+        return color(groupKey);  
+      })
+      */
+
+    }
   
 
         
@@ -201,6 +239,7 @@ export default function drawChart(jsonData) {
       return d.key.replace(/_/g, " ");
     })
     .style("fill", function(d) { 
+        console.log(d);
         var splitName = d.name.split(".");             
         var group = splitName[0] + '.' + splitName[1];            
         return color(group); 
@@ -230,9 +269,6 @@ export default function drawChart(jsonData) {
       return line(splines[i]);
     });
   });
-
-  
-  
 
   d3.select(window)
     .on("mousemove", mousemove)
@@ -295,15 +331,25 @@ export default function drawChart(jsonData) {
   }
 
   function mouseover(d) {
+
+    let groupKey = d.key;
     svg
       .selectAll("path.link.target-" + d.key)
       .classed("target", true)
-      .each(updateNodes("source", true));
+      .each(updateNodes("source", true))
+      .style('stroke', function(){         
+        return color(groupKey);  
+      })
 
     svg
       .selectAll("path.link.source-" + d.key)
       .classed("source", true)
-      .each(updateNodes("target", true));
+      .each(updateNodes("target", true))
+      .style('stroke', function(){           
+        return color(groupKey);  
+      })
+
+ 
   }
 
   function mouseout(d) {
@@ -316,6 +362,12 @@ export default function drawChart(jsonData) {
       .selectAll("path.link.target-" + d.key)
       .classed("target", false)
       .each(updateNodes("source", false));
+
+      svg.
+      selectAll("path.link")
+      .style('stroke', function(d){           
+        return '#1f77b4';  
+      })
   }
 
   function updateNodes(name, value) {
