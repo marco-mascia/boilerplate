@@ -18,6 +18,11 @@ export default function drawChart(jsonData) {
   const height = divWidth - margin.top - margin.bottom;
 
   var color = d3.scale.category10();
+  const tension_smooth = 0.85;
+  const tension_tense = 0.1;
+  let currentTension = tension_smooth;
+
+  
 
   var w = width,
     h = height,
@@ -38,7 +43,7 @@ export default function drawChart(jsonData) {
   var line = d3.svg.line
     .radial()
     .interpolate("bundle")
-    .tension(0.85)
+    .tension(tension_smooth)
     .radius(function(d) {
       return d.y;
     })
@@ -61,27 +66,7 @@ export default function drawChart(jsonData) {
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
 
-    /*
-  svg
-    .append("svg:path")
-    .attr("class", "arc")
-    .attr("d",
-      d3.svg.arc()
-        .outerRadius(ry - 180)
-        .innerRadius(0)
-        .startAngle(0)
-        .endAngle(2 * Math.PI)
-    )
-    .on("mousedown", mousedown)
-    .style("fill", function(d) {         
-        //var splitName = d.name.split(".");             
-        //var group = splitName[0] + '.' + splitName[1];            
-        //console.log(d);
-        return null; 
-    })
-    */
-
-  var nodes = cluster.nodes(packageHierarchy(jsonData[2]));
+  var nodes = cluster.nodes(packageHierarchy(jsonData[1]));
   var links = packageImports(nodes);
   var splines = bundle(links);
 
@@ -96,15 +81,17 @@ export default function drawChart(jsonData) {
     .attr("d", function(d, i) {
       return line(splines[i]);
     }) 
+ 
+    
 
   var groupData = svg
     .selectAll("g.group")
     .data(
       nodes.filter(function(d) {
         return (
-          //(d.key == "crop" || d.key == "month") 
+          (d.key == "crop" || d.key == "month") 
           //(d.key == "analytics" || d.key == "animate" || d.key == "data" || d.key == "physics" || d.key == "query" || d.key == "scale" || d.key == "util" || d.key == "vis")
-          (d.key == "interest" || d.key == "international" || d.key == "national" || d.key == "AllScales" || d.key == "local")
+          //(d.key == "interest" || d.key == "international" || d.key == "national" || d.key == "AllScales" || d.key == "local")
           && d.children
         );
       })
@@ -149,12 +136,14 @@ export default function drawChart(jsonData) {
             .attr('d', groupArc);
         arcs.append("text")
             .attr("transform", function(d){ 
-                return "translate("+groupArc.centroid(d)+")"; 
+            
+                return "translate("+groupArc.centroid(d) +")"; 
             })
             .attr("text-anchor", "middle")
             .text(function(d){ 
-                return d.value; 
-            });
+                return $(d).attr("class"); 
+            })
+            
 
         arcs.on("mouseup", function(d){
             console.log("logging ", d)
@@ -225,6 +214,25 @@ export default function drawChart(jsonData) {
       return line(splines[i]);
     });
   });
+
+  d3.select("#tension").on("click", function() {
+    console.log(line.tension);
+    if (currentTension == tension_smooth){
+        line.tension(tension_tense);
+        currentTension = tension_tense;
+    }else{
+        line.tension(tension_smooth);
+        currentTension = tension_smooth;
+    }
+    
+
+    path.attr("d", function(d, i) {
+      return line(splines[i]);
+    });
+  });
+
+  
+  
 
   d3.select(window)
     .on("mousemove", mousemove)
