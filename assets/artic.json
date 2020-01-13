@@ -33,7 +33,7 @@
         
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants",
-        "flare.AllScales.CruiseCompanies"
+        "flare.AllScales.Cruise Companies"
       ],
       "group": "international"
     },
@@ -81,7 +81,7 @@
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.international.OilGasIndustry",
         "flare.international.InternationalShippingIndustry",
         "flare.international.MiningIndustry",
@@ -141,7 +141,7 @@
         "flare.interest.SecuritySafetyDefence",
         
         "flare.international.BanksInsuranceMarket",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         
         "flare.AllScales.DFO",
         "flare.international.ForeignAffairsTradeDevelopment",
@@ -203,7 +203,7 @@
         "flare.AllScales.DFO",
         
         "flare.AllScales.NGOs",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.local.InuitCommercialFishing",
         "flare.international.OilGasIndustry",
         "flare.international.MiningIndustry",
@@ -224,7 +224,7 @@
         "flare.interest.HealthSocial",
         "flare.AllScales.NGOs",
         
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.international.InternationalShippingIndustry",
         "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
@@ -249,7 +249,7 @@
         "flare.interest.InuitInterests",
         
         
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         
         "flare.international.InternationalShippingIndustry",
         "flare.national.TransportCanada",
@@ -271,7 +271,7 @@
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         
         "flare.international.InternationalShippingIndustry",
         "flare.international.MiningIndustry",
@@ -343,14 +343,14 @@
         "flare.interest.InuitInterests",
         "flare.interest.SecuritySafetyDefence",
         "flare.national.TransportCanada",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.international.InternationalShippingIndustry"
       ],
       "group": "international"
     },
 
     {
-      "name": "flare.AllScales.CruiseCompanies",
+      "name": "flare.AllScales.Cruise Companies",
       "citation": "Arctic cruise activity is a type of shipping. They are predominantly made in ice-free waters in the summer season. Arctic cruises is a fast growing business (Ostreng et al., 2013).",
       "size": 3812,
       "imports": [
@@ -383,7 +383,7 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         
         "flare.national.EnvironmentCanada",
         "flare.national.IceNavigators",
@@ -427,7 +427,7 @@
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.international.OilGasIndustry",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.local.TerritorialGovernments",
@@ -469,10 +469,9 @@
         "flare.interest.InuitInterests",
         "flare.international.ArcticCouncil",
         "flare.international.IMO",
-        "flare.AllScales.CruiseCompanies",
+        "flare.AllScales.Cruise Companies",
         "flare.international.InternationalShippingIndustry",
         "flare.international.BanksInsuranceMarket",
-        
         "flare.international.OilGasIndustry",
         "flare.national.EnvironmentCanada",
         "flare.AllScales.DFO",
@@ -500,28 +499,119 @@
       "name": "flare.interest.Economy",
       "citation": "business development; cost-efficiency; trade; financial gains; economic utilization of natural resources (petroleum, gas, minerals, fish); competitiveness; employment; income; sustainability",
       "size": 3534,
-      "imports": [],
+      "imports": [
+        "flare.interest.SecuritySafetyDefence",
+        "flare.interest.InuitInterests",
+        "flare.AllScales.DFO",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "interest"
+    },
+    {
+      "name": "flare.interest.PublicService",
+      "citation": "business development; cost-efficiency; trade; financial gains; economic utilization of natural resources (petroleum, gas, minerals, fish); competitiveness; employment; income; sustainability",
+      "size": 3534,
+      "imports": [      
+        "flare.interest.ClimateEnvironment",
+        "flare.interest.Economy",
+        "flare.interest.SecuritySafetyDefence",
+        "flare.interest.HealthSocial",
+        "flare.interest.InuitInterests",
+        "flare.international.ArcticCouncil",
+        "flare.international.IMO",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.OilGasIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NationalDefence",
+        "flare.national.NRCan",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.NorthernPopulation",
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"],
       "group": "interest"
     },
     {
       "name": "flare.interest.SecuritySafetyDefence",
       "citation": "Search & Rescue (SAR); safety of navigation; maritime security; sustainability. Safety, Security & Defence are grouped for our analysis because of the similarities in concerns within the three topics. Based on a presentation given by Major Pascal Sévigny of the Department of National Defence at the Warming of the North Conference -2015 held in Ottawa, Ontario, they are viewed along a gradient rather than as three distinct areas of interest.",
       "size": 5731,
-      "imports": [],
+      "imports": [
+        "flare.interest.ClimateEnvironment",
+        "flare.interest.Economy",
+        "flare.interest.SecuritySafetyDefence",
+        "flare.interest.HealthSocial",
+        "flare.interest.InuitInterests",
+        "flare.international.ArcticCouncil",
+        "flare.international.IMO",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.OilGasIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NationalDefence",
+        "flare.national.NRCan",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.NorthernPopulation",
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"
+      ],
       "group": "interest"
     },
     {
       "name": "flare.interest.HealthSocial",
       "size": 7840,
       "citation": "Primarily addresses the impacts on health, happiness, well-being, tensions and social problems and welfare of Arctic marine shipping.",
-      "imports": [],
+      "imports": [
+        "flare.interest.ClimateEnvironment",
+        "flare.interest.Economy",
+        "flare.interest.SecuritySafetyDefence",
+        "flare.interest.HealthSocial",
+        "flare.interest.InuitInterests",
+        "flare.AllScales.Cruise Companies",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.national.IceNavigators",
+        "flare.international.InternationalShippingIndustry",
+        
+        "flare.local.InuitCommercialFishing",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.AllScales.NationalDefence",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        "flare.international.MiningIndustry",
+        "flare.international.OilGasIndustry",
+        "flare.AllScales.ResearchCommunityConsultants",
+        
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"
+      ],
       "group": "interest"
     },
     {
       "name": "flare.interest.InuitInterests",
       "size": 5914,
       "citation": "Primarily addresses the impacts of Arctic marine shipping on local cultural and traditional aspects.",
-      "imports": [],
+      "imports": [
+        "flare.interest.Economy",
+        "flare.interest.ClimateEnvironment",
+        "flare.interest.HealthSocial",
+        "flare.interest.InuitInterests",
+        "flare.interest.SecuritySafetyDefence",
+        "flare.national.TransportCanada",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry"
+      ],
       "group": "interest"
     }
   ]

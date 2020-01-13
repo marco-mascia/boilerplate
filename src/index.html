@@ -117,7 +117,7 @@
               <span class="md-body-1">Tension</span>
               <md-switch id="tension" ng-model="data.tensionswitch" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
             </div>           
-          
+            <div class="inset" ng-cloak>  
               <md-input-container>
                 <label>Datasource</label>
                 <md-select ng-model="selectedDatasource" md-selected-text="{{source.name}}" ng-change="switchDatasource()">
@@ -126,6 +126,7 @@
                   </md-optgroup>
                 </md-select>
               </md-input-container>
+            </div> 
           </div>
       </div>    
     

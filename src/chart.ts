@@ -141,9 +141,8 @@ export default function drawChart(jsonData) {
             .attr('d', groupArc);
         arcs.append("text")
             .attr("transform", function(d){             
-              
-              
-              var c = groupArc.centroid(d);
+            
+              let c = groupArc.centroid(d);
               return "translate(" + c[0]*1.3 +"," + c[1]*1.3 + ")";
 
               //return "translate("+groupArc.centroid(d) +")"; 
@@ -217,10 +216,7 @@ export default function drawChart(jsonData) {
     })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    
-
-
-
+  
 
   d3.select("input[type=range]").on("change", function() {
     line.tension(this.value / 100);
