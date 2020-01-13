@@ -47,7 +47,7 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item id="{{item.name}}" class="md-1-line cubeList" ng-repeat="item in cubeSourceList" ng-click="null" >              
+                      <md-list-item id="{{item.name}}" class="md-1-line cubeList" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
                         <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                              
@@ -74,7 +74,7 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item ng-repeat="item in entitiesSourceList" ng-click="null" >   
+                      <md-list-item ng-repeat="item in entitiesSourceList" ng-click="selectEntity(item)">   
                         <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                                         
@@ -101,7 +101,7 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item ng-repeat="item in capsulesSourceList" ng-click="null">        
+                      <md-list-item ng-repeat="item in capsulesSourceList" ng-click="selectEntity(item)">        
                         <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                               
@@ -136,14 +136,5 @@
       </div>
 
     </div>    
-      <!--
-      <div class="container-circle">     
-          <button id="addCircle" class="btn btn-primary">Add circle</button>
-          <button id="removeCircle" class="btn btn-primary">Remove circle</button>
-      </div>
-      -->
-     
   </body>
-
 </html>
-

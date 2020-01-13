@@ -11,10 +11,11 @@ import { selectEntity } from './chart.ts';
 import drawCircles from './circles.ts';
 import gen_fake_data from './fakedata.ts';
 
-
+/*
 Promise.all([flare, crop, artic, jobs]).then(res => {
     drawChart(res[0]);      
 })
+*/
 
 /*
 setTimeout(function(){     
@@ -59,40 +60,48 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
       }
 
     $scope.datasourceList.push({name:'random', value: gen_fake_data(fakeSizeNr, fakeGroupsNr)})
-
-    /*
-    $scope.cubeSourceList = flare.filter((item) => {
-        let arr = item.name.split(".");                     
-        return arr[0] + '.' + arr[1] === 'flare.animate';        
-    });
-    */
-
-    $scope.cubeSourceList = artic.filter((item) => {
-        let arr = item.name.split(".");                     
-        return arr[0] + '.' + arr[1] === 'flare.AllScales';        
-    });
-
-    $scope.entitiesSourceList = flare.filter((item) => {
-        let arr = item.name.split(".");                     
-        return arr[0] + '.' + arr[1] === 'flare.query';        
-    });
-
-    $scope.capsulesSourceList = flare.filter((item) => {
-        let arr = item.name.split(".");                     
-        return arr[0] + '.' + arr[1] === 'flare.analytics';        
-    });
-    
+  
     $scope.select = function(item){           
         clicked();
     }
 
+    $scope.selectedDatasource = $scope.datasourceList[0];
+    buildCombo();
+    drawChart($scope.selectedDatasource.value);  
+
     $scope.switchDatasource = function(){        
         d3.select("#impact").remove();    
-        drawChart($scope.selectedDatasource.value);     
+        drawChart($scope.selectedDatasource.value);   
+        buildCombo()  
     }
 
     function buildCombo(){
+        let entities = $scope.selectedDatasource.value.map(
+            (item) => {
+                let arr = item.name.split(".");
+                return arr[1];
+            } );
 
+        entities = entities.filter((v,i) => entities.indexOf(v) === i);
+        
+        $scope.cubeSourceList = $scope.selectedDatasource.value.filter((item) => {
+            let arr = item.name.split(".");                     
+            return arr[0] + '.' + arr[1] === 'flare.'+entities[0];        
+        });
+
+        $scope.entitiesSourceList = $scope.selectedDatasource.value.filter((item) => {
+            let arr = item.name.split(".");                     
+            return arr[0] + '.' + arr[1] === 'flare.'+entities[1];        
+        });
+
+        $scope.capsulesSourceList = $scope.selectedDatasource.value.filter((item) => {
+            let arr = item.name.split(".");                     
+            return arr[0] + '.' + arr[1] === 'flare.'+entities[2];        
+        }); 
+    }
+
+    $scope.selectEntity = function(item){
+       selectEntity(item.name);    
     }
 
   });  
@@ -102,9 +111,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
 
 /* JQUERY --------------------------------------------------- */
 $( document ).ready(function() {
-    $('.cubeList').click(function() {
-        selectEntity($(this).find('p').text());
-    });
+    
 });
 /* --------------------------------------------------------- */
 
