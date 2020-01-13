@@ -7,10 +7,16 @@ import flare from '../assets/flare.json';
 import crop from '../assets/crop.json';
 import artic from '../assets/artic.json';
 import jobs from '../assets/jobs.json';
+import { selectEntity } from './chart.ts';
+import drawCircles from './circles.ts';
+
 
 Promise.all([flare, crop, artic, jobs]).then(res => {
     drawChart(res);  
 })
+
+drawCircles();
+
 
 /**
  * 
@@ -28,9 +34,16 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.entitiesSourceList = [];   
     $scope.capsulesSourceList = [];   
 
+    /*
     $scope.cubeSourceList = flare.filter((item) => {
         let arr = item.name.split(".");                     
         return arr[0] + '.' + arr[1] === 'flare.animate';        
+    });
+    */
+
+    $scope.cubeSourceList = artic.filter((item) => {
+        let arr = item.name.split(".");                     
+        return arr[0] + '.' + arr[1] === 'flare.AllScales';        
     });
 
     $scope.entitiesSourceList = flare.filter((item) => {
@@ -52,5 +65,14 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
   });
   
 
+/* --------------------------------------------------------- */
+
+
+/* JQUERY --------------------------------------------------- */
+$( document ).ready(function() {
+    $('.cubeList').click(function() {
+        selectEntity($(this).find('p').text());
+    });
+});
 /* --------------------------------------------------------- */
 

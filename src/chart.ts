@@ -7,41 +7,64 @@ import packageHierarchy from "./packageHierarchy.ts";
 import packageImports from "./packageImports.ts";
 import getDivWidth from "./getDivWidth.ts";
 
+const color = d3.scale.category10();
+const line_color = '#CCCCCC';
+
+var nodes, links, splines, path, cluster, bundle, root;
+
+const divWidth = getDivWidth(".container-chart");
+const diameter = divWidth,
+  radius = diameter / 2,
+  innerRadius = radius - divWidth / 7;
+
+const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+const width = divWidth - margin.left - margin.right;
+const height = divWidth - margin.top - margin.bottom;
+const tension_smooth = 0.85;
+const tension_tense = 0;
+
+let w = width,
+h = height,
+rx = w / 2,
+ry = h / 2,
+m0,
+rotate = 0;
+
+let div = d3
+.select(".container-chart")
+.style("width", w + "px")
+.style("height", w + "px")
+.style("position", "absolute");
+
+let svg = div
+    .append("svg:svg")
+    .attr("width", w)
+    .attr("height", w)
+    .append("svg:g")
+    .attr("transform", "translate(" + rx + "," + ry + ")");
+
+//var link = svg.append("g").selectAll(".link");
+let node = svg.selectAll("g.node");
+let nodeText;
+
 export default function drawChart(jsonData) {
 
-  const divWidth = getDivWidth(".container-chart");
-  const diameter = divWidth,
-    radius = diameter / 2,
-    innerRadius = radius - divWidth / 7;
-  const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-  const width = divWidth - margin.left - margin.right;
-  const height = divWidth - margin.top - margin.bottom;
+  setTimeout(function(){     
+    //nodeText.select('text');
+    //update(jsonData[0]);
 
-  var color = d3.scale.category10();
-
-
-  const tension_smooth = 0.85;
-  const tension_tense = 0;
-  let currentTension = tension_smooth;
-  const line_color = '#1f77b4';
-
+  }, 5000);
   
+  let currentTension = tension_smooth;
 
-  var w = width,
-    h = height,
-    rx = w / 2,
-    ry = h / 2,
-    m0,
-    rotate = 0;
-
-  var cluster = d3.layout
-    .cluster()
+  cluster = d3.layout
+    .cluster()    
     .size([360, ry - 180])
     .sort(function(a, b) {
       return d3.ascending(a.key, b.key);
     });
 
-  var bundle = d3.layout.bundle();
+  bundle = d3.layout.bundle();
 
   var line = d3.svg.line
     .radial()
@@ -54,28 +77,13 @@ export default function drawChart(jsonData) {
       return (d.x / 180) * Math.PI;
     })
     
-
-
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
-  var div = d3
-    .select(".container-chart")
-    .style("width", w + "px")
-    .style("height", w + "px")
-    .style("position", "absolute");
 
-  var svg = div
-    .append("svg:svg")
-    .attr("width", w)
-    .attr("height", w)
-    .append("svg:g")
-    .attr("transform", "translate(" + rx + "," + ry + ")");
+  nodes = cluster.nodes(packageHierarchy(jsonData[2]));
+  links = packageImports(nodes);
+  splines = bundle(links);
 
-
-  var nodes = cluster.nodes(packageHierarchy(jsonData[1]));
-  var links = packageImports(nodes);
-  var splines = bundle(links);
-
-  var path = svg
+  path = svg
     .selectAll("path.link")
     .data(links)
     .enter()
@@ -87,16 +95,12 @@ export default function drawChart(jsonData) {
       return line(splines[i]);
     }) 
    
-    
-
   var groupData = svg
     .selectAll("g.group")
     .data(
       nodes.filter(function(d) {
-        return (
-          (d.key == "crop" || d.key == "month") 
-          //(d.key == "analytics" || d.key == "animate" || d.key == "data" || d.key == "physics" || d.key == "query" || d.key == "scale" || d.key == "util" || d.key == "vis")
-          //(d.key == "interest" || d.key == "international" || d.key == "national" || d.key == "AllScales" || d.key == "local")
+        return (   
+          (d.key== "Bayard" || d.key == "Freelance" || d.key == "Jobs" || d.key == "analytics" || d.key == "animate" || d.key == "data" || d.key == "physics" || d.key == "query" || d.key == "scale" || d.key == "util" || d.key == "vis" || d.key == "crop" || d.key == "month" || d.key == "interest" || d.key == "international" || d.key == "national" || d.key == "AllScales" || d.key == "local")
           && d.children
         );
       })
@@ -106,7 +110,6 @@ export default function drawChart(jsonData) {
     .attr("class", function(d){
         return d.key
     })
-
     
 
   var groupArc = d3.svg.arc()
@@ -118,105 +121,58 @@ export default function drawChart(jsonData) {
     .endAngle(function(d) {      
       return ((findEndAngle(d.__data__.children) + 2) * Math.PI) / 180;
     })
-
-    /*
-    var arcs = svg
-    .selectAll("g.arc")
-    .data(groupData[0])
-    .enter()
-        .append("svg:path")
-        .attr("d", groupArc)
-        .attr("class", "groupArc")
-        .style("fill", "#1f77b4")
-        .style("fill-opacity", 0.5)
-        */
-    
+     
     var arcs = svg.selectAll("g.arc")
         .data(groupData[0])
         .enter().append('g')
-            .attr("class", "arc")
-            //.attr("transform", "translate("+outerRadius+","+outerRadius+")");
+            .attr("class", "arc")            
         arcs.append('path')
             .attr('fill', function(d,i){
                 return color($(d).attr("class")); 
             })
             .attr('d', groupArc);
         arcs.append("text")
-            .attr("transform", function(d){ 
+            .attr("transform", function(d){               
                 return "translate("+groupArc.centroid(d) +")"; 
             })
             .attr("text-anchor", "middle")
             .text(function(d){ 
                 return $(d).attr("class"); 
-            })
-            
-        arcs.on("mouseup", groupClick);
-        /*
-        arcs.on("mouseup", function(d){
-            console.log("logging ", d)
-        });
-        */
-
-
+            })            
+        arcs.on("mouseup", groupClick);        
   
-    function groupClick(d){
-     
-      svg
-      .selectAll("path.link")
-      .style('stroke', function(){         
-        return color(line_color);  
-      })
 
+    /**
+     * 
+     * @param d toggle group selection
+     */
+    function groupClick(d){         
+      let group = $(d).attr("class");      
       svg
-      .selectAll("path.link.group-" + $(d).attr("class"))
-      //.each(updateNodes("group", true))
-      .style('stroke', function(){           
-        return color($(d).attr("class"));  
-      })
-     
-
-/*
-      svg
-      .selectAll("path.link.target-" + d.key)
-      .classed("target", true)
-      .each(updateNodes("source", true))
-      .style('stroke', function(){         
-        return color(groupKey);  
-      })
-      */
-
+      .selectAll("path.link.group-" + group)      
+      .style('stroke', function(d){        
+        let newColor = color(group);              
+        let rgb = d3.select(this).style("stroke")
+        rgb = rgb.replace("rgb(", "");
+        rgb = rgb.replace(")", "");        
+        let arrgb = rgb.split(',');        
+        let currentColor = rgbToHex(+arrgb[0], +arrgb[1], +arrgb[2]);            
+        if(currentColor === newColor){
+          newColor = line_color;
+        }        
+        return newColor;
+      })   
     }
-  
+      
 
-        
-    /*
-    var arcs = svg.selectAll("g.arc")
-            .data(groupData[0])
-			.enter().append('g')
-                .attr("class", "arc")
-                .style("fill", "#1f77b4")
-                .style("fill-opacity", 0.5)
-                //.attr("transform", "translate("+outerRadius+","+outerRadius+")");
-                
-	arcs.append('path')
-		.attr('fill', function(d,i){ return color(i); })
-		.attr('d', arc);
-	arcs.append("text")
-		.attr("transform", function(d){ return "translate("+arc.centroid(d)+")"; })
-		.attr("text-anchor", "middle")
-        .text(function(d){ return d.value; });
-    */
-    
-
-  svg
-    .selectAll("g.node")
+    node
     .data(
       nodes.filter(function(n) {
         return !n.children;
       })
-    )
+    )    
     .enter()
-    .append("svg:g")
+    .append("g")
     .attr("class", "node")
     .attr("id", function(d) {
       return "node-" + d.key;
@@ -238,14 +194,17 @@ export default function drawChart(jsonData) {
     .text(function(d) {
       return d.key.replace(/_/g, " ");
     })
-    .style("fill", function(d) { 
-        console.log(d);
+    .style("fill", function(d) {  
         var splitName = d.name.split(".");             
-        var group = splitName[0] + '.' + splitName[1];            
+        var group = splitName[1]; 
         return color(group); 
     })
     .on("mouseover", mouseover)
-    .on("mouseout", mouseout);
+    .on("mouseout", mouseout)
+    
+
+
+
 
   d3.select("input[type=range]").on("change", function() {
     line.tension(this.value / 100);
@@ -254,8 +213,7 @@ export default function drawChart(jsonData) {
     });
   });
 
-  d3.select("#tension").on("click", function() {
-    console.log(line.tension);
+  d3.select("#tension").on("click", function() {    
     if (currentTension == tension_smooth){
         line.tension(tension_tense);
         currentTension = tension_tense;
@@ -264,7 +222,6 @@ export default function drawChart(jsonData) {
         currentTension = tension_smooth;
     }
     
-
     path.attr("d", function(d, i) {
       return line(splines[i]);
     });
@@ -362,19 +319,8 @@ export default function drawChart(jsonData) {
       .selectAll("path.link.target-" + d.key)
       .classed("target", false)
       .each(updateNodes("source", false));
-
-      svg.
-      selectAll("path.link")
-      .style('stroke', function(d){           
-        return '#1f77b4';  
-      })
-  }
-
-  function updateNodes(name, value) {
-    return function(d) {
-      if (value) this.parentNode.appendChild(this);
-      svg.select("#node-" + d[name].key).classed(name, value);
-    };
+      
+      resetLinkColor();
   }
 
   function cross(a, b) {
@@ -401,18 +347,138 @@ export default function drawChart(jsonData) {
     });
     //console.log('max' , max);
     return +max;
-  }
+  }  
+  
 }
-/*
-export function clicked(d, i) {
-  debugger;
-  console.log("i ", i);
-  console.log("d ", d);
-  debugger;
-  node.attr("stroke", n => {
-    if (d.data.name === n.data.name) return "black";
-  });
-}
-*/
 
 /* --------------------------------------------------------- */
+
+export function selectEntity(name){
+
+  let arr = name.split('.');
+  let key = arr.slice(-1)[0];
+  let groupKey = arr[1];  
+
+  svg
+    .selectAll("path.link.target-" + key)
+    .classed("target", true)
+    .each(updateNodes("source", true))
+    .style('stroke', function(){         
+      return color(groupKey);  
+    })
+
+  svg
+    .selectAll("path.link.source-" + key)
+    .classed("source", true)
+    .each(updateNodes("target", true))
+    .style('stroke', function(){           
+      return color(groupKey);  
+    })
+
+}
+
+function updateNodes(name, value) {
+  return function(d) {
+    if (value) this.parentNode.appendChild(this);
+    svg.select("#node-" + d[name].key).classed(name, value);
+  };
+}
+
+
+function update(jsonData){
+  debugger;
+
+    nodes = cluster.nodes(packageHierarchy(jsonData));
+    links = packageImports(nodes);
+    splines = bundle(links);    
+  
+    /*
+    cluster = d3.layout
+    .cluster()    
+    .size([360, ry - 180])
+    .sort(function(a, b) {
+      return d3.ascending(a.key, b.key);
+    }); 
+    */   
+
+    nodeText
+    .attr("dx", function(d) {
+      return d.x < 180 ? 25 : -25;
+    })
+    .attr("dy", ".31em")
+    .attr("text-anchor", function(d) {
+      return d.x < 180 ? "start" : "end";
+    })
+    .attr("transform", function(d) {
+      return d.x < 180 ? null : "rotate(180)";
+    })
+    .text(function(d) {
+      return d.key.replace(/_/g, " ");
+    })
+    .style("fill", function(d) {  
+        var splitName = d.name.split(".");             
+        var group = splitName[1]; 
+        return color(group); 
+    })
+    
+    /*
+    node = node.data(
+      nodes.filter(function(n) {
+        return !n.children;
+      })
+    )  
+    node.exit().remove();
+    node     
+    .enter()
+    .append("svg:g")
+    .attr("class", "node")
+    .attr("id", function(d) {
+      return "node-" + d.key;
+    })
+    .attr("transform", function(d) {
+      return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
+    });
+    var svgText = node
+    .append("svg:text")
+    .attr("dx", function(d) {
+      return d.x < 180 ? 25 : -25;
+    })
+    .attr("dy", ".31em")
+    .attr("text-anchor", function(d) {
+      return d.x < 180 ? "start" : "end";
+    })
+    .attr("transform", function(d) {
+      return d.x < 180 ? null : "rotate(180)";
+    })
+    .text(function(d) {
+      return d.key.replace(/_/g, " ");
+    })
+    .style("fill", function(d) {  
+        var splitName = d.name.split(".");             
+        var group = splitName[1]; 
+        return color(group); 
+    })
+    //.on("mouseover", mouseover)
+    //.on("mouseout", mouseout);
+    */
+  };
+
+
+/* UTILS */
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {  
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function resetLinkColor(){
+  svg.
+  selectAll("path.link")
+  .style('stroke', function(d){           
+    return line_color;  
+  })
+
+}

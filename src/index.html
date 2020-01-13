@@ -51,7 +51,7 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item id="{{item.name}}" class="md-1-line cubeList" ng-repeat="item in cubeSourceList" ng-click="select(item)">              
+                      <md-list-item id="{{item.name}}" class="md-1-line cubeList" ng-repeat="item in cubeSourceList" ng-click="null" >              
                         <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                              
@@ -121,7 +121,7 @@
             
             <div class="inset" ng-cloak>               
               <span class="md-body-1">Tension</span>
-              <md-switch id="tension" ng-model="data.cb1" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
+              <md-switch id="tension" ng-model="data.tensionswitch" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
             </div>
             <div class="inset" ng-cloak>
               <span class="md-body-1">Weight</span>
@@ -147,3 +147,4 @@
   </body>
 
 </html>
+
