@@ -12,10 +12,18 @@ import drawCircles from './circles.ts';
 
 
 Promise.all([flare, crop, artic, jobs]).then(res => {
-    drawChart(res);  
+    drawChart(res[0]);      
 })
 
-drawCircles();
+/*
+setTimeout(function(){     
+    d3.select("#impact").remove();    
+    Promise.all([flare, crop, artic, jobs]).then(res => {
+        drawChart(res[1]);          
+    })
+}, 5000);
+*/
+
 
 
 /**
@@ -33,6 +41,13 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.cubeSourceList = [];
     $scope.entitiesSourceList = [];   
     $scope.capsulesSourceList = [];   
+
+    $scope.datasourceList = [
+        {name:'flare', value: flare},
+        {name:'crop', value: crop},
+        {name:'artic', value: artic},
+        {name:'jobs', value: jobs}        
+    ];
 
     /*
     $scope.cubeSourceList = flare.filter((item) => {
@@ -60,6 +75,12 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.select = function(item){
         console.log('item ', item);        
         clicked();
+    }
+
+    $scope.switchDatasource = function(){
+        console.log('asdasda');
+        d3.select("#impact").remove();    
+        drawChart($scope.selectedDatasource.value);     
     }
 
   });

@@ -26,11 +26,7 @@
      
   </head>
 
-  <body ng-app="ImpactAnalisysDemo" ng-cloak>
-    <div style="position:absolute;bottom:0;font-size:18px; z-index: 1000000;">
-      tension: <input style="position:relative;top:3px;" type="range" min="0" max="100" value="4">
-    </div>
-
+  <body ng-app="ImpactAnalisysDemo" ng-cloak>  
     <div layout="row" style="padding: 20px 0;">
 
       <div class="menu" flex="20">              
@@ -116,18 +112,23 @@
                 </div>
               </div>
             </div>
-
-          
-            
+                     
             <div class="inset" ng-cloak>               
               <span class="md-body-1">Tension</span>
               <md-switch id="tension" ng-model="data.tensionswitch" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
-            </div>
-            <div class="inset" ng-cloak>
-              <span class="md-body-1">Weight</span>
-              <input id="weight" type="range" min="-100" max="100" value="-100"></input>
-            </div>
-            
+            </div>           
+          
+              <md-input-container>
+                <label>Datasource</label>
+                <md-select ng-model="selectedDatasource" md-selected-text="{{source.name}}" ng-change="switchDatasource()">
+                  <md-optgroup>
+                    <md-option ng-repeat="source in datasourceList" ng-value="source">{{source.name}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+          
+          
+
           </div>
       </div>    
     

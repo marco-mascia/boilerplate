@@ -36,18 +36,26 @@ let div = d3
 .style("height", w + "px")
 .style("position", "absolute");
 
-let svg = div
-    .append("svg:svg")
-    .attr("width", w)
-    .attr("height", w)
-    .append("svg:g")
-    .attr("transform", "translate(" + rx + "," + ry + ")");
+let svg
 
 //var link = svg.append("g").selectAll(".link");
-let node = svg.selectAll("g.node");
+let node;
 let nodeText;
 
 export default function drawChart(jsonData) {
+
+  console.log('jsonData ', jsonData);
+
+  svg = div
+  .append("svg:svg")
+  .attr("id", function(d) {
+    return "impact";
+  })
+  .attr("width", w)
+  .attr("height", w)
+  .append("svg:g")
+  .attr("transform", "translate(" + rx + "," + ry + ")");
+  node = svg.selectAll("g.node");
 
   setTimeout(function(){     
     //nodeText.select('text');
@@ -79,14 +87,14 @@ export default function drawChart(jsonData) {
     
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
 
-  nodes = cluster.nodes(packageHierarchy(jsonData[2]));
+  nodes = cluster.nodes(packageHierarchy(jsonData));
   links = packageImports(nodes);
   splines = bundle(links);
 
   path = svg
     .selectAll("path.link")
-    .data(links)
-    .enter()
+    .data(links)    
+    .enter()    
     .append("svg:path")
     .attr("class", function(d) {
       return "link source-" + d.source.key + " target-" + d.target.key + " group-" + d.source.parent.key;
