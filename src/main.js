@@ -9,6 +9,7 @@ import artic from '../assets/artic.json';
 import jobs from '../assets/jobs.json';
 import { selectEntity } from './chart.ts';
 import drawCircles from './circles.ts';
+import gen_fake_data from './fakedata.ts';
 
 
 Promise.all([flare, crop, artic, jobs]).then(res => {
@@ -49,6 +50,8 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         {name:'jobs', value: jobs}        
     ];
 
+    $scope.datasourceList.push({name:'random', value: gen_fake_data(100, 10)})
+
     /*
     $scope.cubeSourceList = flare.filter((item) => {
         let arr = item.name.split(".");                     
@@ -70,21 +73,21 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         let arr = item.name.split(".");                     
         return arr[0] + '.' + arr[1] === 'flare.analytics';        
     });
-
     
-    $scope.select = function(item){
-        console.log('item ', item);        
+    $scope.select = function(item){           
         clicked();
     }
 
-    $scope.switchDatasource = function(){
-        console.log('asdasda');
+    $scope.switchDatasource = function(){        
         d3.select("#impact").remove();    
         drawChart($scope.selectedDatasource.value);     
     }
 
-  });
-  
+    function buildCombo(){
+
+    }
+
+  });  
 
 /* --------------------------------------------------------- */
 
