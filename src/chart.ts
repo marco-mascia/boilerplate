@@ -44,7 +44,7 @@ let nodeText;
 
 export default function drawChart(jsonData) {
 
-  console.log('jsonData ', jsonData);
+  //console.log('jsonData ', jsonData);
 
   svg = div
   .append("svg:svg")
@@ -301,7 +301,9 @@ export default function drawChart(jsonData) {
 
   function mouseover(d) {
 
-    let groupKey = d.key;
+    let splitName = d.name.split(".");             
+    let groupKey = splitName[1]; 
+    
     svg
       .selectAll("path.link.target-" + d.key)
       .classed("target", true)

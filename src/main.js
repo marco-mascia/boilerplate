@@ -44,9 +44,9 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.capsulesSourceList = [];   
 
     $scope.datasourceList = [
+        {name:'artic', value: artic},
         {name:'flare', value: flare},
         {name:'crop', value: crop},
-        {name:'artic', value: artic},
         {name:'jobs', value: jobs}        
     ];
 
