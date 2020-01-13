@@ -47,11 +47,11 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item id="{{item.name}}" class="md-1-line cubeList" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
-                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
+                        <md-checkbox ng-model="item.selected" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                              
-                          <p>{{ item.name }}</p>                        
+                          <p>{{ item.key }}</p>                        
                       </md-list-item> 
                     </md-list>        
                   </md-content>
@@ -75,10 +75,10 @@
                   <md-content>
                     <md-list class="md-dense" flex="">
                       <md-list-item ng-repeat="item in entitiesSourceList" ng-click="selectEntity(item)">   
-                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                        <md-checkbox ng-model="item.selected" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                                         
-                          <p>{{ item.name }}</p>                        
+                          <p>{{ item.key }}</p>                        
                       </md-list-item> 
                     </md-list>        
                   </md-content>
@@ -102,10 +102,10 @@
                   <md-content>
                     <md-list class="md-dense" flex="">
                       <md-list-item ng-repeat="item in capsulesSourceList" ng-click="selectEntity(item)">        
-                        <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                        <md-checkbox ng-model="item.selected" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                               
-                          <p>{{ item.name }}</p>                        
+                          <p>{{ item.key }}</p>                        
                       </md-list-item> 
                     </md-list>        
                   </md-content>

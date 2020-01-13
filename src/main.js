@@ -8,6 +8,7 @@ import crop from '../assets/crop.json';
 import artic from '../assets/artic.json';
 import jobs from '../assets/jobs.json';
 import { selectEntity } from './chart.ts';
+import { deselectEntity } from './chart.ts';
 import drawCircles from './circles.ts';
 import gen_fake_data from './fakedata.ts';
 
@@ -101,7 +102,14 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     }
 
     $scope.selectEntity = function(item){
-       selectEntity(item.name);    
+       console.log(item);
+       item.selected = !item.selected;
+       if(item.selected){
+        selectEntity(item.name);  
+       }else{
+        deselectEntity(item.name);
+       }
+        
     }
 
   });  

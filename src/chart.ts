@@ -391,6 +391,26 @@ export function selectEntity(name){
 
 }
 
+export function deselectEntity(name){
+  let arr = name.split('.');
+  let key = arr.slice(-1)[0]; 
+  svg
+    .selectAll("path.link.target-" + key)
+    .classed("target", true)
+    .each(updateNodes("source", true))
+    .style('stroke', function(){         
+      return line_color; 
+    })
+
+  svg
+    .selectAll("path.link.source-" + key)
+    .classed("source", true)
+    .each(updateNodes("target", true))
+    .style('stroke', function(){           
+      return line_color;
+    })
+}
+
 function updateNodes(name, value) {
   return function(d) {
     if (value) this.parentNode.appendChild(this);
