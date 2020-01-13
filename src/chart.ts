@@ -140,13 +140,21 @@ export default function drawChart(jsonData) {
             })
             .attr('d', groupArc);
         arcs.append("text")
-            .attr("transform", function(d){               
-                return "translate("+groupArc.centroid(d) +")"; 
+            .attr("transform", function(d){             
+              
+              
+              var c = groupArc.centroid(d);
+              return "translate(" + c[0]*1.3 +"," + c[1]*1.3 + ")";
+
+              //return "translate("+groupArc.centroid(d) +")"; 
             })
             .attr("text-anchor", "middle")
             .text(function(d){ 
                 return $(d).attr("class"); 
-            })            
+            })    
+            .attr('fill', function(d,i){
+              return color($(d).attr("class")); 
+            })       
         arcs.on("mouseup", groupClick);        
   
 
