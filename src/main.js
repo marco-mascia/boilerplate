@@ -50,7 +50,15 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         {name:'jobs', value: jobs}        
     ];
 
-    $scope.datasourceList.push({name:'random', value: gen_fake_data(100, 10)})
+    let fakeSizeNr = getRandomInt(10, 100);
+    let fakeGroupsNr = getRandomInt(10, 100);
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //Il max è escluso e il min è incluso
+      }
+
+    $scope.datasourceList.push({name:'random', value: gen_fake_data(fakeSizeNr, fakeGroupsNr)})
 
     /*
     $scope.cubeSourceList = flare.filter((item) => {

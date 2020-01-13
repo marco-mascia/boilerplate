@@ -12,30 +12,30 @@ export default function gen_fake_data (size, group) {
 		name: "root",
 		imports: []
 	};
-	nodes.push(root);
+	//nodes.push(root);
 
     
 	for (var i = 0; i < group; i ++) {
 		var np = {
-			name: "parent " + i,
+			name: "flare.parent." + i,
 			group: i,
-			parent: root,
+		//	parent: root,
 			imports: []
 		};
 		nodes.push(np);
-		root.imports.push(np);
+		//root.imports.push(np);
     }
     
 	
 	for (var i = 0; i < size; i ++) {
 		var g = random_int(group);
 		var nd = {
-			name: "node " + i,
+			name: "flare.node." + i,
 			group: g,
-			parent: nodes[g + 1]
+			parent: nodes[g]
 		};
 		nodes.push(nd);
-		nodes[g + 1].imports.push(nd);
+		nodes[g].imports.push(nd.name);
 	}
 	for (var i = 0; i < Math.log2(size) * size; i ++) {
 		var s = random_int(size) + group + 1;

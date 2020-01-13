@@ -394,7 +394,6 @@ function updateNodes(name, value) {
 
 
 function update(jsonData){
-  debugger;
 
     nodes = cluster.nodes(packageHierarchy(jsonData));
     links = packageImports(nodes);

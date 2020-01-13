@@ -25,15 +25,15 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.international.ArcticCouncil",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.Ice Navigators",
+        "flare.international.MiningIndustry",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.national.IceNavigators",
         "flare.national.TransportCanada",
-        "flare.national.local.DomesticShippingIndustry",
+        
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants",
-        "flare.AllScales.Cruise Companies"
+        "flare.AllScales.CruiseCompanies"
       ],
       "group": "international"
     },
@@ -45,13 +45,13 @@
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.international.ArcticCouncil",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.national.Environment Canada",
+        "flare.international.BanksInsuranceMarket",
+        
+        "flare.national.EnvironmentCanada",
         "flare.AllScales.DFO",
-        "flare.national.Ice Navigators",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.local.Inuit Population",
+        "flare.national.IceNavigators",
+        "flare.international.InternationalShippingIndustry",
+        "flare.local.InuitPopulation",
         "flare.national.NRCan",
         "flare.AllScales.NGOs",
         "flare.local.NorthernPopulation",
@@ -74,24 +74,24 @@
       "group": "national"
     },
     {
-      "name": "flare.national.Environment Canada",
+      "name": "flare.national.EnvironmentCanada",
       "citation": "EC is a federal department in Canada that has the role of preserving and enhancing the quality of the natural environment; conserving Canada's renewable resources; conserving and protecting Canada's waters resources; forecasting daily weather conditions and warnings and providing detailed meteorological information to all of Canada; enforcing rules relating to boundary waters; and coordinating environmental policies and programs for the federal government.",
       "size": 3812,
       "imports": [
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
-        "flare.AllScales.Cruise Companies",
+        "flare.AllScales.CruiseCompanies",
         "flare.international.OilGasIndustry",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.international.national.MiningIndustry",
-        "flare.international.local.AdventureTourists",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.national.Ice Navigators",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.MiningIndustry",
+        
+        
+        "flare.national.IceNavigators",
         "flare.national.TransportCanada",
         "flare.AllScales.DFO",
         "flare.local.InuitCommercialFishing",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants"
@@ -99,20 +99,20 @@
       "group": "national"
     },
     {
-      "name": "flare.national.Ice Navigators",
+      "name": "flare.national.IceNavigators",
       "citation": "Ice navigators are persons who have served on a ship as master or person in charge of the deck watch for 50 days or more; 30 of those days must have been spent in Arctic waters where the ship required assistance from an icebreaker or had to make manoeuvres to avoid concentrations of ice. Their responsibility is to determine the ice regimes and to use them with the Ice Multipliers to determine whether the ship is capable of handling the planned route.",
       "size": 3812,
       "imports": [
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.AllScales.DFO",
-        "flare.national.Environment Canada",
+        "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.international.national.InternationalShippingIndustry",
+        
+        "flare.international.InternationalShippingIndustry",
         "flare.international.IMO",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.AllScales.ResearchCommunityConsultants"
       ],
       "group": "national"
@@ -125,7 +125,7 @@
         "flare.interest.ClimateEnvironment",
         "flare.interest.Economy",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.national.TransportCanada",
         "flare.AllScales.ResearchCommunityConsultants"
       ],
@@ -139,26 +139,26 @@
         "flare.interest.ClimateEnvironment",
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
-        "flare.international.local.AdventureTourists",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.AllScales.Cruise Companies",
-        "flare.national.local.DomesticShippingIndustry",
+        
+        "flare.international.BanksInsuranceMarket",
+        "flare.AllScales.CruiseCompanies",
+        
         "flare.AllScales.DFO",
-        "flare.international.national.ForeignAffairsTradeDevelopment",
-        "flare.national.Environment Canada",
-        "flare.national.Ice Navigators",
+        "flare.international.ForeignAffairsTradeDevelopment",
+        "flare.national.EnvironmentCanada",
+        "flare.national.IceNavigators",
         "flare.international.IMO",
-        "flare.international.national.InternationalShippingIndustry",
+        "flare.international.InternationalShippingIndustry",
         "flare.local.InuitCommercialFishing",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.AllScales.NGOs",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.international.OilGasIndustry",
         "flare.national.NRCan",
         "flare.AllScales.NonInuitCommercialFishing",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
-        "flare.national.local.PublicSafetyCanada",
+        
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.local.TerritorialGovernments"
       ],
@@ -174,13 +174,13 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
-        "flare.national.local.CanNor",
-        "flare.national.Environment Canada",
-        "flare.international.national.BanksInsuranceMarket",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.international.BanksInsuranceMarket",
         "flare.AllScales.DFO",
-        "flare.national.Environment Canada",
+        "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.AllScales.NGOs",
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.local.NorthernPopulation"
@@ -188,7 +188,7 @@
       "group": "local"
     },
     {
-      "name": "flare.local.Inuit Population",
+      "name": "flare.local.InuitPopulation",
       "size": 3812,
       "citation": "The Inuit in Canada constitute the largest aboriginal group in the country's North. They have described their entire culture and identity as being based on free movement on sea and sea ice for hunting and fishing (Ostreng et al., 2013)",
       "imports": [
@@ -197,16 +197,16 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.national.Environment Canada",
+        "flare.international.InternationalShippingIndustry",
+        "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
         "flare.AllScales.DFO",
-        "flare.national.local.DomesticShippingIndustry",
+        
         "flare.AllScales.NGOs",
-        "flare.AllScales.Cruise Companies",
+        "flare.AllScales.CruiseCompanies",
         "flare.local.InuitCommercialFishing",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.local.TerritorialGovernments"
@@ -223,14 +223,14 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.AllScales.NGOs",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.AllScales.Cruise Companies",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.national.Environment Canada",
+        
+        "flare.AllScales.CruiseCompanies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
         "flare.AllScales.DFO",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.local.InuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.local.TerritorialGovernments"
@@ -247,34 +247,34 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
-        "flare.national.local.CanNor",
-        "flare.international.local.AdventureTourists",
-        "flare.AllScales.Cruise Companies",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.international.national.InternationalShippingIndustry",
+        
+        
+        "flare.AllScales.CruiseCompanies",
+        
+        "flare.international.InternationalShippingIndustry",
         "flare.national.TransportCanada",
         "flare.AllScales.DFO",
         "flare.AllScales.NGOs",
         "flare.local.NorthernPopulation",
-        "flare.local.Inuit Population",
-        "flare.international.national.MiningIndustry",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
         "flare.AllScales.ResearchCommunityConsultants"
       ],
       "group": "local"
     },
     {
-      "name": "flare.international.national.BanksInsuranceMarket",
+      "name": "flare.international.BanksInsuranceMarket",
       "citation": "They allow ship owners and carriers to take on the risk of navigating in the Arctic or not. Generally the limit is 60 degrees North but depending on the company the limit can be 70 degrees North.",
       "size": 3812,
       "imports": [
         "flare.interest.ClimateEnvironment",
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
-        "flare.international.local.AdventureTourists",
-        "flare.AllScales.Cruise Companies",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.international.national.MiningIndustry",
+        
+        "flare.AllScales.CruiseCompanies",
+        
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.MiningIndustry",
         "flare.international.IMO",
         "flare.international.OilGasIndustry",
         "flare.AllScales.NonInuitCommercialFishing",
@@ -285,7 +285,7 @@
       "group": "international"
     },
     {
-      "name": "flare.international.national.InternationalShippingIndustry",
+      "name": "flare.international.InternationalShippingIndustry",
       "citation": "",
       "size": 3812,
       "imports": [
@@ -293,38 +293,38 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.international.IMO",
         "flare.international.OilGasIndustry",
-        "flare.international.national.MiningIndustry",
-        "flare.national.Environment Canada",
+        "flare.international.MiningIndustry",
+        "flare.national.EnvironmentCanada",
         "flare.national.TransportCanada",
-        "flare.national.Ice Navigators",
+        "flare.national.IceNavigators",
         "flare.local.TerritorialGovernments",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.local.PublicSafetyCanada",
+        "flare.international.BanksInsuranceMarket",
+        
         "flare.AllScales.DFO",
-        "flare.international.national.ForeignAffairsTradeDevelopment",
+        "flare.international.ForeignAffairsTradeDevelopment",
         "flare.local.NorthernPopulation",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.AllScales.ResearchCommunityConsultants"
       ],
       "group": "international"
     },
     {
-      "name": "flare.international.national.MiningIndustry",
+      "name": "flare.international.MiningIndustry",
       "citation": "Mining and mineral processing industries. It covers exploration, exploitation, production and exportation.",
       "size": 3812,
       "imports": [
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.international.IMO",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.national.local.CanNor",
-        "flare.national.local.DomesticShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.InternationalShippingIndustry",
+        
+        
         "flare.AllScales.DFO",
-        "flare.national.Ice Navigators",
+        "flare.national.IceNavigators",
         "flare.local.NorthernPopulation",
-        "flare.local.Inuit Population",
-        "flare.national.Environment Canada",
+        "flare.local.InuitPopulation",
+        "flare.national.EnvironmentCanada",
         "flare.national.NRCan",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.national.TransportCanada",
@@ -333,7 +333,7 @@
       "group": "international"
     },
     {
-      "name": "flare.international.national.ForeignAffairsTradeDevelopment",
+      "name": "flare.international.ForeignAffairsTradeDevelopment",
       "citation": "FATD is a federal department in Canada with the role of managing Canada's diplomatic and consular relations, encouraging the country's international trade and leading Canada's international development and humanitarian assistance.",
       "size": 3812,
       "imports": [
@@ -343,85 +343,14 @@
         "flare.interest.InuitInterests",
         "flare.interest.SecuritySafetyDefence",
         "flare.national.TransportCanada",
-        "flare.AllScales.Cruise Companies",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.national.local.PublicSafetyCanada"
+        "flare.AllScales.CruiseCompanies",
+        "flare.international.InternationalShippingIndustry"
       ],
       "group": "international"
-    },
-    {
-      "name": "flare.national.local.CanNor",
-      "citation": "CanNor is an agency within the federal government of Canada with the role of helping to develop a diversified, sustainable, and dynamic economy in Canada's three territories and contributing to Canada's prosperity.",
-      "size": 3812,
-      "imports": [
-        "flare.interest.Economy",
-        "flare.local.TerritorialGovernments",
-        "flare.international.national.MiningIndustry",
-        "flare.local.InuitCommercialFishing"
-      ],
-      "group": "national"
-    },
-    {
-      "name": "flare.national.local.DomesticShippingIndustry",
-      "citation": "Covers the companies operating only within the Canadian Arctic (e.g. FEDNAV, NEAS, NTCL).",
-      "size": 3812,
-      "imports": [
-        "flare.interest.Economy",
-        "flare.interest.SecuritySafetyDefence",
-        "flare.interest.HealthSocial",
-        "flare.national.Ice Navigators",
-        "flare.AllScales.DFO",
-        "flare.international.IMO",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.TransportCanada",
-        "flare.national.Environment Canada",
-        "flare.local.Inuit Population",
-        "flare.local.NorthernPopulation",
-        "flare.national.local.PublicSafetyCanada",
-        "flare.local.TerritorialGovernments",
-        "flare.international.national.MiningIndustry",
-        "flare.international.OilGasIndustry",
-        "flare.AllScales.ResearchCommunityConsultants"
-      ],
-      "group": "national"
-    },
-    
-    {
-      "name": "flare.national.local.PublicSafetyCanada",
-      "citation": "PSC is a federal department in Canada with the role of keeping Canadians safe from a range of risks such as natural disasters, crime and terrorism.",
-      "size": 3812,
-      "imports": [
-        "flare.interest.ClimateEnvironment",
-        "flare.interest.SecuritySafetyDefence",
-        "flare.AllScales.Cruise Companies",
-        "flare.international.local.AdventureTourists",
-        "flare.national.local.DomesticShippingIndustry",
-        "flare.AllScales.DFO",
-        "flare.international.national.ForeignAffairsTradeDevelopment",
-        "flare.national.TransportCanada",
-        "flare.international.national.InternationalShippingIndustry"
-      ],
-      "group": "national"
     },
 
     {
-      "name": "flare.international.local.AdventureTourists",
-      "citation": "Adventure tourists are independent individuals/explorators who take their a recreational vessel, such as a yacht, into the Canadian Arctic for tourism purposes.",
-      "size": 3812,
-      "imports": [
-        "flare.interest.ClimateEnvironment",
-        "flare.interest.SecuritySafetyDefence",
-        "flare.national.local.PublicSafetyCanada",
-        "flare.AllScales.DFO",
-        "flare.national.Environment Canada",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.TransportCanada",
-        "flare.local.TerritorialGovernments"
-      ],
-      "group": "international"
-    },
-    {
-      "name": "flare.AllScales.Cruise Companies",
+      "name": "flare.AllScales.CruiseCompanies",
       "citation": "Arctic cruise activity is a type of shipping. They are predominantly made in ice-free waters in the summer season. Arctic cruises is a fast growing business (Ostreng et al., 2013).",
       "size": 3812,
       "imports": [
@@ -429,13 +358,13 @@
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.InuitInterests",
-        "flare.national.Environment Canada",
+        "flare.national.EnvironmentCanada",
         "flare.AllScales.DFO",
-        "flare.international.national.ForeignAffairsTradeDevelopment",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.local.PublicSafetyCanada",
+        "flare.international.ForeignAffairsTradeDevelopment",
+        "flare.international.BanksInsuranceMarket",
+        
         "flare.national.TransportCanada",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
         "flare.local.TerritorialGovernments",
         "flare.international.IMO",
@@ -454,28 +383,28 @@
         "flare.interest.SecuritySafetyDefence",
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
-        "flare.AllScales.Cruise Companies",
-        "flare.international.local.AdventureTourists",
-        "flare.national.Environment Canada",
-        "flare.national.Ice Navigators",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.national.local.DomesticShippingIndustry",
+        "flare.AllScales.CruiseCompanies",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.national.IceNavigators",
+        "flare.international.InternationalShippingIndustry",
+        
         "flare.local.InuitCommercialFishing",
         "flare.AllScales.NonInuitCommercialFishing",
-        "flare.AllScales.National Defence",
-        "flare.local.Inuit Population",
+        "flare.AllScales.NationalDefence",
+        "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
-        "flare.international.national.MiningIndustry",
+        "flare.international.MiningIndustry",
         "flare.international.OilGasIndustry",
         "flare.AllScales.ResearchCommunityConsultants",
-        "flare.national.local.PublicSafetyCanada",
+        
         "flare.local.TerritorialGovernments",
         "flare.national.TransportCanada"
       ],
       "group": "AllScales"
     },
     {
-      "name": "flare.AllScales.National Defence",
+      "name": "flare.AllScales.NationalDefence",
       "citation": "DND is a federal department in Canada with the role of providing advice and support to the Minister of National Defence and implementing government decisions regarding the defence of Canadian interests at home and abroad.",
       "size": 3812,
       "imports": [
@@ -496,9 +425,9 @@
         "flare.interest.HealthSocial",
         "flare.interest.InuitInterests",
         "flare.AllScales.NonInuitCommercialFishing",
-        "flare.local.Inuit Population",
+        "flare.local.InuitPopulation",
         "flare.local.NorthernPopulation",
-        "flare.AllScales.Cruise Companies",
+        "flare.AllScales.CruiseCompanies",
         "flare.international.OilGasIndustry",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.local.TerritorialGovernments",
@@ -517,14 +446,14 @@
         "flare.interest.Economy",
         "flare.interest.SecuritySafetyDefence",
         "flare.international.IMO",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.Environment Canada",
+        "flare.international.BanksInsuranceMarket",
+        "flare.national.EnvironmentCanada",
         "flare.AllScales.DFO",
         "flare.local.InuitCommercialFishing",
         "flare.AllScales.NGOs",
         "flare.national.TransportCanada",
         "flare.AllScales.ResearchCommunityConsultants",
-        "flare.local.Inuit Population"
+        "flare.local.InuitPopulation"
       ],
       "group": "AllScales"
     },
@@ -540,17 +469,17 @@
         "flare.interest.InuitInterests",
         "flare.international.ArcticCouncil",
         "flare.international.IMO",
-        "flare.AllScales.Cruise Companies",
-        "flare.international.national.InternationalShippingIndustry",
-        "flare.international.national.BanksInsuranceMarket",
-        "flare.national.local.DomesticShippingIndustry",
+        "flare.AllScales.CruiseCompanies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        
         "flare.international.OilGasIndustry",
-        "flare.national.Environment Canada",
+        "flare.national.EnvironmentCanada",
         "flare.AllScales.DFO",
-        "flare.national.Ice Navigators",
-        "flare.local.Inuit Population",
-        "flare.international.national.MiningIndustry",
-        "flare.AllScales.National Defence",
+        "flare.national.IceNavigators",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NationalDefence",
         "flare.national.NRCan",
         "flare.AllScales.NGOs",
         "flare.AllScales.NonInuitCommercialFishing",
