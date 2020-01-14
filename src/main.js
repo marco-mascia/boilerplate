@@ -84,19 +84,22 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
             } );
 
         entities = entities.filter((v,i) => entities.indexOf(v) === i);
-        
+              
+        $scope.cubeSourceTitle = entities[0]; 
         $scope.cubeSourceList = $scope.selectedDatasource.value.filter((item) => {
-            let arr = item.name.split(".");                     
+            let arr = item.name.split(".");
             return arr[0] + '.' + arr[1] === 'flare.'+entities[0];        
         });
 
+        $scope.entitiesSourceTitle = entities[1]; 
         $scope.entitiesSourceList = $scope.selectedDatasource.value.filter((item) => {
             let arr = item.name.split(".");                     
             return arr[0] + '.' + arr[1] === 'flare.'+entities[1];        
         });
 
+        $scope.capsulesSourceTitle = entities[2];    
         $scope.capsulesSourceList = $scope.selectedDatasource.value.filter((item) => {
-            let arr = item.name.split(".");                     
+            let arr = item.name.split(".");                         
             return arr[0] + '.' + arr[1] === 'flare.'+entities[2];        
         }); 
     }
