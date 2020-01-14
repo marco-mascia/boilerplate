@@ -27,8 +27,6 @@ setTimeout(function(){
 }, 5000);
 */
 
-
-
 /**
  * 
  * USES D3.V3
@@ -104,15 +102,13 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         }); 
     }
 
-    $scope.selectEntity = function(item){
-       console.log(item);
+    $scope.selectEntity = function(item){       
        item.selected = !item.selected;
        if(item.selected){
         selectEntity(item.name);  
        }else{
         deselectEntity(item.name);
-       }
-        
+       }        
     }
 
   });  
