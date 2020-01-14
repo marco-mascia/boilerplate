@@ -198,7 +198,6 @@ function update(jsonData) {
   links = packageImports(nodes);
   splines = bundle(links);
 
-
   node = node.data(nodes.filter(function(n) {
     return !n.children;
   })); // link assigned
@@ -316,7 +315,7 @@ function update(jsonData) {
     .append("text")
     .attr("transform", function(d) {
       let c = groupArc.centroid(d);
-      return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")";
+      return "translate(" + c[0] * 1.4 + "," + c[1] * 1.4 + ")";
     })
     .attr("text-anchor", "middle")
     .text(function(d) {

@@ -31,6 +31,9 @@
 
       <div class="menu" flex="20">              
           <div class="container" ng-controller="AccordionCtrl">
+
+
+            <textarea> {{ flaredata }}</textarea>
       
             <div class="expandcollapse-item cubes">  
               <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
@@ -121,7 +124,7 @@
             -->
 
             <div class="inset" ng-cloak>  
-              <md-input-container>
+              <md-input-container style="width: 100%; margin-top: 50px;">
                 <label>Datasource</label>
                 <md-select ng-model="selectedDatasource" md-selected-text="{{source.name}}" ng-change="switchDatasource()">
                   <md-optgroup>
@@ -131,7 +134,10 @@
               </md-input-container>
             </div> 
           </div>
-      </div>    
+             
+      
+      </div>  
+   
     
       <div class="content" flex="80">
         <div class="container-chart"></div>  

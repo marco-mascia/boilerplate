@@ -9,7 +9,6 @@ import artic from '../assets/artic.json';
 import jobs from '../assets/jobs.json';
 import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
-import drawCircles from './circles.ts';
 import gen_fake_data from './fakedata.ts';
 
 /*
@@ -27,6 +26,8 @@ setTimeout(function(){
 }, 5000);
 */
 
+
+
 /**
  * 
  * USES D3.V3
@@ -34,6 +35,22 @@ setTimeout(function(){
  */
 angular.module('ImpactAnalisysDemo', ['ngMaterial', 'ngMessages']);
 angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scope) {
+
+
+    /*
+    function editFlare(){
+        $scope.flaredata = flare.filter((item) => {        
+            let arr = item.name.split(".");
+            item.group = arr[1];    
+            return item;
+        })        
+    }
+    */
+
+    //editFlare();
+
+
+
 
     $scope.isCubes = false;
     $scope.isEntities = false;
