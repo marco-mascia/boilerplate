@@ -6,6 +6,7 @@ import drawChart from './chart.ts'
 import flare from '../assets/flare.json';
 import crop from '../assets/crop.json';
 import artic from '../assets/artic.json';
+import artic2 from '../assets/artic2.json';
 import jobs from '../assets/jobs.json';
 import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
@@ -37,17 +38,17 @@ angular.module('ImpactAnalisysDemo', ['ngMaterial', 'ngMessages']);
 angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scope) {
 
 
-    /*
+    
     function editFlare(){
-        $scope.flaredata = flare.filter((item) => {        
+        $scope.flaredata = jobs.filter((item) => {        
             let arr = item.name.split(".");
             item.group = arr[1];    
             return item;
         })        
     }
-    */
+    
 
-    //editFlare();
+    editFlare();
 
 
 
@@ -62,6 +63,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
 
     $scope.datasourceList = [
         {name:'artic', value: artic},
+        {name:'artic2', value: artic2},
         {name:'flare', value: flare},
         {name:'crop', value: crop},
         {name:'jobs', value: jobs}        

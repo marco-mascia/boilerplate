@@ -32,9 +32,10 @@
       <div class="menu" flex="20">              
           <div class="container" ng-controller="AccordionCtrl">
 
-
+          
             <textarea> {{ flaredata }}</textarea>
-      
+          
+
             <div class="expandcollapse-item cubes">  
               <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>

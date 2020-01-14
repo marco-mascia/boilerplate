@@ -80,14 +80,25 @@ export default function drawChart(jsonData) {
 
   node = svg.selectAll("g.node");
 
-  setTimeout(function() {
-    //nodeText.select('text');
-    //update(jobs);
-  }, 5000);
+
+  cluster = d3.layout
+  .cluster()
+  .size([360, ry - 180])
+  .sort(function(a, b) {
+    return d3.ascending(a.key, b.key);
+  })
+  
+  bundle = d3.layout.bundle();
+
 
   let currentTension = tension_smooth;
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
   update(jsonData);
+
+  setTimeout(function() {
+    //nodeText.select('text');
+    update(jobs);
+  }, 5000);
   
 
   d3.select("input[type=range]").on("change", function() {
@@ -185,18 +196,20 @@ function groupClick(d) {
 
 function update(jsonData) {
 
-  cluster = d3.layout
-  .cluster()
-  .size([360, ry - 180])
-  .sort(function(a, b) {
-    return d3.ascending(a.key, b.key);
-  });
-
-  bundle = d3.layout.bundle();
-
   nodes = cluster.nodes(packageHierarchy(jsonData));
   links = packageImports(nodes);
   splines = bundle(links);
+
+
+
+  
+  console.log('-------');
+  console.log(nodes);
+  console.log(nodes.filter(function(n) {
+    return !n.children;
+  }));
+  console.log('-------');
+  
 
   node = node.data(nodes.filter(function(n) {
     return !n.children;
@@ -239,7 +252,10 @@ function update(jsonData) {
   link
     .enter() // <----- THIS
     //.append("path")
-    .insert('svg:path', 'g')
+    .insert('svg:path')
+    .attr("d", function(d, i) {
+      return line(splines[i]);
+    })
     .attr("class", function(d) {
       return (
         "link source-" +
@@ -249,10 +265,8 @@ function update(jsonData) {
         " group-" +
         d.source.parent.key
       );
-    })
-    .attr("d", function(d, i) {
-      return line(splines[i]);
     });
+
   link.exit().remove(); // no more errors!
 
   groupData = svg.selectAll("g.group")

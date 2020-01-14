@@ -1,91 +1,109 @@
 [
-    {
-      "name": "root.Jobs.Freelance",
-      "imports": [
-        "root.Freelance.Montrose_High_School",
-        "root.Freelance.Technology_in_Education",
-        "root.Freelance.Fandango",
-        "root.Freelance.ICPA",
-        "root.Freelance.Showtime",
-        "root.Freelance._VVF",
-        "root.Freelance.Team_Tactical",
-        "root.Freelance.ADP",
-        "root.Freelance.Centene"
-      ]
-    },
-    {
-      "name": "root.Jobs.Bayard",
-      "imports": [
-        "root.Bayard.ADP",
-        "root.Bayard.Centene",
-        "root.Bayard.University_of_Kentucky",
-        "root.Bayard.Hertz",
-        "root.Bayard.Six_Flags",
-        "root.Bayard.Kaiser_Permanente"
-      ]
-    },
-    {
-      "name": "root.Freelance.Montrose_High_School",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.Technology_in_Education",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.Fandango",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.ICPA",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.Showtime",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance._VVF",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.Team_Tactical",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.ADP",
-      "imports": []
-    },
-    {
-      "name": "root.Freelance.Centene",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.ADP",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.Centene",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.University_of_Kentucky",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.Hertz",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.Six_Flags",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.Kaiser_Permanente",
-      "imports": []
-    },
-    {
-      "name": "root.Bayard.Ball_Aerospace",
-      "imports": []
-    }
-  ]
+  {
+    "name": "flare.interest.Freelance",
+    "imports": [
+      "flare.Freelance.Montrose_High_School",
+      "flare.Freelance.Technology_in_Education",
+      "flare.Freelance.Fandango",
+      "flare.Freelance.ICPA",
+      "flare.Freelance.Showtime",
+      "flare.Freelance._VVF",
+      "flare.Freelance.Team_Tactical",
+      "flare.Freelance.ADP",
+      "flare.Freelance.Centene"
+    ],
+    "group": "interest"
+  },
+  {
+    "name": "flare.interest.Bayard",
+    "imports": [
+      "flare.Bayard.ADP",
+      "flare.Bayard.Centene",
+      "flare.Bayard.University_of_Kentucky",
+      "flare.Bayard.Hertz",
+      "flare.Bayard.Six_Flags",
+      "flare.Bayard.Kaiser_Permanente"
+    ],
+    "group": "interest"
+  },
+  {
+    "name": "flare.Freelance.Montrose_High_School",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.Technology_in_Education",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.Fandango",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.ICPA",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.Showtime",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance._VVF",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.Team_Tactical",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.ADP",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Freelance.Centene",
+    "imports": ["flare.interest.Bayard"],
+    "group": "Freelance"
+  },
+  {
+    "name": "flare.Bayard.ADP",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.Centene",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.University_of_Kentucky",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.Hertz",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.Six_Flags",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.Kaiser_Permanente",
+    "imports": [],
+    "group": "Bayard"
+  },
+  {
+    "name": "flare.Bayard.Ball_Aerospace",
+    "imports": [],
+    "group": "Bayard"
+  }
+]

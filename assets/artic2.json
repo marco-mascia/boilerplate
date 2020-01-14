@@ -1,0 +1,539 @@
+[
+    {
+      "name": "flare.international.ArcticCouncil",
+      "citation": "The Arctic Council is a high level intergovernmental forum with the role of providing a means for promoting cooperation, coordination and interaction among the Arctic States, with the involvement of the Arctic Indigenous communities and other Arctic inhabitants on common Arctic issues, in particular issues of sustainable development and environmental protection in the Arctic.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.international.OilGasIndustry",
+        "flare.international.IMO",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.IMO",
+      "citation": "IMO is a specialized agency for the UN with the role of setting global standards for safety, security and environmental performance of international shipping to create a regulatory framework for the shipping industry that is fair and effective, universally adopted and universally implemented.",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.international.ArcticCouncil",
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.national.IceNavigators",
+        "flare.national.TransportCanada",
+        
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.AllScales.Cruise Companies"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.OilGasIndustry",
+      "citation": "It covers exploration, exploitation, production and exportation.",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.international.ArcticCouncil",
+        "flare.international.BanksInsuranceMarket",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.international.InternationalShippingIndustry",
+        "flare.local.InuitPopulation",
+        "flare.national.NRCan",
+        "flare.AllScales.NGOs",
+        "flare.local.NorthernPopulation",
+        "flare.international.IMO",
+        "flare.national.TransportCanada",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.national.AANDC",
+      "citation": "AANDC is a federal department in Canada that as the role of supporting northern Canadians in their efforts to improve social and economic well-being to develop healthier, more sustainable communities and to participate more fully in Canada's political, social and economic development.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        "flare.interest.InuitInterests"
+      ],
+      "group": "national"
+    },
+    {
+      "name": "flare.national.EnvironmentCanada",
+      "citation": "EC is a federal department in Canada that has the role of preserving and enhancing the quality of the natural environment; conserving Canada's renewable resources; conserving and protecting Canada's waters resources; forecasting daily weather conditions and warnings and providing detailed meteorological information to all of Canada; enforcing rules relating to boundary waters; and coordinating environmental policies and programs for the federal government.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        "flare.AllScales.Cruise Companies",
+        "flare.international.OilGasIndustry",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.MiningIndustry",
+        
+        
+        "flare.national.IceNavigators",
+        "flare.national.TransportCanada",
+        "flare.AllScales.DFO",
+        "flare.local.InuitCommercialFishing",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "national"
+    },
+    {
+      "name": "flare.national.IceNavigators",
+      "citation": "Ice navigators are persons who have served on a ship as master or person in charge of the deck watch for 50 days or more; 30 of those days must have been spent in Arctic waters where the ship required assistance from an icebreaker or had to make manoeuvres to avoid concentrations of ice. Their responsibility is to determine the ice regimes and to use them with the Ice Multipliers to determine whether the ship is capable of handling the planned route.",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.AllScales.DFO",
+        "flare.national.EnvironmentCanada",
+        "flare.national.TransportCanada",
+        
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.IMO",
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "national"
+    },
+    {
+      "name": "flare.national.NRCan",
+      "citation": "NRCan is a federal department in Canada with the role of enhancing the responsible development and use of Canada's natural resources and the competitiveness of Canada's natural resources products.",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.national.TransportCanada",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "national"
+    },
+    {
+      "name": "flare.national.TransportCanada",
+      "citation": "TC is a federal department in Canada with the role of managing transportation policies and programs, and promoting safe, secure, efficient and environmentally-responsible transportation.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.international.BanksInsuranceMarket",
+        "flare.AllScales.Cruise Companies",
+        
+        "flare.AllScales.DFO",
+        "flare.international.ForeignAffairsTradeDevelopment",
+        "flare.national.EnvironmentCanada",
+        "flare.national.IceNavigators",
+        "flare.international.IMO",
+        "flare.international.InternationalShippingIndustry",
+        "flare.local.InuitCommercialFishing",
+        "flare.local.InuitPopulation",
+        "flare.AllScales.NGOs",
+        "flare.international.MiningIndustry",
+        "flare.international.OilGasIndustry",
+        "flare.national.NRCan",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.local.TerritorialGovernments"
+      ],
+      "group": "national"
+    },
+    {
+      "name": "flare.local.InuitCommercialFishing",
+      "citation": "Inuit commercial fisheries are those fishermen/fisherwomen who identify as Inuit and are engaged in a commercial fishery (in contrast to a traditional fishery). For example: Niqitaq Fisheries Ltd.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.international.BanksInsuranceMarket",
+        "flare.AllScales.DFO",
+        "flare.national.EnvironmentCanada",
+        "flare.national.TransportCanada",
+        "flare.local.InuitPopulation",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.NorthernPopulation"
+      ],
+      "group": "local"
+    },
+    {
+      "name": "flare.local.InuitPopulation",
+      "size": 3812,
+      "citation": "The Inuit in Canada constitute the largest aboriginal group in the country's North. They have described their entire culture and identity as being based on free movement on sea and sea ice for hunting and fishing (Ostreng et al., 2013)",
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.international.InternationalShippingIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.national.TransportCanada",
+        "flare.AllScales.DFO",
+        
+        "flare.AllScales.NGOs",
+        "flare.AllScales.Cruise Companies",
+        "flare.local.InuitCommercialFishing",
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.local.TerritorialGovernments"
+      ],
+      "group": "local"
+    },
+    {
+      "name": "flare.local.NorthernPopulation",
+      "citation": "Aboriginal populations.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.AllScales.NGOs",
+        
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.national.TransportCanada",
+        "flare.AllScales.DFO",
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.local.InuitCommercialFishing",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.local.TerritorialGovernments"
+      ],
+      "group": "local"
+    },
+    {
+      "name": "flare.local.TerritorialGovernments",
+      "citation": "Canada's North is composed by three territories: Northwest Territories, Nunavut and Yukon. Their powers ae delegated from the federal government.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        
+        
+        "flare.AllScales.Cruise Companies",
+        
+        "flare.international.InternationalShippingIndustry",
+        "flare.national.TransportCanada",
+        "flare.AllScales.DFO",
+        "flare.AllScales.NGOs",
+        "flare.local.NorthernPopulation",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "local"
+    },
+    {
+      "name": "flare.international.BanksInsuranceMarket",
+      "citation": "They allow ship owners and carriers to take on the risk of navigating in the Arctic or not. Generally the limit is 60 degrees North but depending on the company the limit can be 70 degrees North.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.AllScales.Cruise Companies",
+        
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.MiningIndustry",
+        "flare.international.IMO",
+        "flare.international.OilGasIndustry",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.InuitCommercialFishing",
+        "flare.national.TransportCanada",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.InternationalShippingIndustry",
+      "citation": "",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.international.IMO",
+        "flare.international.OilGasIndustry",
+        "flare.international.MiningIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.national.TransportCanada",
+        "flare.national.IceNavigators",
+        "flare.local.TerritorialGovernments",
+        "flare.international.BanksInsuranceMarket",
+        
+        "flare.AllScales.DFO",
+        "flare.international.ForeignAffairsTradeDevelopment",
+        "flare.local.NorthernPopulation",
+        "flare.local.InuitPopulation",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.MiningIndustry",
+      "citation": "Mining and mineral processing industries. It covers exploration, exploitation, production and exportation.",
+      "size": 3812,
+      "imports": [
+        
+        
+        "flare.international.IMO",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.InternationalShippingIndustry",
+        
+        
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.local.NorthernPopulation",
+        "flare.local.InuitPopulation",
+        "flare.national.EnvironmentCanada",
+        "flare.national.NRCan",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.national.TransportCanada",
+        "flare.local.TerritorialGovernments"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.ForeignAffairsTradeDevelopment",
+      "citation": "FATD is a federal department in Canada with the role of managing Canada's diplomatic and consular relations, encouraging the country's international trade and leading Canada's international development and humanitarian assistance.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        "flare.interest.InuitInterests",
+        
+        "flare.national.TransportCanada",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry"
+      ],
+      "group": "international"
+    },
+
+    {
+      "name": "flare.AllScales.Cruise Companies",
+      "citation": "Arctic cruise activity is a type of shipping. They are predominantly made in ice-free waters in the summer season. Arctic cruises is a fast growing business (Ostreng et al., 2013).",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.international.ForeignAffairsTradeDevelopment",
+        "flare.international.BanksInsuranceMarket",
+        
+        "flare.national.TransportCanada",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        "flare.local.TerritorialGovernments",
+        "flare.international.IMO",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.AllScales.DFO",
+      "citation": "DFO is a federal department in Canada that has the role of supporting strong economic growth in marine and fisheries sectors by supporting exports and advancing safe maritime trade; supporting innovation through research in expanding sectors such as aquaculture and biotechnology; contributing to a clean and health environment and sustainable aquatic ecosystems through habitat protection, oceans management, and ecosystems research. ",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.AllScales.Cruise Companies",
+        
+        "flare.national.EnvironmentCanada",
+        "flare.national.IceNavigators",
+        "flare.international.InternationalShippingIndustry",
+        
+        "flare.local.InuitCommercialFishing",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.AllScales.NationalDefence",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        "flare.international.MiningIndustry",
+        "flare.international.OilGasIndustry",
+        "flare.AllScales.ResearchCommunityConsultants",
+        
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.AllScales.NationalDefence",
+      "citation": "DND is a federal department in Canada with the role of providing advice and support to the Minister of National Defence and implementing government decisions regarding the defence of Canadian interests at home and abroad.",
+      "size": 3812,
+      "imports": [
+        
+        "flare.interest.InuitInterests",
+        "flare.AllScales.DFO",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.AllScales.NGOs",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.InuitPopulation",
+        "flare.local.NorthernPopulation",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.OilGasIndustry",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada",
+        "flare.international.ArcticCouncil",
+        "flare.local.InuitCommercialFishing"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.AllScales.NonInuitCommercialFishing",
+      "citation": "Non-Inuit commercial fisheries are those fishermen/fisherwomen who do not identify as Inuit and are engaged in a commercial fishery (in contrast to a traditional fishery).",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        "flare.international.IMO",
+        "flare.international.BanksInsuranceMarket",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.local.InuitCommercialFishing",
+        "flare.AllScales.NGOs",
+        "flare.national.TransportCanada",
+        "flare.AllScales.ResearchCommunityConsultants",
+        "flare.local.InuitPopulation"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.AllScales.ResearchCommunityConsultants",
+      "citation": "The research community and consultants are those who work to improve the equipment used and knowledge and management of Arctic shipping.",
+      "size": 3812,
+      "imports": [
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.international.ArcticCouncil",
+        "flare.international.IMO",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.OilGasIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NationalDefence",
+        "flare.national.NRCan",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.NorthernPopulation",
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"
+      ],
+      "group": "AllScales"
+    },
+    {
+      "name": "flare.interest.PublicService",
+      "citation": "business development; cost-efficiency; trade; financial gains; economic utilization of natural resources (petroleum, gas, minerals, fish); competitiveness; employment; income; sustainability",
+      "size": 3534,
+      "imports": [      
+        
+        
+        
+        
+        "flare.interest.InuitInterests",
+        "flare.international.ArcticCouncil",
+        "flare.international.IMO",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry",
+        "flare.international.BanksInsuranceMarket",
+        "flare.international.OilGasIndustry",
+        "flare.national.EnvironmentCanada",
+        "flare.AllScales.DFO",
+        "flare.national.IceNavigators",
+        "flare.local.InuitPopulation",
+        "flare.international.MiningIndustry",
+        "flare.AllScales.NationalDefence",
+        "flare.national.NRCan",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.NonInuitCommercialFishing",
+        "flare.local.NorthernPopulation",
+        "flare.local.TerritorialGovernments",
+        "flare.national.TransportCanada"],
+      "group": "interest"
+    },
+   
+
+    {
+      "name": "flare.interest.InuitInterests",
+      "size": 5914,
+      "citation": "Primarily addresses the impacts of Arctic marine shipping on local cultural and traditional aspects.",
+      "imports": [
+        
+        
+        
+        "flare.interest.InuitInterests",
+        
+        "flare.national.TransportCanada",
+        "flare.AllScales.Cruise Companies",
+        "flare.international.InternationalShippingIndustry"
+      ],
+      "group": "interest"
+    }
+  ]
