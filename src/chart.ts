@@ -67,8 +67,13 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
+let jsonDataBackup;
+
 export default function drawChart(jsonData) {
-  //console.log('jsonData ', jsonData);
+  console.log('jsonData ', jsonData); 
+
+  //DATA CLONE
+  jsonDataBackup = JSON.parse(JSON.stringify(jsonData));
 
   svg = div
     .append("svg:svg")
@@ -196,6 +201,7 @@ function groupClick(d) {
     return newColor;
   });
 }
+
 /** WORKING DATA UPDATE  */
 function updateBundle(jsonData) {
 
@@ -233,7 +239,7 @@ function updateBundle(jsonData) {
     })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", removeNode);
+    .on("click", toggleNode);
 
   node.transition().duration(duration);    
   node.exit().remove();  
@@ -327,13 +333,14 @@ function updateBundle(jsonData) {
       d.source.parent.key
     );
   })
-  .on("click",removeNode);
 
   link.transition().duration(duration);
   link.exit().remove();
 
   function removeNode(d){ 
+
     console.log('removeNode ', d);
+    
     let newData = jsonData.filter(function(el) { return el.name != d.name; }); 
     newData = newData.map((item) => {         
       let importIndex = item.imports.indexOf(d.name);
@@ -343,6 +350,51 @@ function updateBundle(jsonData) {
       return item;     
     })     
     updateBundle(newData);
+  }
+
+
+  function toggleNode(name){
+    
+    console.log('toggleNode ', name);
+
+    let item = jsonData.find((el) => {el.name === name}); 
+    let newData;
+
+    if(item){
+
+      //REMOVE ITEM
+
+      newData = jsonData.filter(function(el) { return el.name != name; }); //remove the item from colletion
+      newData = newData.map((item) => {         
+        let importIndex = item.imports.indexOf(name);
+        if(importIndex != -1){       
+          item.imports.splice(importIndex, 1);
+          if(!item._imports) 
+            item._imports = [];
+          item._imports.push(name); //save name reference
+        }     
+        return item;     
+      })   
+
+    }else{
+
+      //RESTORE ITEM
+      newData = jsonData.map((item) => {         
+        if(item._imports){
+          let importIndex = item._imports.indexOf(name);
+          if(importIndex != -1){
+            item._imports.splice(importIndex, 1);
+            item.imports.push(name);
+          }
+        }      
+        return item;     
+      })   
+      var itemToRestore = jsonDataBackup.find((el) => {return el.name === name});
+      newData.push(itemToRestore);
+    }
+    
+    updateBundle(newData);
+
   }
   
 /** GROUP ARCS */
