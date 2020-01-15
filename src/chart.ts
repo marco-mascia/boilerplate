@@ -7,6 +7,7 @@ import packageHierarchy from "./packageHierarchy.ts";
 import packageImports from "./packageImports.ts";
 import getDivWidth from "./getDivWidth.ts";
 import jobs from "../assets/jobs.json";
+import { json } from "d3";
 
 const color = d3.scale.category10();
 const line_color = "#CCCCCC";
@@ -61,6 +62,11 @@ var line = d3.svg.line
     return (d.x / 180) * Math.PI;
   });
 
+//TOOLTIP
+var tooltip = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+
 export default function drawChart(jsonData) {
   //console.log('jsonData ', jsonData);
 
@@ -91,10 +97,11 @@ export default function drawChart(jsonData) {
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
   updateBundle(jsonData);
 
-  setTimeout(function() {
-    //nodeText.select('text');
-    updateBundle(jobs);
+  /*
+  setTimeout(function() {    
+    //updateBundle(jobs);
   }, 5000);
+  */
   
 
   d3.select("input[type=range]").on("change", function() {
@@ -196,6 +203,7 @@ function updateBundle(jsonData) {
   var links = packageImports(nodes);
   var splines = bundle(links);
 
+
   /* NODES  */
   var node = svg.selectAll(".node").data(nodes.filter(function(n) {
     return !n.children;
@@ -207,9 +215,11 @@ function updateBundle(jsonData) {
     .attr("id", function(d) {
       return "node-" + d.key;
     })
+    /*
     .attr("dx", function(d) {
       return d.x < 180 ? 25 : -25;
     })
+    */
     .attr("dy", ".31em")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
     .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
@@ -221,8 +231,81 @@ function updateBundle(jsonData) {
       var group = splitName[1];
       return color(group);
     })
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
+    .on("click", removeNode);
+
   node.transition().duration(duration);    
   node.exit().remove();  
+
+    // toggle children
+  function toggle(d) {
+    var item = jsonData.find((item) => {      
+      return item.name === d.name;
+    }) 
+
+    //update
+    //updateBundle(d);
+  }
+
+  
+
+  
+  
+  function mouseover(d) {
+    let splitName = d.name.split(".");
+    let groupKey = splitName[1];
+
+    svg
+      .selectAll("path.link.target-" + d.key)
+      .classed("target", true)
+      .each(updateNodes("source", true))
+      .style("stroke", function() {
+        return color(groupKey);
+      });
+
+    svg
+      .selectAll("path.link.source-" + d.key)
+      .classed("source", true)
+      .each(updateNodes("target", true))
+      .style("stroke", function() {
+        return color(groupKey);
+      });
+
+      /*
+
+    tooltip
+      .transition()		
+      .duration(duration)		
+      .style("opacity", .9);		
+
+    tooltip
+      .html(d.key + "<br/>")	
+      .style("left", (d.x) + "px")
+      .style("top", (d.y - 28) + "px");
+      */
+  }
+
+  function mouseout(d) {
+    svg
+      .selectAll("path.link.source-" + d.key)
+      .classed("source", false)
+      .each(updateNodes("target", false));
+
+    svg
+      .selectAll("path.link.target-" + d.key)
+      .classed("target", false)
+      .each(updateNodes("source", false));
+
+      /*
+    tooltip
+      .transition()		
+      .duration(duration)		
+      .style("opacity", 0);
+      */
+
+    resetLinkColor();
+  }
 
   /** LINKS  */
   var link = svg.selectAll("path.link").data(links);
@@ -243,10 +326,24 @@ function updateBundle(jsonData) {
       " group-" +
       d.source.parent.key
     );
-  });  
-  link.transition().duration(duration);    
+  })
+  .on("click",removeNode);
+
+  link.transition().duration(duration);
   link.exit().remove();
 
+  function removeNode(d){ 
+    console.log('removeNode ', d);
+    let newData = jsonData.filter(function(el) { return el.name != d.name; }); 
+    newData = newData.map((item) => {         
+      let importIndex = item.imports.indexOf(d.name);
+      if(importIndex != -1){       
+        item.imports.splice(importIndex, 1); 
+      }     
+      return item;     
+    })     
+    updateBundle(newData);
+  }
   
 /** GROUP ARCS */
 var groupArc = d3.svg.arc()

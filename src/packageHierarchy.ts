@@ -17,8 +17,8 @@ export default function packageHierarchy(classes) {
       return node;
     }
 
-    classes.forEach(function(d) {
-      find(d.name, d);
+    classes.forEach(function(d) {      
+        find(d.name, d);
     });
 
     return map[""];

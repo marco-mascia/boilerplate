@@ -28,7 +28,6 @@ setTimeout(function(){
 */
 
 
-
 /**
  * 
  * USES D3.V3
@@ -37,8 +36,7 @@ setTimeout(function(){
 angular.module('ImpactAnalisysDemo', ['ngMaterial', 'ngMessages']);
 angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scope) {
 
-
-    
+    /*
     function editFlare(){
         $scope.flaredata = jobs.filter((item) => {        
             let arr = item.name.split(".");
@@ -46,12 +44,9 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
             return item;
         })        
     }
+    */
     
-
-    editFlare();
-
-
-
+    //editFlare();
 
     $scope.isCubes = false;
     $scope.isEntities = false;
@@ -121,13 +116,17 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         }); 
     }
 
-    $scope.selectEntity = function(item){       
+    $scope.selectEntity = function(item){   
+        
+       /* 
        item.selected = !item.selected;
        if(item.selected){
         selectEntity(item.name);  
        }else{
         deselectEntity(item.name);
-       }        
+       } 
+       */
+      toggle(item);     
     }
 
   });  
