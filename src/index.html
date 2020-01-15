@@ -52,7 +52,7 @@
                 <div class="expand-collapse-content">
                   <md-content>
                     <md-list class="md-dense" flex="">
-                      <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="toggleNode(item.name)">              
+                      <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
                         <md-checkbox ng-model="item.selected" aria-label="Checkbox 1">
                           {{ data.cb1 }}
                         </md-checkbox>                                                              

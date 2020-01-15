@@ -10,6 +10,7 @@ import artic2 from '../assets/artic2.json';
 import jobs from '../assets/jobs.json';
 import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
+import { toggleEntity } from './chart.ts';
 import gen_fake_data from './fakedata.ts';
 
 /*
@@ -126,8 +127,11 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         deselectEntity(item.name);
        } 
        */
-      toggle(item);     
+      toggleEntity(item.name);
+      //toggle(item);     
     }
+
+    
 
   });  
 

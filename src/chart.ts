@@ -67,12 +67,13 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
-let jsonDataBackup;
+let jsonDataBackup, jsonData;
 
-export default function drawChart(jsonData) {
-  console.log('jsonData ', jsonData); 
+export default function drawChart(data) {
+  console.log('data ', data); 
 
   //DATA CLONE
+  jsonData = data;
   jsonDataBackup = JSON.parse(JSON.stringify(jsonData));
 
   svg = div
@@ -175,6 +176,51 @@ export function deselectEntity(name) {
     });
 }
 
+export function toggleEntity(name){
+  console.log('toggleEntity ', name);
+  console.log('jsonData ', jsonData);
+
+  let item = jsonData.find((el) => {return el.name === name}); 
+  let newData;
+
+  if(item){
+    debugger;
+    //REMOVE ITEM
+
+    newData = jsonData.filter(function(el) { return el.name != name; }); //remove the item from colletion
+    newData = newData.map((item) => {         
+      let importIndex = item.imports.indexOf(name);
+      if(importIndex != -1){       
+        item.imports.splice(importIndex, 1);
+        if(!item._imports) 
+          item._imports = [];
+        item._imports.push(name); //save name reference
+      }     
+      return item;     
+    })   
+
+  }else{
+
+    debugger;
+    //RESTORE ITEM
+    newData = jsonData.map((item) => {         
+      if(item._imports){
+        let importIndex = item._imports.indexOf(name);
+        if(importIndex != -1){
+          item._imports.splice(importIndex, 1);
+          item.imports.push(name);
+        }
+      }      
+      return item;     
+    })   
+    var itemToRestore = jsonDataBackup.find((el) => {return el.name === name});
+    newData.push(itemToRestore);
+  }
+  
+  updateBundle(newData);
+
+}
+
 function updateNodes(name, value) {
   return function(d) {
     if (value) this.parentNode.appendChild(this);
@@ -203,8 +249,10 @@ function groupClick(d) {
 }
 
 /** WORKING DATA UPDATE  */
-function updateBundle(jsonData) {
+function updateBundle(data) {
 
+
+  jsonData = data;
   var nodes = cluster.nodes(packageHierarchy(jsonData));
   var links = packageImports(nodes);
   var splines = bundle(links);
@@ -239,24 +287,11 @@ function updateBundle(jsonData) {
     })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", toggleNode);
+    //.on("click", toggleNode);
 
   node.transition().duration(duration);    
   node.exit().remove();  
 
-    // toggle children
-  function toggle(d) {
-    var item = jsonData.find((item) => {      
-      return item.name === d.name;
-    }) 
-
-    //update
-    //updateBundle(d);
-  }
-
-  
-
-  
   
   function mouseover(d) {
     let splitName = d.name.split(".");
@@ -354,6 +389,8 @@ function updateBundle(jsonData) {
 
 
   function toggleNode(name){
+
+    debugger;
     
     console.log('toggleNode ', name);
 
@@ -361,14 +398,14 @@ function updateBundle(jsonData) {
     let newData;
 
     if(item){
-
+      debugger;
       //REMOVE ITEM
 
       newData = jsonData.filter(function(el) { return el.name != name; }); //remove the item from colletion
       newData = newData.map((item) => {         
         let importIndex = item.imports.indexOf(name);
         if(importIndex != -1){       
-          item.imports.splice(importIndex, 1);
+          item.imports = item.imports.splice(importIndex, 1);
           if(!item._imports) 
             item._imports = [];
           item._imports.push(name); //save name reference
@@ -378,12 +415,13 @@ function updateBundle(jsonData) {
 
     }else{
 
+      debugger;
       //RESTORE ITEM
       newData = jsonData.map((item) => {         
         if(item._imports){
           let importIndex = item._imports.indexOf(name);
           if(importIndex != -1){
-            item._imports.splice(importIndex, 1);
+            item._imports = item._imports.splice(importIndex, 1);
             item.imports.push(name);
           }
         }      
@@ -465,6 +503,8 @@ var arcs = svg.selectAll(".arc").data(groupData[0]);
 }
 
 /* OLD DATA UPDATE NOT WORKING CORRECTLY */
+
+/*
 function update(jsonData) {
 
   nodes = cluster.nodes(packageHierarchy(jsonData));
@@ -646,6 +686,8 @@ function update(jsonData) {
     resetLinkColor();
   }
 }
+
+*/
 
 /* UTILS */
 function componentToHex(c) {
