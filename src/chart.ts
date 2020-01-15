@@ -12,17 +12,13 @@ const color = d3.scale.category10();
 const line_color = "#CCCCCC";
 const duration = 350;
 
-let nodes,
-  links,
-  splines,
+//let nodes, links, splines, groupData, groupArc, arcs;
+let  
   path,
   cluster,
   bundle,
   root,
-  svg,
-  groupData,
-  groupArc,
-  arcs;
+  svg;
 
 const divWidth = getDivWidth(".container-chart");
 const diameter = divWidth,
@@ -78,7 +74,7 @@ export default function drawChart(jsonData) {
     .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
-  node = svg.selectAll("g.node");
+  //node = svg.selectAll("g.node");
 
 
   cluster = d3.layout
@@ -93,11 +89,11 @@ export default function drawChart(jsonData) {
 
   let currentTension = tension_smooth;
   // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
-  update(jsonData);
+  updateBundle(jsonData);
 
   setTimeout(function() {
     //nodeText.select('text');
-    update(jobs);
+    updateBundle(jobs);
   }, 5000);
   
 
@@ -193,7 +189,133 @@ function groupClick(d) {
     return newColor;
   });
 }
+/** WORKING DATA UPDATE  */
+function updateBundle(jsonData) {
 
+  var nodes = cluster.nodes(packageHierarchy(jsonData));
+  var links = packageImports(nodes);
+  var splines = bundle(links);
+
+  /* NODES  */
+  var node = svg.selectAll(".node").data(nodes.filter(function(n) {
+    return !n.children;
+  })); 
+      
+	node.enter().append("text");    
+  node
+    .attr("class", "node")
+    .attr("id", function(d) {
+      return "node-" + d.key;
+    })
+    .attr("dx", function(d) {
+      return d.x < 180 ? 25 : -25;
+    })
+    .attr("dy", ".31em")
+    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+    .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+    .text(function(d) {
+      return d.key.replace(/_/g, " ");
+    })
+    .style("fill", function(d) {
+      var splitName = d.name.split(".");
+      var group = splitName[1];
+      return color(group);
+    })
+  node.transition().duration(duration);    
+  node.exit().remove();  
+
+  /** LINKS  */
+  var link = svg.selectAll("path.link").data(links);
+
+  link
+  .enter()
+  .insert('svg:path');
+  link
+  .attr("d", function(d, i) {
+    return line(splines[i]);
+  })
+  .attr("class", function(d) {
+    return (
+      "link source-" +
+      d.source.key +
+      " target-" +
+      d.target.key +
+      " group-" +
+      d.source.parent.key
+    );
+  });  
+  link.transition().duration(duration);    
+  link.exit().remove();
+
+  
+/** GROUP ARCS */
+var groupArc = d3.svg.arc()
+.innerRadius(ry - 177)
+.outerRadius(ry - 157)
+.startAngle(function(d) {
+  return ((findStartAngle(d.__data__.children) - 2) * Math.PI) / 180;
+})
+.endAngle(function(d) {
+  return ((findEndAngle(d.__data__.children) + 2) * Math.PI) / 180;
+});
+
+var groupData = svg.selectAll("g.group")
+.data(
+  nodes.filter(function(d) {
+    return (
+      (d.key == "Bayard" ||
+        d.key == "Freelance" ||
+        d.key == "Jobs" ||
+        d.key == "analytics" ||
+        d.key == "animate" ||
+        d.key == "data" ||
+        d.key == "physics" ||
+        d.key == "query" ||
+        d.key == "scale" ||
+        d.key == "util" ||
+        d.key == "vis" ||
+        d.key == "crop" ||
+        d.key == "month" ||
+        d.key == "interest" ||
+        d.key == "international" ||
+        d.key == "national" ||
+        d.key == "AllScales" ||
+        d.key == "local") &&
+      d.children
+    );
+  })
+)
+groupData
+  .enter()
+  .append("group")
+  .attr("class", function(d) {
+    return d.key;
+  });
+groupData.exit().remove(); 
+
+var arcs = svg.selectAll(".arc").data(groupData[0]);  
+  arcs
+    .enter()
+    .append("text");      
+  arcs    
+    .attr("class", "arc")
+    .attr("transform", function(d) {
+      let c = groupArc.centroid(d);
+      return "translate(" + c[0] * 1.4 + "," + c[1] * 1.4 + ")";
+    })
+    .attr("text-anchor", "middle")
+    .text(function(d) {
+      return $(d).attr("class");
+    })
+    .attr("fill", function(d, i) {
+      return color($(d).attr("class"));
+    });
+  arcs.on("mouseup", groupClick);
+  arcs.transition().duration(duration);    
+  arcs.exit().remove();
+}
+
+/* OLD DATA UPDATE NOT WORKING CORRECTLY */
 function update(jsonData) {
 
   nodes = cluster.nodes(packageHierarchy(jsonData));
@@ -201,8 +323,6 @@ function update(jsonData) {
   splines = bundle(links);
 
 
-
-  
   console.log('-------');
   console.log(nodes);
   console.log(nodes.filter(function(n) {
