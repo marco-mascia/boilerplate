@@ -62,6 +62,8 @@ var line = d3.svg.line
     return (d.x / 180) * Math.PI;
   });
 
+
+
 //TOOLTIP
 var tooltip = d3.select("body").append("div")	
     .attr("class", "tooltip")				
@@ -183,10 +185,8 @@ export function toggleEntity(name){
   let item = jsonData.find((el) => {return el.name === name}); 
   let newData;
 
-  if(item){
-    debugger;
+  if(item){    
     //REMOVE ITEM
-
     newData = jsonData.filter(function(el) { return el.name != name; }); //remove the item from colletion
     newData = newData.map((item) => {         
       let importIndex = item.imports.indexOf(name);
@@ -200,8 +200,7 @@ export function toggleEntity(name){
     })   
 
   }else{
-
-    debugger;
+    
     //RESTORE ITEM
     newData = jsonData.map((item) => {         
       if(item._imports){

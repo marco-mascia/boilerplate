@@ -100,18 +100,21 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
               
         $scope.cubeSourceTitle = entities[0]; 
         $scope.cubeSourceList = $scope.selectedDatasource.value.filter((item) => {
+            item.selected = true;
             let arr = item.name.split(".");
             return arr[0] + '.' + arr[1] === 'flare.'+entities[0];        
         });
 
         $scope.entitiesSourceTitle = entities[1]; 
         $scope.entitiesSourceList = $scope.selectedDatasource.value.filter((item) => {
+            item.selected = true;
             let arr = item.name.split(".");                     
             return arr[0] + '.' + arr[1] === 'flare.'+entities[1];        
         });
 
         $scope.capsulesSourceTitle = entities[2];    
         $scope.capsulesSourceList = $scope.selectedDatasource.value.filter((item) => {
+            item.selected = true;
             let arr = item.name.split(".");                         
             return arr[0] + '.' + arr[1] === 'flare.'+entities[2];        
         }); 
@@ -127,6 +130,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         deselectEntity(item.name);
        } 
        */
+      item.selected = !item.selected;
       toggleEntity(item.name);
       //toggle(item);     
     }
