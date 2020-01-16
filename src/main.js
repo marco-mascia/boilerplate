@@ -8,6 +8,7 @@ import crop from '../assets/crop.json';
 import artic from '../assets/artic.json';
 import artic2 from '../assets/artic2.json';
 import jobs from '../assets/jobs.json';
+import flaredefault from '../assets/flaredefault.json';
 import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
 import { toggleEntity } from './chart.ts';
@@ -58,11 +59,12 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.capsulesSourceList = [];   
 
     $scope.datasourceList = [
-        {name:'artic', value: artic},
-        {name:'artic2', value: artic2},
         {name:'flare', value: flare},
+        {name:'artic', value: artic},
+        {name:'artic2', value: artic2},        
         {name:'crop', value: crop},
-        {name:'jobs', value: jobs}        
+        {name:'jobs', value: jobs},
+        {name:'flaredefault', value: flaredefault}   
     ];
 
     let fakeSizeNr = getRandomInt(10, 100);

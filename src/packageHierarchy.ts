@@ -5,6 +5,11 @@ export default function packageHierarchy(classes) {
     var map = {};
 
     function find(name, data) {
+      
+      if (!name) {
+        throw "Name is empty";
+      }
+
       var node = map[name], i;
       if (!node) {
         node = map[name] = data || {name: name, children: []};

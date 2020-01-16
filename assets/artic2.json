@@ -4,10 +4,32 @@
       "citation": "The Arctic Council is a high level intergovernmental forum with the role of providing a means for promoting cooperation, coordination and interaction among the Arctic States, with the involvement of the Arctic Indigenous communities and other Arctic inhabitants on common Arctic issues, in particular issues of sustainable development and environmental protection in the Arctic.",
       "size": 3812,
       "imports": [
-        
-        
-        
-        
+        "flare.interest.InuitInterests",
+        "flare.international.OilGasIndustry",
+        "flare.international.IMO",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.ArcticCouncil.gino",
+      "citation": "The Arctic Council is a high level intergovernmental forum with the role of providing a means for promoting cooperation, coordination and interaction among the Arctic States, with the involvement of the Arctic Indigenous communities and other Arctic inhabitants on common Arctic issues, in particular issues of sustainable development and environmental protection in the Arctic.",
+      "size": 3812,
+      "imports": [
+        "flare.interest.InuitInterests",
+        "flare.international.OilGasIndustry",
+        "flare.international.IMO",
+        "flare.AllScales.NGOs",
+        "flare.AllScales.ResearchCommunityConsultants"
+      ],
+      "group": "international"
+    },
+    {
+      "name": "flare.international.ArcticCouncil.pino",
+      "citation": "The Arctic Council is a high level intergovernmental forum with the role of providing a means for promoting cooperation, coordination and interaction among the Arctic States, with the involvement of the Arctic Indigenous communities and other Arctic inhabitants on common Arctic issues, in particular issues of sustainable development and environmental protection in the Arctic.",
+      "size": 3812,
+      "imports": [
         "flare.interest.InuitInterests",
         "flare.international.OilGasIndustry",
         "flare.international.IMO",
@@ -21,16 +43,13 @@
       "citation": "IMO is a specialized agency for the UN with the role of setting global standards for safety, security and environmental performance of international shipping to create a regulatory framework for the shipping industry that is fair and effective, universally adopted and universally implemented.",
       "size": 3812,
       "imports": [
-        
-        
         "flare.international.ArcticCouncil",
         "flare.international.OilGasIndustry",
         "flare.international.MiningIndustry",
         "flare.international.InternationalShippingIndustry",
         "flare.international.BanksInsuranceMarket",
         "flare.national.IceNavigators",
-        "flare.national.TransportCanada",
-        
+        "flare.national.TransportCanada",        
         "flare.AllScales.NonInuitCommercialFishing",
         "flare.AllScales.ResearchCommunityConsultants",
         "flare.AllScales.Cruise Companies"

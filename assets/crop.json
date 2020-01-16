@@ -3,6 +3,43 @@
   {"name":"flare.month.FEBRUARY","size":1000,"imports":[]},
   {"name":"flare.month.MARCH","size":1000,"imports":[]},
   {"name":"flare.month.APRIL","size":1000,"imports":[]},
+
+  {"name":"flare.month.SANTAMBROGIO","size":1000,"imports":[]},
+
+
+  {"name":"flare.month.SANTAMBROGIO.week1","size":330,"imports":[]},
+  {"name":"flare.month.SANTAMBROGIO.week2","size":330,"imports":[]},
+  {"name":"flare.month.SANTAMBROGIO.week3","size":330,"imports":[]},
+
+  {
+      "name": "flare.vis.operator.layout.DendrogramLayout",
+      "size": 4853,
+      "imports": [
+        "flare.util.Property",
+        "flare.vis.data.NodeSprite",
+        "flare.util.Orientation",
+        "flare.vis.operator.layout.Layout",
+        "flare.vis.data.EdgeSprite"
+      ]
+    },
+    {
+      "name": "flare.vis.operator.layout.ForceDirectedLayout",
+      "size": 8411,
+      "imports": [
+        "flare.physics.Simulation",
+        "flare.animate.Transitioner",
+        "flare.vis.data.NodeSprite",
+        "flare.vis.data.DataSprite",
+        "flare.physics.Particle",
+        "flare.physics.Spring",
+        "flare.vis.operator.layout.Layout",
+        "flare.vis.data.EdgeSprite",
+        "flare.vis.data.Data"
+      ]
+    },
+
+
+
   {"name":"flare.month.MAY","size":1000,"imports":[]},
   {"name":"flare.month.JUNE","size":1000,"imports":[]},
   {"name":"flare.month.JULY","size":1000,"imports":[]},
@@ -19,7 +56,10 @@
   {"name":"flare.crop.Broccoli","size":3534,"imports":["flare.month.JANUARY","flare.month.FEBRUARY","flare.month.MARCH","flare.month.SEPTEMBER","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},
   {"name":"flare.crop.BrusselsSprouts","size":3534,"imports":["flare.month.JANUARY","flare.month.FEBRUARY","flare.month.MARCH","flare.month.SEPTEMBER","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},
   {"name":"flare.crop.Cabbage","size":3534,"imports":["flare.month.JANUARY","flare.month.FEBRUARY","flare.month.MARCH","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},
+  
   {"name":"flare.crop.Cantaloupe","size":3534,"imports":["flare.month.APRIL","flare.month.MAY","flare.month.JUNE"]},
+
+
   {"name":"flare.crop.Carrots","size":3534,"imports":["flare.month.JANUARY","flare.month.FEBRUARY","flare.month.MARCH","flare.month.APRIL","flare.month.MAY","flare.month.APRIL","flare.month.MAY","flare.month.JUNE","flare.month.JULY","flare.month.AUGUST","flare.month.SEPTEMBER","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},
   {"name":"flare.crop.Cauliflower","size":3534,"imports":["flare.month.JANUARY","flare.month.FEBRUARY","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},
   {"name":"flare.crop.Celery","size":3534,"imports":["flare.month.JANUARY","flare.month.AUGUST","flare.month.SEPTEMBER","flare.month.OCTOBER","flare.month.NOVEMBER","flare.month.DECEMBER"]},

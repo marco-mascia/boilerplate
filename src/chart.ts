@@ -250,19 +250,17 @@ function groupClick(d) {
 /** WORKING DATA UPDATE  */
 function updateBundle(data) {
 
-
   jsonData = data;
   var nodes = cluster.nodes(packageHierarchy(jsonData));
   var links = packageImports(nodes);
   var splines = bundle(links);
 
-
   /* NODES  */
   var node = svg.selectAll(".node").data(nodes.filter(function(n) {
     return !n.children;
   })); 
-      
-	node.enter().append("text");    
+        
+  node.enter().append("text"); 
   node
     .attr("class", "node")
     .attr("id", function(d) {
@@ -288,7 +286,16 @@ function updateBundle(data) {
     .on("mouseout", mouseout)
     //.on("click", toggleNode);
 
-  node.transition().duration(duration);    
+  node.transition().duration(duration);   
+  /*
+  node.transition()
+      .duration(duration)
+      .delay(function(d,i) {
+        return 24*i;
+      })
+      .style("opacity", 1);
+      */
+
   node.exit().remove();  
 
   
@@ -371,6 +378,7 @@ function updateBundle(data) {
   link.transition().duration(duration);
   link.exit().remove();
 
+  /*
   function removeNode(d){ 
 
     console.log('removeNode ', d);
@@ -385,19 +393,17 @@ function updateBundle(data) {
     })     
     updateBundle(newData);
   }
+  */
 
 
-  function toggleNode(name){
-
-    debugger;
+  function toggleNode(name){    
     
     console.log('toggleNode ', name);
 
     let item = jsonData.find((el) => {el.name === name}); 
     let newData;
 
-    if(item){
-      debugger;
+    if(item){      
       //REMOVE ITEM
 
       newData = jsonData.filter(function(el) { return el.name != name; }); //remove the item from colletion
@@ -413,8 +419,7 @@ function updateBundle(data) {
       })   
 
     }else{
-
-      debugger;
+      
       //RESTORE ITEM
       newData = jsonData.map((item) => {         
         if(item._imports){
