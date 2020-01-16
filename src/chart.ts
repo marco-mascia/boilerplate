@@ -75,10 +75,11 @@ export default function drawChart(data) {
   console.log('data ', data); 
 
   //DATA CLONE
-  jsonData = null;
-  jsonDataBackup = null;
-  jsonData = JSON.parse(JSON.stringify(data));
-  jsonDataBackup = JSON.parse(JSON.stringify(data));
+  jsonData = [];
+  jsonDataBackup = [];
+
+  jsonData = data;
+  jsonDataBackup = data;
 
   svg = div
     .append("svg:svg")
@@ -90,9 +91,6 @@ export default function drawChart(data) {
     .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
-  //node = svg.selectAll("g.node");
-
-
   cluster = d3.layout
   .cluster()
   .size([360, ry - 180])
@@ -102,9 +100,7 @@ export default function drawChart(data) {
   
   bundle = d3.layout.bundle();
 
-
   let currentTension = tension_smooth;
-  // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
   updateBundle(jsonData);
 
   /*
@@ -251,8 +247,9 @@ function groupClick(d) {
 
 /** WORKING DATA UPDATE  */
 function updateBundle(data) {
-
+  jsonData = [];
   jsonData = data;
+
   var nodes = cluster.nodes(packageHierarchy(jsonData));
   var links = packageImports(nodes);
   var splines = bundle(links);

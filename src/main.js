@@ -82,13 +82,13 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     }
 
     $scope.selectedDatasource = $scope.datasourceList[0];
-    buildCombo();
     drawChart($scope.selectedDatasource.value);  
-
+    buildCombo();
+    
     $scope.switchDatasource = function(){        
-        d3.select("#impact").remove();    
+        d3.select("#impact").remove();  
         drawChart($scope.selectedDatasource.value);   
-        buildCombo()  
+        buildCombo();
     }
 
     function buildCombo(){
@@ -122,19 +122,14 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         }); 
     }
 
+    $scope.getItemName = function(item){
+        let arr = item.name.split(".");
+        return arr[arr.length-1];
+    }
+
     $scope.selectEntity = function(item){   
-        
-       /* 
-       item.selected = !item.selected;
-       if(item.selected){
-        selectEntity(item.name);  
-       }else{
-        deselectEntity(item.name);
-       } 
-       */
       item.selected = !item.selected;
-      toggleEntity(item.name);
-      //toggle(item);     
+      toggleEntity(item.name);     
     }
 
     

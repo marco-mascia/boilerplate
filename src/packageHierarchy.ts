@@ -5,14 +5,7 @@ export default function packageHierarchy(classes) {
     var map = {};
 
     function find(name, data) {
-      
-      
-      if (!name) {
-        //throw "Name is empty";
-        console.warn('[packageHierarchy] name is null');
-      }
-      
-
+    
       var node = map[name], i;
       if (!node) {
         node = map[name] = data || {name: name, children: []};
@@ -22,6 +15,7 @@ export default function packageHierarchy(classes) {
           node.key = name.substring(i + 1);
         }
       }
+      console.log(node);
       return node;
     }
 

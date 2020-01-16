@@ -28,15 +28,15 @@
 
   <body ng-app="ImpactAnalisysDemo" ng-cloak>  
     <div layout="row" style="padding: 20px 0;">
+    
 
       <div class="menu" flex="20">              
           <div class="container" ng-controller="AccordionCtrl">
-
-          
             <!--
-            <textarea> {{ flaredata }}</textarea>
-          -->
-
+            <h1>cubeSourceList</h1>
+            <p> {{ cubeSourceList | json }}</p>
+            -->
+        
             <div class="expandcollapse-item cubes">  
               <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
@@ -54,7 +54,7 @@
                     <md-list class="md-dense" flex="">
                       <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
                         <md-checkbox ng-model="item.selected" aria-label="Checkbox 1"></md-checkbox>                                                              
-                        <p>{{ item.key }}</p>                        
+                        <p>{{ getItemName(item) }}</p>                        
                       </md-list-item> 
                     </md-list>        
                   </md-content>
