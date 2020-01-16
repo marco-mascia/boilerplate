@@ -6,9 +6,12 @@ export default function packageHierarchy(classes) {
 
     function find(name, data) {
       
+      
       if (!name) {
-        throw "Name is empty";
+        //throw "Name is empty";
+        console.warn('[packageHierarchy] name is null');
       }
+      
 
       var node = map[name], i;
       if (!node) {

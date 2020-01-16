@@ -75,8 +75,10 @@ export default function drawChart(data) {
   console.log('data ', data); 
 
   //DATA CLONE
-  jsonData = data;
-  jsonDataBackup = JSON.parse(JSON.stringify(jsonData));
+  jsonData = null;
+  jsonDataBackup = null;
+  jsonData = JSON.parse(JSON.stringify(data));
+  jsonDataBackup = JSON.parse(JSON.stringify(data));
 
   svg = div
     .append("svg:svg")
