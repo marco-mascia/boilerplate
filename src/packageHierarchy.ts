@@ -15,7 +15,7 @@ export default function packageHierarchy(classes) {
           node.key = name.substring(i + 1);
         }
       }
-      console.log(node);
+      //console.log(node);
       return node;
     }
 

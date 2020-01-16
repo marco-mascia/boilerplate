@@ -32,19 +32,24 @@
 
       <div class="menu" flex="20">              
           <div class="container" ng-controller="AccordionCtrl">
+      
             <!--
             <h1>cubeSourceList</h1>
             <p> {{ cubeSourceList | json }}</p>
             -->
         
             <div class="expandcollapse-item cubes">  
+              
               <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
                   <md-card-title>
                     <md-card-title-text>
-                      <span class="md-title">{{ cubeSourceTitle }}</span>                      
+                      <span class="md-title">{{ cubeSourceTitle }}</span>  
                     </md-card-title-text>              
-                  </md-card-title>    
+                  </md-card-title>   
+                  <md-button class="md-fab md-mini md-hue-2" aria-label="SelectGroup" ng-click="selectGroup(cubeSourceList)">
+                    G
+                  </md-button>
                 </md-card>
               </div>      
 
@@ -54,7 +59,7 @@
                     <md-list class="md-dense" flex="">
                       <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="selectEntity(item)">              
                         <md-checkbox ng-model="item.selected" aria-label="Checkbox 1"></md-checkbox>                                                              
-                        <p>{{ getItemName(item) }}</p>                        
+                        <p>{{ item.key  }}</p>                        
                       </md-list-item> 
                     </md-list>        
                   </md-content>
@@ -136,6 +141,7 @@
    
     
       <div class="content" flex="80">
+        
         <div class="container-chart"></div>  
         <div id="bundle"></div>
       </div>

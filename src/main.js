@@ -14,22 +14,6 @@ import { deselectEntity } from './chart.ts';
 import { toggleEntity } from './chart.ts';
 import gen_fake_data from './fakedata.ts';
 
-/*
-Promise.all([flare, crop, artic, jobs]).then(res => {
-    drawChart(res[0]);      
-})
-*/
-
-/*
-setTimeout(function(){     
-    d3.select("#impact").remove();    
-    Promise.all([flare, crop, artic, jobs]).then(res => {
-        drawChart(res[1]);          
-    })
-}, 5000);
-*/
-
-
 /**
  * 
  * USES D3.V3
@@ -67,6 +51,11 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         {name:'flaredefault', value: flaredefault}   
     ];
 
+
+    /*
+
+    FAKE DATA GENERATION
+
     let fakeSizeNr = getRandomInt(10, 100);
     let fakeGroupsNr = getRandomInt(10, 100);
     function getRandomInt(min, max) {
@@ -77,6 +66,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
 
     $scope.datasourceList.push({name:'random', value: gen_fake_data(fakeSizeNr, fakeGroupsNr)})
   
+    */
     $scope.select = function(item){           
         clicked();
     }
@@ -122,10 +112,18 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         }); 
     }
 
+
+    $scope.selectGroup = function(list){
+        console.log('selectGroup');
+        event.stopPropagation();
+
+    }
+    /*
     $scope.getItemName = function(item){
         let arr = item.name.split(".");
         return arr[arr.length-1];
     }
+    */
 
     $scope.selectEntity = function(item){   
       item.selected = !item.selected;
