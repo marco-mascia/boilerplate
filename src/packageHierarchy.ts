@@ -4,9 +4,8 @@
 export default function packageHierarchy(classes) {
     var map = {};
 
-    function find(name, data) {
-    
-      var node = map[name], i;
+    function find(name, data) {    
+      var node = map[name], i;    
       if (!node) {
         node = map[name] = data || {name: name, children: []};
         if (name.length) {
@@ -14,8 +13,7 @@ export default function packageHierarchy(classes) {
           node.parent.children.push(node);
           node.key = name.substring(i + 1);
         }
-      }
-      //console.log(node);
+      }      
       return node;
     }
 
@@ -25,4 +23,3 @@ export default function packageHierarchy(classes) {
 
     return map[""];
 }
-

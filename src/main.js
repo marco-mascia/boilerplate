@@ -115,9 +115,13 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
 
     $scope.selectGroup = function(list){
         console.log('selectGroup');
-        event.stopPropagation();
-
+        event.stopPropagation();       
+        list.forEach(item => {
+            toggleEntity(item.name);  
+        });
     }
+
+
     /*
     $scope.getItemName = function(item){
         let arr = item.name.split(".");
@@ -129,8 +133,6 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
       item.selected = !item.selected;
       toggleEntity(item.name);     
     }
-
-    
 
   });  
 

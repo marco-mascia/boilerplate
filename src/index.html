@@ -42,14 +42,16 @@
               
               <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-title">{{ cubeSourceTitle }}</span>  
-                    </md-card-title-text>              
-                  </md-card-title>   
-                  <md-button class="md-fab md-mini md-hue-2" aria-label="SelectGroup" ng-click="selectGroup(cubeSourceList)">
-                    G
-                  </md-button>
+                  <div layout="row">
+                    <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">{{ cubeSourceTitle }}</span>  
+                      </md-card-title-text>              
+                    </md-card-title>   
+                    <md-button class="md-fab md-mini md-hue-2" aria-label="SelectGroup" ng-click="selectGroup(cubeSourceList)">
+                      G
+                    </md-button>
+                  </div>
                 </md-card>
               </div>      
 

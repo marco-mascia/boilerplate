@@ -45,12 +45,6 @@ let div = d3
   .style("height", w + "px")
   .style("position", "absolute");
 
-//var link = svg.append("g").selectAll(".link");
-let node;
-let nodeText;
-
-var link;
-
 var line = d3.svg.line
   .radial()
   .interpolate("bundle")
@@ -61,8 +55,6 @@ var line = d3.svg.line
   .angle(function(d) {
     return (d.x / 180) * Math.PI;
   });
-
-
 
 //TOOLTIP
 var tooltip = d3.select("body").append("div")	
@@ -81,6 +73,7 @@ export default function drawChart(data) {
   jsonData = data;
   jsonDataBackup = data;
 
+
   svg = div
     .append("svg:svg")
     .attr("id", function(d) {
@@ -91,12 +84,15 @@ export default function drawChart(data) {
     .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
+
   cluster = d3.layout
   .cluster()
   .size([360, ry - 180])
   .sort(function(a, b) {
     return d3.ascending(a.key, b.key);
   })
+
+  //.sum(d => d.value).sort((a, b) => b.value - a.value);  
   
   bundle = d3.layout.bundle();
 
@@ -175,6 +171,22 @@ export function deselectEntity(name) {
       return line_color;
     });
 }
+
+export function toggleGroup(groupName){
+  console.log('toggleGroup ', groupName);
+  console.log('jsonData ', jsonData);
+  let newData;
+
+  let isVisible = jsonData.find((el) => {    
+    let index = el.name.indexOf(groupName);
+    if(index != -1)
+      return el;
+  }); 
+
+  console.log("isVisible ", isVisible);
+  
+}
+
 
 export function toggleEntity(name){
   console.log('toggleEntity ', name);
@@ -258,19 +270,16 @@ function updateBundle(data) {
   var node = svg.selectAll(".node").data(nodes.filter(function(n) {
     return !n.children;
   })); 
-        
+  
   node.enter().append("text"); 
+
+  
   node
     .attr("class", "node")
     .attr("id", function(d) {
       return "node-" + d.key;
     })
-    /*
-    .attr("dx", function(d) {
-      return d.x < 180 ? 25 : -25;
-    })
-    */
-    .attr("dy", ".31em")
+    .attr("dy", ".31em")    
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
     .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .text(function(d) {
@@ -282,21 +291,25 @@ function updateBundle(data) {
       return color(group);
     })
     .on("mouseover", mouseover)
-    .on("mouseout", mouseout)
-    //.on("click", toggleNode);
+    .on("mouseout", mouseout);
 
-  node.transition().duration(duration);   
-  /*
-  node.transition()
-      .duration(duration)
-      .delay(function(d,i) {
-        return 24*i;
-      })
-      .style("opacity", 1);
+    /*
+    .transition()
+      .duration(1000)
+      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ")" + (d.x < 180 ? "" : "rotate(180)"); })
       */
+    /*
+    //working transition
+
+    .transition()
+      .duration(2000)
+      .text(function(d) {
+        return d.key.replace(/_/g, " ");
+      })
+      .style('fill', 'red');
+      */    
 
   node.exit().remove();  
-
   
   function mouseover(d) {
     let splitName = d.name.split(".");
@@ -355,10 +368,14 @@ function updateBundle(data) {
 
   /** LINKS  */
   var link = svg.selectAll("path.link").data(links);
+ 
 
   link
   .enter()
   .insert('svg:path');
+
+  var totalLength = link.node().getTotalLength();
+
   link
   .attr("d", function(d, i) {
     return line(splines[i]);
@@ -373,9 +390,19 @@ function updateBundle(data) {
       d.source.parent.key
     );
   })
-
-  link.transition().duration(duration);
+   /** working transition */
+   /*
+  .attr("stroke-dasharray", totalLength + " " + totalLength)
+  .attr("stroke-dashoffset", totalLength)
+  
+  .transition()
+    .duration(500)
+    .ease("linear")
+    .attr("stroke-dashoffset", 0);
+    */ 
+  
   link.exit().remove();
+  
 
   /*
   function removeNode(d){ 
@@ -504,193 +531,6 @@ var arcs = svg.selectAll(".arc").data(groupData[0]);
   arcs.transition().duration(duration);    
   arcs.exit().remove();
 }
-
-/* OLD DATA UPDATE NOT WORKING CORRECTLY */
-
-/*
-function update(jsonData) {
-
-  nodes = cluster.nodes(packageHierarchy(jsonData));
-  links = packageImports(nodes);
-  splines = bundle(links);
-
-
-  console.log('-------');
-  console.log(nodes);
-  console.log(nodes.filter(function(n) {
-    return !n.children;
-  }));
-  console.log('-------');
-  
-
-  node = node.data(nodes.filter(function(n) {
-    return !n.children;
-  })); // link assigned
-
-  node  
-    .enter()
-    .append("g")
-    .attr("class", "node")
-    .attr("id", function(d) {
-      return "node-" + d.key;
-    })
-    .attr("transform", function(d) {
-      return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
-    })
-    .append("svg:text")
-    .attr("dx", function(d) {
-      return d.x < 180 ? 25 : -25;
-    })
-    .attr("dy", ".31em")
-    .attr("text-anchor", function(d) {
-      return d.x < 180 ? "start" : "end";
-    })
-    .attr("transform", function(d) {
-      return d.x < 180 ? null : "rotate(180)";
-    })
-    .text(function(d) {
-      return d.key.replace(/_/g, " ");
-    })
-    .style("fill", function(d) {
-      var splitName = d.name.split(".");
-      var group = splitName[1];
-      return color(group);
-    })
-    .on("mouseover", mouseover)
-    .on("mouseout", mouseout);
-  node.exit().remove(); // no more errors!
-
-  link = svg.selectAll("path.link").data(links); // link assigned
-  link
-    .enter() // <----- THIS
-    //.append("path")
-    .insert('svg:path')
-    .attr("d", function(d, i) {
-      return line(splines[i]);
-    })
-    .attr("class", function(d) {
-      return (
-        "link source-" +
-        d.source.key +
-        " target-" +
-        d.target.key +
-        " group-" +
-        d.source.parent.key
-      );
-    });
-
-  link.exit().remove(); // no more errors!
-
-  groupData = svg.selectAll("g.group")
-    .data(
-      nodes.filter(function(d) {
-        return (
-          (d.key == "Bayard" ||
-            d.key == "Freelance" ||
-            d.key == "Jobs" ||
-            d.key == "analytics" ||
-            d.key == "animate" ||
-            d.key == "data" ||
-            d.key == "physics" ||
-            d.key == "query" ||
-            d.key == "scale" ||
-            d.key == "util" ||
-            d.key == "vis" ||
-            d.key == "crop" ||
-            d.key == "month" ||
-            d.key == "interest" ||
-            d.key == "international" ||
-            d.key == "national" ||
-            d.key == "AllScales" ||
-            d.key == "local") &&
-          d.children
-        );
-      })
-    )
-  groupData
-      .enter()
-      .append("group")
-      .attr("class", function(d) {
-        return d.key;
-      });
-  groupData.exit().remove(); // no more errors!
-
-  groupArc = d3.svg
-    .arc()
-    .innerRadius(ry - 177)
-    .outerRadius(ry - 157)
-    .startAngle(function(d) {
-      return ((findStartAngle(d.__data__.children) - 2) * Math.PI) / 180;
-    })
-    .endAngle(function(d) {
-      return ((findEndAngle(d.__data__.children) + 2) * Math.PI) / 180;
-    });
-
-  arcs = svg.selectAll("g.arc").data(groupData[0]);
-  arcs
-    .enter()
-    .append("g")
-    .attr("class", "arc");
-  arcs
-    .append("path")
-    .attr("fill", function(d, i) {
-      return color($(d).attr("class"));
-    })
-    .attr("d", groupArc);
-  arcs
-    .append("text")
-    .attr("transform", function(d) {
-      let c = groupArc.centroid(d);
-      return "translate(" + c[0] * 1.4 + "," + c[1] * 1.4 + ")";
-    })
-    .attr("text-anchor", "middle")
-    .text(function(d) {
-      return $(d).attr("class");
-    })
-    .attr("fill", function(d, i) {
-      return color($(d).attr("class"));
-    });
-  arcs.on("mouseup", groupClick);
-  arcs.exit().remove();
-
-
-  function mouseover(d) {
-    let splitName = d.name.split(".");
-    let groupKey = splitName[1];
-
-    svg
-      .selectAll("path.link.target-" + d.key)
-      .classed("target", true)
-      .each(updateNodes("source", true))
-      .style("stroke", function() {
-        return color(groupKey);
-      });
-
-    svg
-      .selectAll("path.link.source-" + d.key)
-      .classed("source", true)
-      .each(updateNodes("target", true))
-      .style("stroke", function() {
-        return color(groupKey);
-      });
-  }
-
-  function mouseout(d) {
-    svg
-      .selectAll("path.link.source-" + d.key)
-      .classed("source", false)
-      .each(updateNodes("target", false));
-
-    svg
-      .selectAll("path.link.target-" + d.key)
-      .classed("target", false)
-      .each(updateNodes("source", false));
-
-    resetLinkColor();
-  }
-}
-
-*/
 
 /* UTILS */
 function componentToHex(c) {
