@@ -61,6 +61,8 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
+    
+
 let jsonDataBackup, jsonData;
 
 export default function drawChart(data) {
@@ -243,6 +245,7 @@ function updateNodes(name, value) {
  */
 function groupClick(d) {
   let group = $(d).attr("class");
+
   svg.selectAll("path.link.group-" + group).style("stroke", function(d) {
     let newColor = color(group);
     let rgb = d3.select(this).style("stroke");
@@ -273,7 +276,6 @@ function updateBundle(data) {
   
   node.enter().append("text"); 
 
-  
   node
     .attr("class", "node")
     .attr("id", function(d) {
@@ -315,6 +317,9 @@ function updateBundle(data) {
     let splitName = d.name.split(".");
     let groupKey = splitName[1];
 
+    d3.select(this).style("cursor", "pointer"); 
+    d3.select(this).style("font-weight", "bolder"); 
+
     svg
       .selectAll("path.link.target-" + d.key)
       .classed("target", true)
@@ -331,6 +336,16 @@ function updateBundle(data) {
         return color(groupKey);
       });
 
+
+      tooltip
+      .transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+      tooltip
+      .html(d.key + "<br/>")	
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY - 28) + "px");
+
       /*
 
     tooltip
@@ -346,6 +361,13 @@ function updateBundle(data) {
   }
 
   function mouseout(d) {
+
+    d3.select(this).style("cursor", "default"); 
+    d3.select(this).style("font-weight", "normal"); 
+
+    
+
+
     svg
       .selectAll("path.link.source-" + d.key)
       .classed("source", false)
@@ -356,12 +378,12 @@ function updateBundle(data) {
       .classed("target", false)
       .each(updateNodes("source", false));
 
-      /*
+      
     tooltip
       .transition()		
       .duration(duration)		
       .style("opacity", 0);
-      */
+      
 
     resetLinkColor();
   }

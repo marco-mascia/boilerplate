@@ -150,17 +150,33 @@ path.arc {
 }
 
 .node.target {
-  fill: #d62728 !important;
+  fill: #000 !important;
 }
 
 .link.source {
-  stroke: #d62728;
+  stroke: #000;
 }
 
 .node.source {
-  fill: #2ca02c;
+  fill: #000;
 }
 
 .link.target {
-  stroke: #2ca02c;
+  stroke: #000;
+}
+
+
+div.tooltip {	
+  position: absolute;			
+  text-align: center;			
+  width: auto;					
+  height: auto;					
+  padding: 4px;				
+  font: 12px sans-serif;		
+  background:black;
+  border: 0px;		
+  border-radius: 8px;			
+  pointer-events: none;		
+  color: white;	
+  cursor: pointer;
 }

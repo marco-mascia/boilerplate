@@ -47,10 +47,10 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         {name:'megaflare', value: megaflare},
         {name:'flare', value: flare},
         {name:'artic', value: artic},
-        {name:'artic2', value: artic2},        
-        {name:'crop', value: crop},
+        //{name:'artic2', value: artic2},        
+        //{name:'crop', value: crop},
         {name:'jobs', value: jobs},
-        {name:'flaredefault', value: flaredefault}   
+        //{name:'flaredefault', value: flaredefault}   
     ];
 
 
