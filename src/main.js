@@ -4,6 +4,7 @@ import flare3 from '../assets/flare3.json';
 import clicked from './chart.ts'
 import drawChart from './chart.ts'
 import flare from '../assets/flare.json';
+import megaflare from '../assets/megaflare.json';
 import crop from '../assets/crop.json';
 import artic from '../assets/artic.json';
 import artic2 from '../assets/artic2.json';
@@ -43,6 +44,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.capsulesSourceList = [];   
 
     $scope.datasourceList = [
+        {name:'megaflare', value: megaflare},
         {name:'flare', value: flare},
         {name:'artic', value: artic},
         {name:'artic2', value: artic2},        
