@@ -131,8 +131,8 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     }
     */
 
-    $scope.selectEntity = function(item){   
-      item.selected = !item.selected;
+    $scope.selectEntity = function(item){  
+      //item.selected = !item.selected;
       toggleEntity(item.name);     
     }
 
