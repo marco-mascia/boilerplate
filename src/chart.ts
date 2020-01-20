@@ -491,6 +491,8 @@ var groupData = svg.selectAll("g.group")
         d.key == "scale" ||
         d.key == "util" ||
         d.key == "vis" ||
+        d.key == "tris" ||
+        d.key == "entity" ||
         d.key == "crop" ||
         d.key == "month" ||
         d.key == "interest" ||
