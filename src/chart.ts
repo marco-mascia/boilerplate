@@ -243,7 +243,8 @@ function updateNodes(name, value) {
  *
  * @param d toggle group selection
  */
-function groupClick(d) {
+function groupClick(d) { 
+
   let group = $(d).attr("class");
 
   svg.selectAll("path.link.group-" + group).style("stroke", function(d) {
@@ -365,9 +366,7 @@ function updateBundle(data) {
     d3.select(this).style("cursor", "default"); 
     d3.select(this).style("font-weight", "normal"); 
 
-    
-
-
+  
     svg
       .selectAll("path.link.source-" + d.key)
       .classed("source", false)
@@ -390,7 +389,6 @@ function updateBundle(data) {
 
   /** LINKS  */
   var link = svg.selectAll("path.link").data(links);
- 
 
   link
   .enter()
@@ -552,6 +550,9 @@ var arcs = svg.selectAll(".arc").data(groupData[0]);
       return color($(d).attr("class"));
     });
   arcs.on("mouseup", groupClick);
+  arcs.on("mouseover", function(d){
+    d3.select(this).style("cursor", "pointer"); 
+  })
   arcs.transition().duration(duration);    
   arcs.exit().remove();
 }
