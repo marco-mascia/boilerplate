@@ -93,6 +93,13 @@ export default function drawChart(data) {
   .sort(function(a, b) {
     return d3.ascending(a.key, b.key);
   })
+  /*
+  .separation(function(a,b){
+    return 20 + d3.sum([a,b].map(function(d){
+      return d.status=="D" ? 70 : 0;
+    }))
+  });
+  */
 
   //.sum(d => d.value).sort((a, b) => b.value - a.value);  
   
@@ -320,6 +327,11 @@ function updateBundle(data) {
 
     d3.select(this).style("cursor", "pointer"); 
     d3.select(this).style("font-weight", "bolder"); 
+    d3.select(this)
+    .transition()		
+    .duration(200)		
+    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 20) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+
 
     svg
       .selectAll("path.link.target-" + d.key)
@@ -366,7 +378,11 @@ function updateBundle(data) {
     d3.select(this).style("cursor", "default"); 
     d3.select(this).style("font-weight", "normal"); 
 
-  
+    d3.select(this)
+    .transition()		
+    .duration(200)		
+    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+
     svg
       .selectAll("path.link.source-" + d.key)
       .classed("source", false)
@@ -376,13 +392,11 @@ function updateBundle(data) {
       .selectAll("path.link.target-" + d.key)
       .classed("target", false)
       .each(updateNodes("source", false));
-
       
     tooltip
       .transition()		
       .duration(duration)		
-      .style("opacity", 0);
-      
+      .style("opacity", 0);      
 
     resetLinkColor();
   }
@@ -552,6 +566,10 @@ var arcs = svg.selectAll(".arc").data(groupData[0]);
   arcs.on("mouseup", groupClick);
   arcs.on("mouseover", function(d){
     d3.select(this).style("cursor", "pointer"); 
+    d3.select(this).style("font-weight", "bold"); 
+  })
+  arcs.on('mouseout', function(){
+    d3.select(this).style("font-weight", "normal"); 
   })
   arcs.transition().duration(duration);    
   arcs.exit().remove();
