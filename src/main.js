@@ -14,6 +14,7 @@ import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
 import { toggleEntity } from './chart.ts';
 import gen_fake_data from './fakedata.ts';
+import { toggleGroup } from './chart.ts';
 
 /**
  * 
@@ -123,6 +124,7 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         });
     }
 
+ 
 
     /*
     $scope.getItemName = function(item){

@@ -193,9 +193,15 @@ export function toggleGroup(groupName){
   }); 
 
   console.log("isVisible ", isVisible);
+  debugger;
   
 }
 
+
+function removeItem(){
+
+  
+}
 
 export function toggleEntity(name){
   console.log('toggleEntity ', name);

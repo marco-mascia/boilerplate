@@ -48,9 +48,10 @@
                         <span class="md-title">{{ cubeSourceTitle }}</span>  
                       </md-card-title-text>              
                     </md-card-title>   
-                    <md-button class="md-fab md-mini md-hue-2" aria-label="SelectGroup" ng-click="selectGroup(cubeSourceList)">
-                      G
-                    </md-button>
+                    
+
+                    <md-switch ng-model="data.cb1" aria-label="Switch 1" ng-change="selectGroup(cubeSourceList)">
+                    </md-switch>
                   </div>
                 </md-card>
               </div>      
@@ -77,11 +78,15 @@
             <div class="expandcollapse-item entities">      
               <div ng-click="isEntities = !isEntities" ng-class="{'expandcollapse-heading-collapsed': isEntities, 'expandcollapse-heading-expanded': !isEntities}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                  <div layout="row">
                   <md-card-title>
                     <md-card-title-text>
                       <span class="md-title">{{ entitiesSourceTitle }}</span>                      
                     </md-card-title-text>              
                   </md-card-title>    
+                  <md-switch ng-model="data.cb2" aria-label="Switch 1" ng-change="selectGroup(entitiesSourceList)">
+                  </md-switch>
+                </div>
                 </md-card>
               </div>      
 
@@ -108,11 +113,17 @@
             <div class="expandcollapse-item capsules">      
               <div ng-click="isCapsules = !isCapsules" ng-class="{'expandcollapse-heading-collapsed': isCapsules, 'expandcollapse-heading-expanded': !isCapsules}">                
                 <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-                  <md-card-title>
+                  
+                  <div layout="row">
+                    <md-card-title>
                     <md-card-title-text>
                       <span class="md-title">{{ capsulesSourceTitle }}</span>                      
                     </md-card-title-text>              
-                  </md-card-title>    
+                  </md-card-title>   
+                  
+                  <md-switch ng-model="data.cb3" aria-label="Switch 1" ng-change="selectGroup(capsulesSourceList)">
+                  </md-switch> 
+                </div>
                 </md-card>
               </div>      
 
