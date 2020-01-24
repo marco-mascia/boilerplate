@@ -74,6 +74,13 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         clicked();
     }
 
+    //group switch
+    $scope.data = {
+        cb1: true,
+        cb2: true,
+        cb3: true
+      };
+
     $scope.selectedDatasource = $scope.datasourceList[0];
     drawChart($scope.selectedDatasource.value);  
     buildCombo();
@@ -122,6 +129,10 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         list.forEach(item => {
             toggleEntity(item.name);  
         });
+    }
+
+    $scope.toggleGroup = function(name){
+        toggleGroup(name);
     }
 
  

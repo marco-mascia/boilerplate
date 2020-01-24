@@ -47,10 +47,8 @@
                       <md-card-title-text>
                         <span class="md-title">{{ cubeSourceTitle }}</span>  
                       </md-card-title-text>              
-                    </md-card-title>   
-                    
-
-                    <md-switch ng-model="data.cb1" aria-label="Switch 1" ng-change="selectGroup(cubeSourceList)">
+                    </md-card-title>
+                    <md-switch ng-model="data.cb1" aria-label="Switch 1" ng-change="toggleGroup(cubeSourceTitle)">
                     </md-switch>
                   </div>
                 </md-card>
@@ -84,7 +82,7 @@
                       <span class="md-title">{{ entitiesSourceTitle }}</span>                      
                     </md-card-title-text>              
                   </md-card-title>    
-                  <md-switch ng-model="data.cb2" aria-label="Switch 1" ng-change="selectGroup(entitiesSourceList)">
+                  <md-switch ng-model="data.cb2" aria-label="Switch 1" ng-change="toggleGroup(entitiesSourceTitle)">
                   </md-switch>
                 </div>
                 </md-card>
@@ -121,7 +119,7 @@
                     </md-card-title-text>              
                   </md-card-title>   
                   
-                  <md-switch ng-model="data.cb3" aria-label="Switch 1" ng-change="selectGroup(capsulesSourceList)">
+                  <md-switch ng-model="data.cb3" aria-label="Switch 1" ng-change="toggleGroup(capsulesSourceTitle)">
                   </md-switch> 
                 </div>
                 </md-card>

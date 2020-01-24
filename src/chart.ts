@@ -192,8 +192,51 @@ export function toggleGroup(groupName){
       return el;
   }); 
 
-  console.log("isVisible ", isVisible);
-  debugger;
+  //console.log("isVisible ", isVisible);
+    
+  if(isVisible){
+    console.log('remove');
+    //removegroup
+    newData = jsonData.filter(function(el) { return el.group != groupName; }); //remove the items from colletion
+    newData = newData.map((item) => {          
+      if(!item._imports){
+        item._imports = [];
+      }
+      let imports = item.imports.map((element) => {      
+        if(element.includes(groupName)){          
+          item._imports.push(element);
+          return null;
+        }
+        return element;
+      })
+
+      item.imports = imports;
+      return item;
+    })  
+
+  }else{    
+
+    console.log('restore');
+
+     newData = jsonData.map((item) => {         
+      if(item._imports){
+        let importIndex = item._imports.indexOf(name);
+        if(importIndex != -1){
+          item._imports.splice(importIndex, 1);
+          item.imports.push(name);
+        }
+      }      
+      return item;     
+    })   
+
+    var itemToRestore = jsonDataBackup.filter((el) => {
+      return el.group === groupName
+    });
+  
+    newData = newData.concat(itemToRestore); 
+  }
+  
+  updateBundle(newData);
   
 }
 
