@@ -181,7 +181,7 @@ export function deselectEntity(name) {
     });
 }
 
-export function toggleGroup(groupName){
+export function toggleGroup(groupName, groupList){
   console.log('toggleGroup ', groupName);
   console.log('jsonData ', jsonData);
   let newData;
@@ -214,6 +214,10 @@ export function toggleGroup(groupName){
       return item;
     })  
 
+    //toggle checkboxes
+    console.log('groupList ', groupList);
+    groupList.forEach((item) => item.selected = false);
+
   }else{    
 
     console.log('restore');
@@ -234,6 +238,10 @@ export function toggleGroup(groupName){
     });
   
     newData = newData.concat(itemToRestore); 
+
+       //toggle checkboxes
+       console.log('groupList ', groupList);
+       groupList.forEach((item) => item.selected = true);
   }
   
   updateBundle(newData);

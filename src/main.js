@@ -131,8 +131,8 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
         });
     }
 
-    $scope.toggleGroup = function(name){
-        toggleGroup(name);
+    $scope.toggleGroup = function(name, list){
+        toggleGroup(name, list);
     }
 
  
