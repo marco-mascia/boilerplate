@@ -1,0 +1,171 @@
+[
+    {
+      "id": "0__1",
+      "vmType": 0,
+      "name": "Month",
+      "internalId": "1",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "4__2",
+        "4__3",
+        "0__3",
+        "0__6",
+        "0__10",
+        "7__1",
+        "0__7"
+      ]
+    },
+    {
+      "id": "0__201",
+      "vmType": 0,
+      "name": "Prodotto",
+      "internalId": "201",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "4__2",
+        "4__3",
+        "0__202"
+      ]
+    },
+    {
+      "id": "0__202",
+      "vmType": 0,
+      "name": "Gruppo di prodotto",
+      "internalId": "202",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "4__3",
+        "0__201"
+      ]
+    },
+    {
+      "id": "0__206",
+      "vmType": 0,
+      "name": "Andreotti",
+      "internalId": "206",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__203"
+      ]
+    },
+    {
+      "id": "0__205",
+      "vmType": 0,
+      "name": "Giulio Cesare",
+      "internalId": "205",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__207"
+      ]
+    },
+    {
+      "id": "0__7",
+      "vmType": 0,
+      "name": "Day",
+      "internalId": "7",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__1",
+        "0__3",
+        "0__6",
+        "0__10"
+      ]
+    },
+    {
+      "id": "0__3",
+      "vmType": 0,
+      "name": "Quarter",
+      "internalId": "3",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__6",
+        "0__10",
+        "0__1",
+        "0__7"
+      ]
+    },
+    {
+      "id": "4__2",
+      "vmType": 4,
+      "name": "Sale iodato",
+      "internalId": "2",
+      "subGroup": "",
+      "group": "Cubes",
+      "imports": []
+    },
+    {
+      "id": "4__3",
+      "vmType": 4,
+      "name": "Sale per lavastoviglie",
+      "internalId": "3",
+      "subGroup": "",
+      "group": "Cubes",
+      "imports": []
+    },
+    {
+      "id": "0__6",
+      "vmType": 0,
+      "name": "Year",
+      "internalId": "6",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__1",
+        "0__7",
+        "0__3"
+      ]
+    },
+    {
+      "id": "0__10",
+      "vmType": 0,
+      "name": "Fiscal Year",
+      "internalId": "10",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__1",
+        "0__7",
+        "0__3"
+      ]
+    },
+    {
+      "id": "7__1",
+      "vmType": 7,
+      "name": "prodotto",
+      "internalId": "1",
+      "subGroup": "",
+      "group": "Rules",
+      "imports": [
+        "0__1"
+      ]
+    },
+    {
+      "id": "0__203",
+      "vmType": 0,
+      "name": "Attila",
+      "internalId": "203",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__206"
+      ]
+    },
+    {
+      "id": "0__207",
+      "vmType": 0,
+      "name": "Drillaper",
+      "internalId": "207",
+      "subGroup": "",
+      "group": "Entities",
+      "imports": [
+        "0__205"
+      ]
+    }
+  ]

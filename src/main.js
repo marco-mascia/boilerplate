@@ -1,15 +1,18 @@
 import './scss/main.scss';
-import flare3 from '../assets/flare3.json';
-//import * as d3 from "d3";
+
+
 import clicked from './chart.ts'
 import drawChart from './chart.ts'
 import flare from '../assets/flare.json';
-import megaflare from '../assets/megaflare.json';
-import crop from '../assets/crop.json';
+
+
 import artic from '../assets/artic.json';
-import artic2 from '../assets/artic2.json';
+
 import jobs from '../assets/jobs.json';
-import flaredefault from '../assets/flaredefault.json';
+
+
+import real from '../assets/real.json';
+import real2 from '../assets/real2.json';
 import { selectEntity } from './chart.ts';
 import { deselectEntity } from './chart.ts';
 import { toggleEntity } from './chart.ts';
@@ -45,12 +48,17 @@ angular.module('ImpactAnalisysDemo').controller('AccordionCtrl', function ($scop
     $scope.capsulesSourceList = [];   
 
     $scope.datasourceList = [
+        /*
         {name:'megaflare', value: megaflare},
         {name:'flare', value: flare},
+        */
+       {name:'real', value: real},
+       {name:'real2', value: real2},
         {name:'artic', value: artic},
         //{name:'artic2', value: artic2},        
         //{name:'crop', value: crop},
-        {name:'jobs', value: jobs},
+        {name:'jobs', value: jobs}
+  
         //{name:'flaredefault', value: flaredefault}   
     ];
 
