@@ -1,177 +1,161 @@
 <!doctype html>
 <html class="no-js" lang="">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">      
 
-       <!-- Angular Material requires Angular.js Libraries -->
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>      
-      
-  
-       <!-- Angular Material Library -->
-       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>     
-       <script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-       <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>       
-       <script src="https://d3js.org/queue.v1.min.js"></script>
-     
+  <script src="https://d3js.org/d3.v4.min.js"></script> 
+  <title>Hierarchical Edge Update d3.v3</title>
+  <style>
 
-      <title>Impact Analisys d3.v3</title>
-     
-  </head>
-
-  <body ng-app="ImpactAnalisysDemo" ng-cloak>  
-    <div layout="row" style="padding: 20px 0;">
+    .node {
+      font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #bbb;
+    }
     
-
-      <div class="menu" flex="20">              
-          <div class="container" ng-controller="AccordionCtrl">
-      
-            <!--
-            <h1>cubeSourceList</h1>
-            <p> {{ cubeSourceList | json }}</p>
-            -->
-        
-            <div class="expandcollapse-item cubes">  
-              
-              <div ng-click="isCubes = !isCubes" ng-class="{'expandcollapse-heading-collapsed': isCubes, 'expandcollapse-heading-expanded': !isCubes}">                
-                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-                  <div layout="row">
-                    <md-card-title>
-                      <md-card-title-text>
-                        <span class="md-title">{{ cubeSourceTitle }}</span>  
-                      </md-card-title-text>              
-                    </md-card-title>
-                    <md-switch ng-model="data.cb1" aria-label="Switch 1" ng-change="toggleGroup(cubeSourceTitle, cubeSourceList)">
-                    </md-switch>
-                  </div>
-                </md-card>
-              </div>      
-
-              <div class="slideDown" ng-show="isCubes" ng-hide="!isCubes" ng-style="cubesStyle">              
-                <div class="expand-collapse-content">
-                  <md-content>
-                    <md-list class="md-dense" flex="">
-                      <md-list-item id="{{item.name}}" class="md-1-line" ng-repeat="item in cubeSourceList" ng-click="null">     
-                             
-                        <md-checkbox  ng-model="item.selected" 
-                                      aria-label="Checkbox 1" 
-                                      ng-change="selectEntity(item)">
-                        </md-checkbox>            
-
-                        <p>{{ item.key  }}</p>                        
-                      </md-list-item> 
-                    </md-list>        
-                  </md-content>
-                </div>
-              </div>
-            </div>
-
-            <div class="expandcollapse-item entities">      
-              <div ng-click="isEntities = !isEntities" ng-class="{'expandcollapse-heading-collapsed': isEntities, 'expandcollapse-heading-expanded': !isEntities}">                
-                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-                  <div layout="row">
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-title">{{ entitiesSourceTitle }}</span>                      
-                    </md-card-title-text>              
-                  </md-card-title>    
-                  <md-switch ng-model="data.cb2" aria-label="Switch 1" ng-change="toggleGroup(entitiesSourceTitle)">
-                  </md-switch>
-                </div>
-                </md-card>
-              </div>      
-
-              <div class="slideDown" ng-show="isEntities" ng-hide="!isEntities" ng-style="cubesStyle">              
-                <div class="expand-collapse-content">
-                  <md-content>
-                    <md-list class="md-dense" flex="">
-                      <md-list-item ng-repeat="item in entitiesSourceList" ng-click="null">  
-                        
-                        <md-checkbox  ng-model="item.selected" 
-                        aria-label="Checkbox 1" 
-                        ng-change="selectEntity(item)">
-                        </md-checkbox>      
-
-                       
-                          <p>{{ item.key }}</p>                        
-                      </md-list-item> 
-                    </md-list>        
-                  </md-content>
-                </div>
-              </div>
-            </div>
-
-            <div class="expandcollapse-item capsules">      
-              <div ng-click="isCapsules = !isCapsules" ng-class="{'expandcollapse-heading-collapsed': isCapsules, 'expandcollapse-heading-expanded': !isCapsules}">                
-                <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-                  
-                  <div layout="row">
-                    <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-title">{{ capsulesSourceTitle }}</span>                      
-                    </md-card-title-text>              
-                  </md-card-title>   
-                  
-                  <md-switch ng-model="data.cb3" aria-label="Switch 1" ng-change="toggleGroup(capsulesSourceTitle)">
-                  </md-switch> 
-                </div>
-                </md-card>
-              </div>      
-
-              <div class="slideDown" ng-show="isCapsules" ng-hide="!isCapsules" ng-style="cubesStyle">              
-                <div class="expand-collapse-content">
-                  <md-content>
-                    <md-list class="md-dense" flex="">
-                      <md-list-item ng-repeat="item in capsulesSourceList" ng-click="null">        
-                     
-                        <md-checkbox  ng-model="item.selected" 
-                        aria-label="Checkbox 1" 
-                        ng-change="selectEntity(item)">
-          </md-checkbox>      
-                          <p>{{ item.key }}</p>                        
-                      </md-list-item> 
-                    </md-list>        
-                  </md-content>
-                </div>
-              </div>
-            </div>
-                  
-            <!--
-            <div class="inset" ng-cloak>               
-              <span class="md-body-1">Tension</span>
-              <md-switch id="tension" ng-model="data.tensionswitch" aria-label="Tension" class="md-primary" md-no-ink></md-switch>    
-            </div>      
-            -->
-
-            <div class="inset" ng-cloak>  
-              <md-input-container style="width: 100%; margin-top: 50px;">
-                <label>Datasource</label>
-                <md-select ng-model="selectedDatasource" md-selected-text="{{source.name}}" ng-change="switchDatasource()">
-                  <md-optgroup>
-                    <md-option ng-repeat="source in datasourceList" ng-value="source">{{source.name}}</md-option>
-                  </md-optgroup>
-                </md-select>
-              </md-input-container>
-            </div> 
-          </div>
-             
-      
-      </div>  
-   
+    .node:hover {
+      fill: #000;
+    }
     
-      <div class="content" flex="80">
-        
-        <div class="container-chart"></div>  
-        <div id="bundle"></div>
-      </div>
+    .link {
+      stroke: steelblue;
+      stroke-opacity: 0.4;
+      fill: none;
+      pointer-events: none;
+    }
+    
+    .node:hover,
+    .node--source,
+    .node--target {
+      font-weight: 700;
+    }
+    
+    .node--source {
+      fill: #2ca02c;
+    }
+    
+    .node--target {
+      fill: #d62728;
+    }
+    
+    .link--source,
+    .link--target {
+      stroke-opacity: 1;
+      stroke-width: 2px;
+    }
+    
+    .link--source {
+      stroke: #d62728;
+    }
+    
+    .link--target {
+      stroke: #2ca02c;
+    }
+    
+    </style>
+</head>
 
-    </div>    
-  </body>
+<body>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+
+    var diameter = 960,
+      radius = diameter / 2,
+      innerRadius = radius - 120;
+
+    var cluster = d3.cluster()
+      .size([360, innerRadius]);
+
+    var line = d3.radialLine()
+      .curve(d3.curveBundle.beta(0.85))
+      .radius(function (d) { return d.y; })
+      .angle(function (d) { return d.x / 180 * Math.PI; });
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", diameter)
+      .attr("height", diameter)
+      .append("g")
+      .attr("transform", "translate(" + radius + "," + radius + ")");
+
+    var link = svg.append("g").selectAll(".link"),
+      node = svg.append("g").selectAll(".node");
+
+    function update(data) {
+      var root = packageHierarchy(data)
+        .sum(function (d) { return d.size; });
+
+      cluster(root);
+
+      link = link
+        .data(packageImports(root.leaves()))
+        .enter().append("path")
+        .each(function (d) { d.source = d[0], d.target = d[d.length - 1]; })
+        .attr("class", "link")
+        .attr("d", line);
+
+      node = node
+        .data(root.leaves())
+        .enter().append("text")
+        .attr("class", "node")
+        .attr("dy", "0.31em")
+        .attr("transform", function (d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+        .attr("text-anchor", function (d) { return d.x < 180 ? "start" : "end"; })
+        .text(function (d) { return d.data.key; })
+        .on("mouseover", mouseovered)
+        .on("mouseout", mouseouted);
+    };
+
+
+    function packageImports(nodes) {
+      var map = {},
+        imports = [];
+
+      // Compute a map from name to node.
+      nodes.forEach(function (d) {
+        map[d.id] = d;
+      });
+
+      // For each import, construct a link from the source to target node.
+      nodes.forEach(function (d) {
+        if (d.imports)
+          d.imports.forEach(function (i) {
+            imports.push({ source: map[d.id], target: map[i] });
+          });
+      });
+
+      return imports;
+    }
+
+    function packageHierarchy(classes) {
+
+      console.log("classes ", classes);
+
+      var map = {};
+
+      function find(id, data) {
+        var node = map[id], i;
+        if (!node) {
+          node = map[id] = data || { id: id, children: [] };
+          if (id.length) {
+            node.parent = find(id.substring(0, i = id.lastIndexOf("__")));
+            node.parent.children.push(node);
+            node.key = id.substring(i + 1);
+          }
+        }
+        return node;
+      }
+
+      classes.forEach(function (d) {
+        find(d.id, d);
+      });
+
+      return map[""];
+    }
+  </script>
+
+</body>
+
 </html>
